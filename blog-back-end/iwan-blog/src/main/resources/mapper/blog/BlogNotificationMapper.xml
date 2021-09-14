@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.iwannnn.blog.mapper.BlogNotificationMapper">
+    
+    <resultMap type="BlogNotification" id="BlogNotificationResult">
+        <result property="notificationId"    column="notification_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="content"    column="content"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBlogNotificationVo">
+        select notification_id, user_id, content, create_time, update_time, remark from blog_notification
+    </sql>
+
+    <select id="selectBlogNotificationList" parameterType="BlogNotification" resultMap="BlogNotificationResult">
+        <include refid="selectBlogNotificationVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogNotificationByNotificationId" parameterType="Long" resultMap="BlogNotificationResult">
+        <include refid="selectBlogNotificationVo"/>
+        where notification_id = #{notificationId}
+    </select>
+        
+    <insert id="insertBlogNotification" parameterType="BlogNotification" useGeneratedKeys="true" keyProperty="notificationId">
+        insert into blog_notification
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="content != null">content,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="content != null">#{content},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogNotification" parameterType="BlogNotification">
+        update blog_notification
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where notification_id = #{notificationId}
+    </update>
+
+    <delete id="deleteBlogNotificationByNotificationId" parameterType="Long">
+        delete from blog_notification where notification_id = #{notificationId}
+    </delete>
+
+    <delete id="deleteBlogNotificationByNotificationIds" parameterType="String">
+        delete from blog_notification where notification_id in 
+        <foreach item="notificationId" collection="array" open="(" separator="," close=")">
+            #{notificationId}
+        </foreach>
+    </delete>
+</mapper>
