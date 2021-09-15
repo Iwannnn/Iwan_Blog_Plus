@@ -1,19 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="文章id" prop="article">
+      <el-form-item label="标签名称" prop="tagName">
         <el-input
-          v-model="queryParams.article"
-          placeholder="请输入文章id"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="标签id" prop="tag">
-        <el-input
-          v-model="queryParams.tag"
-          placeholder="请输入标签id"
+          v-model="queryParams.tagName"
+          placeholder="请输入标签名称"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -74,9 +65,8 @@
 
     <el-table v-loading="loading" :data="tagList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="文章和标签关联" align="center" prop="id" />
-      <el-table-column label="文章id" align="center" prop="article" />
-      <el-table-column label="标签id" align="center" prop="tag" />
+      <el-table-column label="标签id" align="center" prop="tagId" />
+      <el-table-column label="标签名称" align="center" prop="tagName" />
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -106,14 +96,11 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改文章标签对话框 -->
+    <!-- 添加或修改博客标签对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="文章id" prop="article">
-          <el-input v-model="form.article" placeholder="请输入文章id" />
-        </el-form-item>
-        <el-form-item label="标签id" prop="tag">
-          <el-input v-model="form.tag" placeholder="请输入标签id" />
+        <el-form-item label="标签名称" prop="tagName">
+          <el-input v-model="form.tagName" placeholder="请输入标签名称" />
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <el-input v-model="form.remark" placeholder="请输入备注" />
@@ -148,7 +135,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 文章标签表格数据
+      // 博客标签表格数据
       tagList: [],
       // 弹出层标题
       title: "",
@@ -158,8 +145,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        article: null,
-        tag: null,
+        tagName: null,
       },
       // 表单参数
       form: {},
@@ -172,7 +158,7 @@ export default {
     this.getList();
   },
   methods: {
-    /** 查询文章标签列表 */
+    /** 查询博客标签列表 */
     getList() {
       this.loading = true;
       listTag(this.queryParams).then(response => {
@@ -189,9 +175,8 @@ export default {
     // 表单重置
     reset() {
       this.form = {
-        id: null,
-        article: null,
-        tag: null,
+        tagId: null,
+        tagName: null,
         createTime: null,
         updateTime: null,
         remark: null
@@ -210,7 +195,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map(item => item.tagId)
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
@@ -218,23 +203,23 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加文章标签";
+      this.title = "添加博客标签";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const id = row.id || this.ids
-      getTag(id).then(response => {
+      const tagId = row.tagId || this.ids
+      getTag(tagId).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改文章标签";
+        this.title = "修改博客标签";
       });
     },
     /** 提交按钮 */
     submitForm() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.id != null) {
+          if (this.form.tagId != null) {
             updateTag(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
@@ -252,13 +237,13 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const ids = row.id || this.ids;
-      this.$confirm('是否确认删除文章标签编号为"' + ids + '"的数据项?', "警告", {
+      const tagIds = row.tagId || this.ids;
+      this.$confirm('是否确认删除博客标签编号为"' + tagIds + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delTag(ids);
+          return delTag(tagIds);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -267,7 +252,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有文章标签数据项?', "警告", {
+      this.$confirm('是否确认导出所有博客标签数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"

@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.enums.BusinessType;
+import cn.iwannnn.common.annotation.Log;
+import cn.iwannnn.common.core.controller.BaseController;
+import cn.iwannnn.common.core.domain.AjaxResult;
+import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogUserLike;
 import cn.iwannnn.blog.service.IBlogUserLikeService;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
+import cn.iwannnn.common.utils.poi.ExcelUtil;
+import cn.iwannnn.common.core.page.TableDataInfo;
 
 /**
  * 用户点赞Controller
@@ -28,76 +28,69 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/blog/like")
-public class BlogUserLikeController extends BaseController
-{
-    @Autowired
-    private IBlogUserLikeService blogUserLikeService;
+public class BlogUserLikeController extends BaseController {
+	@Autowired
+	private IBlogUserLikeService blogUserLikeService;
 
-    /**
-     * 查询用户点赞列表
-     */
-    @PreAuthorize("@ss.hasPermi('blog:like:list')")
-    @GetMapping("/list")
-    public TableDataInfo list(BlogUserLike blogUserLike)
-    {
-        startPage();
-        List<BlogUserLike> list = blogUserLikeService.selectBlogUserLikeList(blogUserLike);
-        return getDataTable(list);
-    }
+	/**
+	 * 查询用户点赞列表
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:like:list')")
+	@GetMapping("/list")
+	public TableDataInfo list(BlogUserLike blogUserLike) {
+		startPage();
+		List<BlogUserLike> list = blogUserLikeService.selectBlogUserLikeList(blogUserLike);
+		return getDataTable(list);
+	}
 
-    /**
-     * 导出用户点赞列表
-     */
-    @PreAuthorize("@ss.hasPermi('blog:like:export')")
-    @Log(title = "用户点赞", businessType = BusinessType.EXPORT)
-    @GetMapping("/export")
-    public AjaxResult export(BlogUserLike blogUserLike)
-    {
-        List<BlogUserLike> list = blogUserLikeService.selectBlogUserLikeList(blogUserLike);
-        ExcelUtil<BlogUserLike> util = new ExcelUtil<BlogUserLike>(BlogUserLike.class);
-        return util.exportExcel(list, "用户点赞数据");
-    }
+	/**
+	 * 导出用户点赞列表
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:like:export')")
+	@Log(title = "用户点赞", businessType = BusinessType.EXPORT)
+	@GetMapping("/export")
+	public AjaxResult export(BlogUserLike blogUserLike) {
+		List<BlogUserLike> list = blogUserLikeService.selectBlogUserLikeList(blogUserLike);
+		ExcelUtil<BlogUserLike> util = new ExcelUtil<BlogUserLike>(BlogUserLike.class);
+		return util.exportExcel(list, "用户点赞数据");
+	}
 
-    /**
-     * 获取用户点赞详细信息
-     */
-    @PreAuthorize("@ss.hasPermi('blog:like:query')")
-    @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
-        return AjaxResult.success(blogUserLikeService.selectBlogUserLikeById(id));
-    }
+	/**
+	 * 获取用户点赞详细信息
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:like:query')")
+	@GetMapping(value = "/{id}")
+	public AjaxResult getInfo(@PathVariable("id") Long id) {
+		return AjaxResult.success(blogUserLikeService.selectBlogUserLikeById(id));
+	}
 
-    /**
-     * 新增用户点赞
-     */
-    @PreAuthorize("@ss.hasPermi('blog:like:add')")
-    @Log(title = "用户点赞", businessType = BusinessType.INSERT)
-    @PostMapping
-    public AjaxResult add(@RequestBody BlogUserLike blogUserLike)
-    {
-        return toAjax(blogUserLikeService.insertBlogUserLike(blogUserLike));
-    }
+	/**
+	 * 新增用户点赞
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:like:add')")
+	@Log(title = "用户点赞", businessType = BusinessType.INSERT)
+	@PostMapping
+	public AjaxResult add(@RequestBody BlogUserLike blogUserLike) {
+		return toAjax(blogUserLikeService.insertBlogUserLike(blogUserLike));
+	}
 
-    /**
-     * 修改用户点赞
-     */
-    @PreAuthorize("@ss.hasPermi('blog:like:edit')")
-    @Log(title = "用户点赞", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@RequestBody BlogUserLike blogUserLike)
-    {
-        return toAjax(blogUserLikeService.updateBlogUserLike(blogUserLike));
-    }
+	/**
+	 * 修改用户点赞
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:like:edit')")
+	@Log(title = "用户点赞", businessType = BusinessType.UPDATE)
+	@PutMapping
+	public AjaxResult edit(@RequestBody BlogUserLike blogUserLike) {
+		return toAjax(blogUserLikeService.updateBlogUserLike(blogUserLike));
+	}
 
-    /**
-     * 删除用户点赞
-     */
-    @PreAuthorize("@ss.hasPermi('blog:like:remove')")
-    @Log(title = "用户点赞", businessType = BusinessType.DELETE)
+	/**
+	 * 删除用户点赞
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:like:remove')")
+	@Log(title = "用户点赞", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
-        return toAjax(blogUserLikeService.deleteBlogUserLikeByIds(ids));
-    }
+	public AjaxResult remove(@PathVariable Long[] ids) {
+		return toAjax(blogUserLikeService.deleteBlogUserLikeByIds(ids));
+	}
 }

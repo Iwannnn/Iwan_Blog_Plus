@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.enums.BusinessType;
+import cn.iwannnn.common.annotation.Log;
+import cn.iwannnn.common.core.controller.BaseController;
+import cn.iwannnn.common.core.domain.AjaxResult;
+import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogArticle;
 import cn.iwannnn.blog.service.IBlogArticleService;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
+import cn.iwannnn.common.utils.poi.ExcelUtil;
+import cn.iwannnn.common.core.page.TableDataInfo;
 
 /**
  * 博客文章Controller
@@ -28,76 +28,69 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/blog/article")
-public class BlogArticleController extends BaseController
-{
-    @Autowired
-    private IBlogArticleService blogArticleService;
+public class BlogArticleController extends BaseController {
+	@Autowired
+	private IBlogArticleService blogArticleService;
 
-    /**
-     * 查询博客文章列表
-     */
-    @PreAuthorize("@ss.hasPermi('blog:article:list')")
-    @GetMapping("/list")
-    public TableDataInfo list(BlogArticle blogArticle)
-    {
-        startPage();
-        List<BlogArticle> list = blogArticleService.selectBlogArticleList(blogArticle);
-        return getDataTable(list);
-    }
+	/**
+	 * 查询博客文章列表
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:article:list')")
+	@GetMapping("/list")
+	public TableDataInfo list(BlogArticle blogArticle) {
+		startPage();
+		List<BlogArticle> list = blogArticleService.selectBlogArticleList(blogArticle);
+		return getDataTable(list);
+	}
 
-    /**
-     * 导出博客文章列表
-     */
-    @PreAuthorize("@ss.hasPermi('blog:article:export')")
-    @Log(title = "博客文章", businessType = BusinessType.EXPORT)
-    @GetMapping("/export")
-    public AjaxResult export(BlogArticle blogArticle)
-    {
-        List<BlogArticle> list = blogArticleService.selectBlogArticleList(blogArticle);
-        ExcelUtil<BlogArticle> util = new ExcelUtil<BlogArticle>(BlogArticle.class);
-        return util.exportExcel(list, "博客文章数据");
-    }
+	/**
+	 * 导出博客文章列表
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:article:export')")
+	@Log(title = "博客文章", businessType = BusinessType.EXPORT)
+	@GetMapping("/export")
+	public AjaxResult export(BlogArticle blogArticle) {
+		List<BlogArticle> list = blogArticleService.selectBlogArticleList(blogArticle);
+		ExcelUtil<BlogArticle> util = new ExcelUtil<BlogArticle>(BlogArticle.class);
+		return util.exportExcel(list, "博客文章数据");
+	}
 
-    /**
-     * 获取博客文章详细信息
-     */
-    @PreAuthorize("@ss.hasPermi('blog:article:query')")
-    @GetMapping(value = "/{articleId}")
-    public AjaxResult getInfo(@PathVariable("articleId") Long articleId)
-    {
-        return AjaxResult.success(blogArticleService.selectBlogArticleByArticleId(articleId));
-    }
+	/**
+	 * 获取博客文章详细信息
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:article:query')")
+	@GetMapping(value = "/{articleId}")
+	public AjaxResult getInfo(@PathVariable("articleId") Long articleId) {
+		return AjaxResult.success(blogArticleService.selectBlogArticleByArticleId(articleId));
+	}
 
-    /**
-     * 新增博客文章
-     */
-    @PreAuthorize("@ss.hasPermi('blog:article:add')")
-    @Log(title = "博客文章", businessType = BusinessType.INSERT)
-    @PostMapping
-    public AjaxResult add(@RequestBody BlogArticle blogArticle)
-    {
-        return toAjax(blogArticleService.insertBlogArticle(blogArticle));
-    }
+	/**
+	 * 新增博客文章
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:article:add')")
+	@Log(title = "博客文章", businessType = BusinessType.INSERT)
+	@PostMapping
+	public AjaxResult add(@RequestBody BlogArticle blogArticle) {
+		return toAjax(blogArticleService.insertBlogArticle(blogArticle));
+	}
 
-    /**
-     * 修改博客文章
-     */
-    @PreAuthorize("@ss.hasPermi('blog:article:edit')")
-    @Log(title = "博客文章", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@RequestBody BlogArticle blogArticle)
-    {
-        return toAjax(blogArticleService.updateBlogArticle(blogArticle));
-    }
+	/**
+	 * 修改博客文章
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:article:edit')")
+	@Log(title = "博客文章", businessType = BusinessType.UPDATE)
+	@PutMapping
+	public AjaxResult edit(@RequestBody BlogArticle blogArticle) {
+		return toAjax(blogArticleService.updateBlogArticle(blogArticle));
+	}
 
-    /**
-     * 删除博客文章
-     */
-    @PreAuthorize("@ss.hasPermi('blog:article:remove')")
-    @Log(title = "博客文章", businessType = BusinessType.DELETE)
+	/**
+	 * 删除博客文章
+	 */
+	@PreAuthorize("@ss.hasPermi('blog:article:remove')")
+	@Log(title = "博客文章", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{articleIds}")
-    public AjaxResult remove(@PathVariable Long[] articleIds)
-    {
-        return toAjax(blogArticleService.deleteBlogArticleByArticleIds(articleIds));
-    }
+	public AjaxResult remove(@PathVariable Long[] articleIds) {
+		return toAjax(blogArticleService.deleteBlogArticleByArticleIds(articleIds));
+	}
 }

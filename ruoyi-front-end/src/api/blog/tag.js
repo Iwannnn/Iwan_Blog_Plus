@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询文章标签列表
+// 查询博客标签列表
 export function listTag(query) {
   return request({
     url: '/blog/tag/list',
@@ -9,15 +9,15 @@ export function listTag(query) {
   })
 }
 
-// 查询文章标签详细
-export function getTag(id) {
+// 查询博客标签详细
+export function getTag(tagId) {
   return request({
-    url: '/blog/tag/' + id,
+    url: '/blog/tag/' + tagId,
     method: 'get'
   })
 }
 
-// 新增文章标签
+// 新增博客标签
 export function addTag(data) {
   return request({
     url: '/blog/tag',
@@ -26,7 +26,7 @@ export function addTag(data) {
   })
 }
 
-// 修改文章标签
+// 修改博客标签
 export function updateTag(data) {
   return request({
     url: '/blog/tag',
@@ -35,15 +35,15 @@ export function updateTag(data) {
   })
 }
 
-// 删除文章标签
-export function delTag(id) {
+// 删除博客标签
+export function delTag(tagId) {
   return request({
-    url: '/blog/tag/' + id,
+    url: '/blog/tag/' + tagId,
     method: 'delete'
   })
 }
 
-// 导出文章标签
+// 导出博客标签
 export function exportTag(query) {
   return request({
     url: '/blog/tag/export',
