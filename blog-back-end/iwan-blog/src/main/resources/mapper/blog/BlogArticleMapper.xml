@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.iwannnn.blog.mapper.BlogArticleMapper">
+    
+    <resultMap type="BlogArticle" id="BlogArticleResult">
+        <result property="articleId"    column="article_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="tittle"    column="tittle"    />
+        <result property="content"    column="content"    />
+        <result property="musicId"    column="music_id"    />
+        <result property="categoryId"    column="category_id"    />
+        <result property="avator"    column="avator"    />
+        <result property="summary"    column="summary"    />
+        <result property="pageviews"    column="pageviews"    />
+        <result property="likes"    column="likes"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBlogArticleVo">
+        select article_id, user_id, tittle, content, music_id, category_id, avator, summary, pageviews, likes, create_time, update_time, remark from blog_article
+    </sql>
+
+    <select id="selectBlogArticleList" parameterType="BlogArticle" resultMap="BlogArticleResult">
+        <include refid="selectBlogArticleVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="tittle != null  and tittle != ''"> and tittle = #{tittle}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="musicId != null "> and music_id = #{musicId}</if>
+            <if test="categoryId != null "> and category_id = #{categoryId}</if>
+            <if test="avator != null  and avator != ''"> and avator = #{avator}</if>
+            <if test="summary != null  and summary != ''"> and summary = #{summary}</if>
+            <if test="pageviews != null "> and pageviews = #{pageviews}</if>
+            <if test="likes != null "> and likes = #{likes}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogArticleByArticleId" parameterType="Long" resultMap="BlogArticleResult">
+        <include refid="selectBlogArticleVo"/>
+        where article_id = #{articleId}
+    </select>
+        
+    <insert id="insertBlogArticle" parameterType="BlogArticle" useGeneratedKeys="true" keyProperty="articleId">
+        insert into blog_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="tittle != null">tittle,</if>
+            <if test="content != null">content,</if>
+            <if test="musicId != null">music_id,</if>
+            <if test="categoryId != null">category_id,</if>
+            <if test="avator != null">avator,</if>
+            <if test="summary != null">summary,</if>
+            <if test="pageviews != null">pageviews,</if>
+            <if test="likes != null">likes,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="tittle != null">#{tittle},</if>
+            <if test="content != null">#{content},</if>
+            <if test="musicId != null">#{musicId},</if>
+            <if test="categoryId != null">#{categoryId},</if>
+            <if test="avator != null">#{avator},</if>
+            <if test="summary != null">#{summary},</if>
+            <if test="pageviews != null">#{pageviews},</if>
+            <if test="likes != null">#{likes},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlogArticle" parameterType="BlogArticle">
+        update blog_article
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="tittle != null">tittle = #{tittle},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="musicId != null">music_id = #{musicId},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="avator != null">avator = #{avator},</if>
+            <if test="summary != null">summary = #{summary},</if>
+            <if test="pageviews != null">pageviews = #{pageviews},</if>
+            <if test="likes != null">likes = #{likes},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where article_id = #{articleId}
+    </update>
+
+    <delete id="deleteBlogArticleByArticleId" parameterType="Long">
+        delete from blog_article where article_id = #{articleId}
+    </delete>
+
+    <delete id="deleteBlogArticleByArticleIds" parameterType="String">
+        delete from blog_article where article_id in 
+        <foreach item="articleId" collection="array" open="(" separator="," close=")">
+            #{articleId}
+        </foreach>
+    </delete>
+</mapper>
