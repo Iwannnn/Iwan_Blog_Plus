@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import cn.iwannnn.common.annotation.Log;
 import cn.iwannnn.common.core.controller.BaseController;
 import cn.iwannnn.common.core.domain.AjaxResult;
@@ -93,4 +94,5 @@ public class BlogArticleController extends BaseController {
 	public AjaxResult remove(@PathVariable Long[] articleIds) {
 		return toAjax(blogArticleService.deleteBlogArticleByArticleIds(articleIds));
 	}
+
 }
