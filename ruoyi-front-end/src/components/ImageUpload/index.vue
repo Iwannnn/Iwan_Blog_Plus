@@ -13,7 +13,6 @@
             :show-file-list="true"
             :headers="headers"
             :file-list="fileList"
-            :on-preview="handlePictureCardPreview"
             :class="{ hide: this.fileList.length >= this.limit }"
         >
             <i class="el-icon-plus"></i>
@@ -135,7 +134,6 @@ export default {
         // 上传成功回调
         handleUploadSuccess(res) {
             this.$emit("getImageUrl", res.data);
-            console.log(res);
             this.loading.close();
         },
         // 上传前loading加载
@@ -192,11 +190,6 @@ export default {
                 message: "上传失败",
             });
             this.loading.close();
-        },
-        // 预览
-        handlePictureCardPreview(file) {
-            // this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
         },
         // 对象转成指定字符串分隔
         listToString(list, separator) {

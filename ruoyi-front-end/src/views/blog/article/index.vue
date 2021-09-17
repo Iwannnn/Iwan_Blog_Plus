@@ -7,15 +7,6 @@
             v-show="showSearch"
             label-width="68px"
         >
-            <el-form-item label="用户Id" prop="userId">
-                <el-input
-                    v-model="queryParams.userId"
-                    placeholder="请输入博主"
-                    clearable
-                    size="small"
-                    @keyup.enter.native="handleQuery"
-                />
-            </el-form-item>
             <el-form-item label="文章标题" prop="tittle">
                 <el-input
                     v-model="queryParams.tittle"
@@ -148,12 +139,18 @@
         >
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="文章id" align="center" prop="articleId" />
-            <el-table-column label="博主" align="center" prop="userId" />
             <el-table-column label="文章标题" align="center" prop="tittle" />
             <el-table-column label="文章内容" align="center" prop="content" />
             <el-table-column label="音乐id" align="center" prop="musicId" />
             <el-table-column label="分类id" align="center" prop="categoryId" />
-            <el-table-column label="头像链接" align="center" prop="avator" />
+            <el-table-column label="头像">
+                <template width="60" slot-scope="scope">
+                    <img
+                        style="width: 50px; height: 50px; border: none"
+                        :src="scope.row.avator"
+                    />
+                </template>
+            </el-table-column>
             <el-table-column label="概要" align="center" prop="summary" />
             <el-table-column label="浏览量" align="center" prop="pageviews" />
             <el-table-column label="点赞数" align="center" prop="likes" />
@@ -180,7 +177,11 @@
                         v-hasPermi="['blog:article:remove']"
                         >删除</el-button
                     >
-                </template>
+                </template></el-table-column
+            ></el-table
+        >
+    </div>
+</template>
             </el-table-column>
         </el-table>
 
@@ -200,9 +201,6 @@
             append-to-body
         >
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item label="博主" prop="userId">
-                    <el-input v-model="form.userId" placeholder="请输入博主" />
-                </el-form-item>
                 <el-form-item label="文章标题" prop="tittle">
                     <el-input
                         v-model="form.tittle"
@@ -227,7 +225,7 @@
                 <el-form-item label="标题图" prop="avator">
                     <imageUpload
                         @getImageUrl="getImageUrl"
-                        :dialogImageUrl="'http://cdn.iwannnn.cn/chrome_1fBpAefY6q.png'"
+                        :dialogImageUrl="'form.avator'"
                     />
                 </el-form-item>
                 <el-form-item label="概要" prop="summary">

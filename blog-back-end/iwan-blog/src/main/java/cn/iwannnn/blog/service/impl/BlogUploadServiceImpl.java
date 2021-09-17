@@ -21,7 +21,7 @@ import cn.iwannnn.blog.service.IBlogUploadService;
 public class BlogUploadServiceImpl implements IBlogUploadService {
 	private static final String accessKey = "w9uwfJ-Wz6JIPeWyQl8iTPe577wybVgZmSJ8ShjL";
 	private static final String secretKey = "26kSxtoZcRCLJzKAmabCMcBv3lOF1Q_ZGh4poNBo";
-	private static final String url = "cdn.iwannnn.cn";
+	private static final String baseUrl = "http://cdn.iwannnn.cn/";
 	private static final String bucket = "iwannnn";
 
 	@Override
@@ -36,7 +36,7 @@ public class BlogUploadServiceImpl implements IBlogUploadService {
 			byte[] localFile = file.getBytes();
 			Response response = uploadManager.put(localFile, key, uptoken);
 			DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-			res = url + putRet.key;
+			res = baseUrl + putRet.key;
 		} catch (QiniuException e) {
 		}
 		return res;
