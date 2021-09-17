@@ -143,7 +143,7 @@
             <el-table-column label="文章内容" align="center" prop="content" />
             <el-table-column label="音乐id" align="center" prop="musicId" />
             <el-table-column label="分类id" align="center" prop="categoryId" />
-            <el-table-column label="头像">
+            <el-table-column label="标题图">
                 <template width="60" slot-scope="scope">
                     <img
                         style="width: 50px; height: 50px; border: none"
@@ -177,11 +177,7 @@
                         v-hasPermi="['blog:article:remove']"
                         >删除</el-button
                     >
-                </template></el-table-column
-            ></el-table
-        >
-    </div>
-</template>
+                </template>
             </el-table-column>
         </el-table>
 
@@ -208,7 +204,13 @@
                     />
                 </el-form-item>
                 <el-form-item label="文章内容">
-                    <editor v-model="form.content" :min-height="192" />
+                    <mavon-editor
+                        v-model="form.content"
+                        :ishljs="true"
+                        ref="md"
+                        @imgAdd="this.imgAdd"
+                        @imgDel="this.imgDel"
+                    />
                 </el-form-item>
                 <el-form-item label="音乐id" prop="musicId">
                     <el-input
@@ -263,6 +265,7 @@ import {
 } from "@/api/blog/article";
 import importTable from "../../tool/gen/importTable.vue";
 import imageUpload from "@/components/ImageUpload";
+import { addImg } from "@/api/tool/upload.js";
 
 export default {
     components: { importTable, imageUpload },
@@ -440,6 +443,18 @@ export default {
         getImageUrl(imageUrl) {
             this.form.avator = imageUrl;
             console.log(this, this.form.avator);
+        },
+        imgAdd(pos, $file) {
+            var formdata = new FormData();
+            formdata.append("file", $file);
+            addImg(formdata).then((res) => {
+                console.log(res);
+                let _res = res.data;
+                this.$refs.md.$img2Url(pos, _res);
+            });
+        },
+        imgDel(pos) {
+            delete this.img_file[pos];
         },
     },
 };
