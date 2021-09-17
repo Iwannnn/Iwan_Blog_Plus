@@ -263,7 +263,13 @@
                     />
                 </el-form-item>
                 <el-form-item label="评论内容">
-                    <editor v-model="form.content" :min-height="192" />
+                    <mavon-editor
+                        v-model="form.content"
+                        :ishljs="true"
+                        ref="md"
+                        @imgAdd="this.imgAdd"
+                        @imgDel="this.imgDel"
+                    />
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
                     <el-input v-model="form.remark" placeholder="请输入备注" />
@@ -286,7 +292,7 @@ import {
     updateComment,
     exportComment,
 } from "@/api/blog/comment";
-
+import { addImg } from "@/api/tool/upload.js";
 export default {
     name: "Comment",
     data() {
@@ -456,6 +462,18 @@ export default {
                     this.exportLoading = false;
                 })
                 .catch(() => {});
+        },
+        imgAdd(pos, $file) {
+            var formdata = new FormData();
+            formdata.append("file", $file);
+            addImg(formdata).then((res) => {
+                console.log(res);
+                let _res = res.data;
+                this.$refs.md.$img2Url(pos, _res);
+            });
+        },
+        imgDel(pos) {
+            delete this.img_file[pos];
         },
     },
 };
