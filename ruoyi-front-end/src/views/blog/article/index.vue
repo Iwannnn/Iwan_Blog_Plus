@@ -225,11 +225,10 @@
                     />
                 </el-form-item>
                 <el-form-item label="标题图" prop="avator">
-                    <!-- <el-input
-                        v-model="form.avator"
-                        placeholder="请输入标题图链接"
-                    /> -->
-                    <imageUpload></imageUpload>
+                    <imageUpload
+                        @getImageUrl="getImageUrl"
+                        :dialogImageUrl="'http://cdn.iwannnn.cn/chrome_1fBpAefY6q.png'"
+                    />
                 </el-form-item>
                 <el-form-item label="概要" prop="summary">
                     <el-input v-model="form.summary" placeholder="请输入概要" />
@@ -440,6 +439,38 @@ export default {
                 })
                 .catch(() => {});
         },
+        getImageUrl(imageUrl) {
+            this.form.avator = imageUrl;
+            console.log(this, this.form.avator);
+        },
     },
 };
 </script>
+<style scoped>
+.avatar-uploader .el-upload {
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+    border-color: #000000;
+}
+
+.avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+}
+
+.avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+}
+</style>

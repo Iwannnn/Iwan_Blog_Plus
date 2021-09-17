@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import cn.iwannnn.common.annotation.Excel;
 import cn.iwannnn.common.core.domain.BaseEntity;
+import lombok.NoArgsConstructor;
 
 /**
  * 文章标签对象 blog_article_tag
@@ -11,6 +12,7 @@ import cn.iwannnn.common.core.domain.BaseEntity;
  * @author iwan
  * @date 2021-09-15
  */
+@NoArgsConstructor
 public class BlogArticleTag extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 

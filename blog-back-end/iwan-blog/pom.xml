@@ -1,28 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>iwan</artifactId>
-        <groupId>cn.iwannnn</groupId>
-        <version>3.7.0</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>iwan</artifactId>
+		<groupId>cn.iwannnn</groupId>
+		<version>3.7.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>iwan-blog</artifactId>
+	<artifactId>iwan-blog</artifactId>
 
-    <description>
+	<description>
         博客模块
-    </description>
+	</description>
 
-    <dependencies>
+	<dependencies>
 
-        <!-- 通用工具-->
-        <dependency>
-            <groupId>cn.iwannnn</groupId>
-            <artifactId>iwan-common</artifactId>
+		<!-- 通用工具-->
+		<dependency>
+			<groupId>cn.iwannnn</groupId>
+			<artifactId>iwan-common</artifactId>
+		</dependency>
+
+		<!-- 七牛云 -->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>7.2.28</version>
+		</dependency>
+
+		<!-- Gson -->
+		<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.6</version>
         </dependency>
 
-    </dependencies>
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
 
 </project>
