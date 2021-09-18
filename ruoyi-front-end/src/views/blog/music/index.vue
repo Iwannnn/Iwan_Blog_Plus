@@ -1,6 +1,15 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+      <el-form-item label="音乐名称" prop="name">
+        <el-input
+          v-model="queryParams.name"
+          placeholder="请输入音乐名称"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="音乐资源" prop="src">
         <el-input
           v-model="queryParams.src"
@@ -84,6 +93,7 @@
     <el-table v-loading="loading" :data="musicList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="音乐id" align="center" prop="musicId" />
+      <el-table-column label="音乐名称" align="center" prop="name" />
       <el-table-column label="音乐资源" align="center" prop="src" />
       <el-table-column label="字幕文件" align="center" prop="lrc" />
       <el-table-column label="头像" align="center" prop="avator" />
@@ -119,6 +129,9 @@
     <!-- 添加或修改博客音乐对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="音乐名称" prop="name">
+          <el-input v-model="form.name" placeholder="请输入音乐名称" />
+        </el-form-item>
         <el-form-item label="音乐资源" prop="src">
           <el-input v-model="form.src" placeholder="请输入音乐资源" />
         </el-form-item>
@@ -171,6 +184,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
+        name: null,
         src: null,
         lrc: null,
         avator: null,
@@ -204,6 +218,7 @@ export default {
     reset() {
       this.form = {
         musicId: null,
+        name: null,
         src: null,
         lrc: null,
         avator: null,

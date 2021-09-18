@@ -24,10 +24,10 @@ public class BlogUploadController {
 	@Autowired
 	private IBlogUploadService blogUploadSerive;
 
-	@RequestMapping("/qiniuImage")
-	public AjaxResult uploadPicture(@RequestParam("file") MultipartFile multipartFile) throws IOException {
+	@RequestMapping("/file")
+	public AjaxResult uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
 		System.out.println(multipartFile.toString());
-		String imageUrl = blogUploadSerive.uploadPicture(multipartFile);
-		return AjaxResult.success("success", imageUrl);
+		String fileUrl = blogUploadSerive.uploadFile(multipartFile);
+		return AjaxResult.success("success", fileUrl);
 	}
 }

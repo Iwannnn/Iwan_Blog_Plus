@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function addImg(data) {
 	return request({
-		url: '/api/upload/qiniuImage',
+		url: '/api/upload/file',
 		method: 'post',
 		data: data,
 		headers: {

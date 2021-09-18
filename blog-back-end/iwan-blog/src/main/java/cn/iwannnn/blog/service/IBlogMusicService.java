@@ -7,7 +7,7 @@ import cn.iwannnn.blog.domain.BlogMusic;
  * 博客音乐Service接口
  * 
  * @author iwan
- * @date 2021-09-15
+ * @date 2021-09-17
  */
 public interface IBlogMusicService 
 {

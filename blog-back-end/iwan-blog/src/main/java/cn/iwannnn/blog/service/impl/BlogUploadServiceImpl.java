@@ -25,11 +25,11 @@ public class BlogUploadServiceImpl implements IBlogUploadService {
 	private static final String bucket = "iwannnn";
 
 	@Override
-	public String uploadPicture(MultipartFile file) throws IOException {
+	public String uploadFile(MultipartFile file) throws IOException {
 		String res = "";
 		Configuration configuration = new Configuration(Region.region0());
 		UploadManager uploadManager = new UploadManager(configuration);
-		String key = getRandomCharacterAndNumber(10) + ".png";
+		String key = getRandomCharacterAndNumber(21);
 		Auth auth = Auth.create(accessKey, secretKey);
 		String uptoken = auth.uploadToken(bucket);
 		try {

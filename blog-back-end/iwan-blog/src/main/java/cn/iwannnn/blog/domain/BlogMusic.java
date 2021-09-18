@@ -9,63 +9,88 @@ import cn.iwannnn.common.core.domain.BaseEntity;
  * 博客音乐对象 blog_music
  * 
  * @author iwan
- * @date 2021-09-15
+ * @date 2021-09-17
  */
-public class BlogMusic extends BaseEntity {
-	private static final long serialVersionUID = 1L;
+public class BlogMusic extends BaseEntity
+{
+    private static final long serialVersionUID = 1L;
 
-	/** 音乐id */
-	private Long musicId;
+    /** 音乐id */
+    private Long musicId;
 
-	/** 音乐资源 */
-	@Excel(name = "音乐资源")
-	private String src;
+    /** 音乐名称 */
+    @Excel(name = "音乐名称")
+    private String name;
 
-	/** 字幕文件 */
-	@Excel(name = "字幕文件")
-	private String lrc;
+    /** 音乐资源 */
+    @Excel(name = "音乐资源")
+    private String src;
 
-	/** 头像 */
-	@Excel(name = "头像")
-	private String avator;
+    /** 字幕文件 */
+    @Excel(name = "字幕文件")
+    private String lrc;
 
-	public void setMusicId(Long musicId) {
-		this.musicId = musicId;
-	}
+    /** 头像 */
+    @Excel(name = "头像")
+    private String avator;
 
-	public Long getMusicId() {
-		return musicId;
-	}
+    public void setMusicId(Long musicId) 
+    {
+        this.musicId = musicId;
+    }
 
-	public void setSrc(String src) {
-		this.src = src;
-	}
+    public Long getMusicId() 
+    {
+        return musicId;
+    }
+    public void setName(String name) 
+    {
+        this.name = name;
+    }
 
-	public String getSrc() {
-		return src;
-	}
+    public String getName() 
+    {
+        return name;
+    }
+    public void setSrc(String src) 
+    {
+        this.src = src;
+    }
 
-	public void setLrc(String lrc) {
-		this.lrc = lrc;
-	}
+    public String getSrc() 
+    {
+        return src;
+    }
+    public void setLrc(String lrc) 
+    {
+        this.lrc = lrc;
+    }
 
-	public String getLrc() {
-		return lrc;
-	}
+    public String getLrc() 
+    {
+        return lrc;
+    }
+    public void setAvator(String avator) 
+    {
+        this.avator = avator;
+    }
 
-	public void setAvator(String avator) {
-		this.avator = avator;
-	}
+    public String getAvator() 
+    {
+        return avator;
+    }
 
-	public String getAvator() {
-		return avator;
-	}
-
-	@Override
-	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("musicId", getMusicId())
-				.append("src", getSrc()).append("lrc", getLrc()).append("avator", getAvator())
-				.append("createTime", getCreateTime()).append("updateTime", getUpdateTime())
-				.append("remark", getRemark()).toString();
-	}
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+            .append("musicId", getMusicId())
+            .append("name", getName())
+            .append("src", getSrc())
+            .append("lrc", getLrc())
+            .append("avator", getAvator())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
+            .append("remark", getRemark())
+            .toString();
+    }
 }
