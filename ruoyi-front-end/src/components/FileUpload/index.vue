@@ -73,7 +73,7 @@ export default {
         // 数量限制
         limit: {
             type: Number,
-            default: 5,
+            default: 1,
         },
         // 大小限制(MB)
         fileSize: {
@@ -94,7 +94,7 @@ export default {
     data() {
         return {
             baseUrl: process.env.VUE_APP_BASE_API,
-            uploadFileUrl: process.env.VUE_APP_BASE_API + "/api/upload/file", // 上传的图片服务器地址
+            uploadFileUrl: process.env.VUE_APP_BASE_API + "/api/upload/file", // 上传的服务器地址
             headers: {
                 Authorization: "Bearer " + getToken(),
             },
@@ -182,8 +182,8 @@ export default {
         // 上传成功回调
         handleUploadSuccess(res, file) {
             this.$message.success("上传成功");
-            this.fileList.push({ name: res.fileName, url: res.fileName });
-            this.$emit("input", this.listToString(this.fileList));
+            console.log(res);
+            this.$emit("input", res.data);
         },
         // 删除文件
         handleDelete(index) {

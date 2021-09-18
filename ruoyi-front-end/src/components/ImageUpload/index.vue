@@ -132,7 +132,7 @@ export default {
         },
         // 上传成功回调
         handleUploadSuccess(res) {
-            this.$emit("getImageUrl", res.data);
+            this.$emit("input", res.data);
             this.loading.close();
         },
         // 上传前loading加载

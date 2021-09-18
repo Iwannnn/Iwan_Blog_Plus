@@ -226,7 +226,7 @@
                 </el-form-item>
                 <el-form-item label="标题图" prop="avator">
                     <imageUpload
-                        @getImageUrl="getImageUrl"
+                        @input="getImageUrl"
                         :dialogImageUrl="'form.avator'"
                     />
                 </el-form-item>

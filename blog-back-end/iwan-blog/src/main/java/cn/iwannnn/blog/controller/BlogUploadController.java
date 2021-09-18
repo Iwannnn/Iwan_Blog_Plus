@@ -26,7 +26,6 @@ public class BlogUploadController {
 
 	@RequestMapping("/file")
 	public AjaxResult uploadFile(@RequestParam("file") MultipartFile multipartFile) throws IOException {
-		System.out.println(multipartFile.toString());
 		String fileUrl = blogUploadSerive.uploadFile(multipartFile);
 		return AjaxResult.success("success", fileUrl);
 	}
