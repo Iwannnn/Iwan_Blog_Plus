@@ -310,6 +310,8 @@ export default {
             form: {},
             // 表单校验
             rules: {},
+            categoryList: [],
+            musicList: [],
         };
     },
     created() {
@@ -456,6 +458,8 @@ export default {
         imgDel(pos) {
             delete this.img_file[pos];
         },
+        getCategoryList() {},
+        getMusicList() {},
     },
 };
 </script>
