@@ -34,9 +34,9 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
-            <el-form-item label="头像" prop="avator">
+            <el-form-item label="头像" prop="avatar">
                 <el-input
-                    v-model="queryParams.avator"
+                    v-model="queryParams.avatar"
                     placeholder="请输入头像"
                     clearable
                     size="small"
@@ -124,7 +124,7 @@
             <el-table-column label="音乐名称" align="center" prop="name" />
             <el-table-column label="音乐资源" align="center" prop="src" />
             <el-table-column label="字幕文件" align="center" prop="lrc" />
-            <el-table-column label="头像" align="center" prop="avator" />
+            <el-table-column label="头像" align="center" prop="avatar" />
             <el-table-column label="备注" align="center" prop="remark" />
             <el-table-column
                 label="操作"
@@ -184,7 +184,7 @@
                 <el-form-item label="字幕文件" prop="lrc">
                     <fileUpload :fileType="lrcType" @input="getLrcUrl" />
                 </el-form-item>
-                <el-form-item label="头像" prop="avator">
+                <el-form-item label="头像" prop="avatar">
                     <imageUpload @input="getImageUrl" />
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
@@ -239,7 +239,7 @@ export default {
                 name: null,
                 src: null,
                 lrc: null,
-                avator: null,
+                avatar: null,
             },
             // 表单参数
             form: {},
@@ -274,7 +274,7 @@ export default {
                 name: null,
                 src: null,
                 lrc: null,
-                avator: null,
+                avatar: null,
                 createTime: null,
                 updateTime: null,
                 remark: null,
@@ -380,7 +380,7 @@ export default {
             this.form.lrc = lrcUrl;
         },
         getImageUrl(imageUrl) {
-            this.form.avator = imageUrl;
+            this.form.avatar = imageUrl;
         },
     },
 };

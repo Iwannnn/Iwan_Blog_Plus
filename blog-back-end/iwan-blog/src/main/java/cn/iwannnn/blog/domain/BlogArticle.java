@@ -39,7 +39,7 @@ public class BlogArticle extends BaseEntity {
 
 	/** 头像链接 */
 	@Excel(name = "头像链接")
-	private String avator;
+	private String avatar;
 
 	/** 概要 */
 	@Excel(name = "概要")
@@ -101,12 +101,12 @@ public class BlogArticle extends BaseEntity {
 		return categoryId;
 	}
 
-	public void setAvator(String avator) {
-		this.avator = avator;
+	public void setAvatar(String avator) {
+		this.avatar = avator;
 	}
 
-	public String getAvator() {
-		return avator;
+	public String getAvatar() {
+		return avatar;
 	}
 
 	public void setSummary(String summary) {
@@ -137,7 +137,7 @@ public class BlogArticle extends BaseEntity {
 	public String toString() {
 		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("articleId", getArticleId())
 				.append("userId", getUserId()).append("tittle", getTittle()).append("content", getContent())
-				.append("musicId", getMusicId()).append("categoryId", getCategoryId()).append("avator", getAvator())
+				.append("musicId", getMusicId()).append("categoryId", getCategoryId()).append("avator", getAvatar())
 				.append("summary", getSummary()).append("pageviews", getPageviews()).append("likes", getLikes())
 				.append("createTime", getCreateTime()).append("updateTime", getUpdateTime())
 				.append("remark", getRemark()).toString();

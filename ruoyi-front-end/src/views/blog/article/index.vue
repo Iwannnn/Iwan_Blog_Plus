@@ -147,7 +147,7 @@
                 <template width="60" slot-scope="scope">
                     <img
                         style="width: 50px; height: 50px; border: none"
-                        :src="scope.row.avator"
+                        :src="scope.row.avatar"
                     />
                 </template>
             </el-table-column>
@@ -224,10 +224,10 @@
                         placeholder="请输入分类id"
                     />
                 </el-form-item>
-                <el-form-item label="标题图" prop="avator">
+                <el-form-item label="标题图" prop="avatar">
                     <imageUpload
                         @input="getImageUrl"
-                        :dialogImageUrl="'form.avator'"
+                        :dialogImageUrl="'form.avatar'"
                     />
                 </el-form-item>
                 <el-form-item label="概要" prop="summary">
@@ -301,7 +301,7 @@ export default {
                 content: null,
                 musicId: null,
                 categoryId: null,
-                avator: null,
+                avatar: null,
                 summary: null,
                 pageviews: null,
                 likes: null,
@@ -341,7 +341,7 @@ export default {
                 content: null,
                 musicId: null,
                 categoryId: null,
-                avator: null,
+                avatar: null,
                 summary: null,
                 pageviews: null,
                 likes: null,
@@ -443,8 +443,8 @@ export default {
                 .catch(() => {});
         },
         getImageUrl(imageUrl) {
-            this.form.avator = imageUrl;
-            console.log(this, this.form.avator);
+            this.form.avatar = imageUrl;
+            console.log(this, this.form.avatar);
         },
         imgAdd(pos, $file) {
             var formdata = new FormData();

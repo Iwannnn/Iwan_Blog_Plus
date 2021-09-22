@@ -11,86 +11,73 @@ import cn.iwannnn.common.core.domain.BaseEntity;
  * @author iwan
  * @date 2021-09-17
  */
-public class BlogMusic extends BaseEntity
-{
-    private static final long serialVersionUID = 1L;
+public class BlogMusic extends BaseEntity {
+	private static final long serialVersionUID = 1L;
 
-    /** 音乐id */
-    private Long musicId;
+	/** 音乐id */
+	private Long musicId;
 
-    /** 音乐名称 */
-    @Excel(name = "音乐名称")
-    private String name;
+	/** 音乐名称 */
+	@Excel(name = "音乐名称")
+	private String name;
 
-    /** 音乐资源 */
-    @Excel(name = "音乐资源")
-    private String src;
+	/** 音乐资源 */
+	@Excel(name = "音乐资源")
+	private String src;
 
-    /** 字幕文件 */
-    @Excel(name = "字幕文件")
-    private String lrc;
+	/** 字幕文件 */
+	@Excel(name = "字幕文件")
+	private String lrc;
 
-    /** 头像 */
-    @Excel(name = "头像")
-    private String avator;
+	/** 头像 */
+	@Excel(name = "头像")
+	private String avatar;
 
-    public void setMusicId(Long musicId) 
-    {
-        this.musicId = musicId;
-    }
+	public void setMusicId(Long musicId) {
+		this.musicId = musicId;
+	}
 
-    public Long getMusicId() 
-    {
-        return musicId;
-    }
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
+	public Long getMusicId() {
+		return musicId;
+	}
 
-    public String getName() 
-    {
-        return name;
-    }
-    public void setSrc(String src) 
-    {
-        this.src = src;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getSrc() 
-    {
-        return src;
-    }
-    public void setLrc(String lrc) 
-    {
-        this.lrc = lrc;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getLrc() 
-    {
-        return lrc;
-    }
-    public void setAvator(String avator) 
-    {
-        this.avator = avator;
-    }
+	public void setSrc(String src) {
+		this.src = src;
+	}
 
-    public String getAvator() 
-    {
-        return avator;
-    }
+	public String getSrc() {
+		return src;
+	}
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("musicId", getMusicId())
-            .append("name", getName())
-            .append("src", getSrc())
-            .append("lrc", getLrc())
-            .append("avator", getAvator())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .toString();
-    }
+	public void setLrc(String lrc) {
+		this.lrc = lrc;
+	}
+
+	public String getLrc() {
+		return lrc;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("musicId", getMusicId())
+				.append("name", getName()).append("src", getSrc()).append("lrc", getLrc()).append("avator", getAvatar())
+				.append("createTime", getCreateTime()).append("updateTime", getUpdateTime())
+				.append("remark", getRemark()).toString();
+	}
 }

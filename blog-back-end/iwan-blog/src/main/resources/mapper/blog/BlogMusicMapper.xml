@@ -9,14 +9,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"    column="name"    />
         <result property="src"    column="src"    />
         <result property="lrc"    column="lrc"    />
-        <result property="avator"    column="avator"    />
+        <result property="avatar"    column="avatar"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
     </resultMap>
 
     <sql id="selectBlogMusicVo">
-        select music_id, name, src, lrc, avator, create_time, update_time, remark from blog_music
+        select music_id, name, src, lrc, avatar, create_time, update_time, remark from blog_music
     </sql>
 
     <select id="selectBlogMusicList" parameterType="BlogMusic" resultMap="BlogMusicResult">
@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="src != null  and src != ''"> and src = #{src}</if>
             <if test="lrc != null  and lrc != ''"> and lrc = #{lrc}</if>
-            <if test="avator != null  and avator != ''"> and avator = #{avator}</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
         </where>
     </select>
     
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null">name,</if>
             <if test="src != null">src,</if>
             <if test="lrc != null">lrc,</if>
-            <if test="avator != null">avator,</if>
+            <if test="avatar != null">avatar,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null">#{name},</if>
             <if test="src != null">#{src},</if>
             <if test="lrc != null">#{lrc},</if>
-            <if test="avator != null">#{avator},</if>
+            <if test="avatar != null">#{avatar},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="name != null">name = #{name},</if>
             <if test="src != null">src = #{src},</if>
             <if test="lrc != null">lrc = #{lrc},</if>
-            <if test="avator != null">avator = #{avator},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>
