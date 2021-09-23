@@ -350,7 +350,7 @@ export default {
             });
         },
         getTagList() {
-            this.getTagList().then((res) => {
+            getTagId().then((res) => {
                 this.tagList = res.data;
             });
         },
