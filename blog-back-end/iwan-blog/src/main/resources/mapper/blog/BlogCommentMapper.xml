@@ -9,9 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="blogId"    column="blog_id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="becommentUserId"    column="becomment_user_id"    />
-        <result property="becommentUserName"    column="becomment_user_name"    />
         <result property="commentUserId"    column="comment_user_id"    />
-        <result property="commentUserName"    column="comment_user_name"    />
         <result property="likes"    column="likes"    />
         <result property="content"    column="content"    />
         <result property="createTime"    column="create_time"    />
@@ -20,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBlogCommentVo">
-        select comment_id, blog_id, parent_id, becomment_user_id, becomment_user_name, comment_user_id, comment_user_name, likes, content, create_time, update_time, remark from blog_comment
+        select comment_id, blog_id, parent_id, becomment_user_id, comment_user_id, likes, content, create_time, update_time, remark from blog_comment
     </sql>
 
     <select id="selectBlogCommentList" parameterType="BlogComment" resultMap="BlogCommentResult">
@@ -29,9 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogId != null "> and blog_id = #{blogId}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
             <if test="becommentUserId != null "> and becomment_user_id = #{becommentUserId}</if>
-            <if test="becommentUserName != null  and becommentUserName != ''"> and becomment_user_name like concat('%', #{becommentUserName}, '%')</if>
             <if test="commentUserId != null "> and comment_user_id = #{commentUserId}</if>
-            <if test="commentUserName != null  and commentUserName != ''"> and comment_user_name like concat('%', #{commentUserName}, '%')</if>
             <if test="likes != null "> and likes = #{likes}</if>
             <if test="content != null  and content != ''"> and content = #{content}</if>
         </where>
@@ -48,9 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogId != null">blog_id,</if>
             <if test="parentId != null">parent_id,</if>
             <if test="becommentUserId != null">becomment_user_id,</if>
-            <if test="becommentUserName != null">becomment_user_name,</if>
             <if test="commentUserId != null">comment_user_id,</if>
-            <if test="commentUserName != null">comment_user_name,</if>
             <if test="likes != null">likes,</if>
             <if test="content != null">content,</if>
             <if test="createTime != null">create_time,</if>
@@ -61,9 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogId != null">#{blogId},</if>
             <if test="parentId != null">#{parentId},</if>
             <if test="becommentUserId != null">#{becommentUserId},</if>
-            <if test="becommentUserName != null">#{becommentUserName},</if>
             <if test="commentUserId != null">#{commentUserId},</if>
-            <if test="commentUserName != null">#{commentUserName},</if>
             <if test="likes != null">#{likes},</if>
             <if test="content != null">#{content},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -78,9 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogId != null">blog_id = #{blogId},</if>
             <if test="parentId != null">parent_id = #{parentId},</if>
             <if test="becommentUserId != null">becomment_user_id = #{becommentUserId},</if>
-            <if test="becommentUserName != null">becomment_user_name = #{becommentUserName},</if>
             <if test="commentUserId != null">comment_user_id = #{commentUserId},</if>
-            <if test="commentUserName != null">comment_user_name = #{commentUserName},</if>
             <if test="likes != null">likes = #{likes},</if>
             <if test="content != null">content = #{content},</if>
             <if test="createTime != null">create_time = #{createTime},</if>

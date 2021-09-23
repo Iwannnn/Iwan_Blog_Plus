@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.iwannnn.blog.mapper.BlogTagMapper;
 import cn.iwannnn.blog.domain.BlogTag;
 import cn.iwannnn.blog.service.IBlogTagService;
+import cn.iwannnn.blog.vo.BlogTagVo;
 
 /**
  * 博客标签Service业务层处理
@@ -85,5 +86,15 @@ public class BlogTagServiceImpl implements IBlogTagService {
 	@Override
 	public int deleteBlogTagByTagId(Long tagId) {
 		return blogTagMapper.deleteBlogTagByTagId(tagId);
+	}
+
+	/**
+	 * 获取标签名称id
+	 * 
+	 * @return id 名称
+	 */
+	@Override
+	public List<BlogTagVo> selectBlogTagVos() {
+		return blogTagMapper.selectBlogTagVos();
 	}
 }

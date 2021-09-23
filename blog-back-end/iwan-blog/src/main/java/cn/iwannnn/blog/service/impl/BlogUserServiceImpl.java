@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.iwannnn.blog.mapper.BlogUserMapper;
 import cn.iwannnn.blog.domain.BlogUser;
 import cn.iwannnn.blog.service.IBlogUserService;
+import cn.iwannnn.blog.vo.BlogUserVo;
 
 /**
  * 博客用户Service业务层处理
@@ -85,5 +86,15 @@ public class BlogUserServiceImpl implements IBlogUserService {
 	@Override
 	public int deleteBlogUserByUserId(Long userId) {
 		return blogUserMapper.deleteBlogUserByUserId(userId);
+	}
+
+	/**
+	 * 获取用户信息
+	 * 
+	 * @return id account name
+	 */
+	@Override
+	public List<BlogUserVo> selectBlogUserVos() {
+		return blogUserMapper.selectBlogUserVos();
 	}
 }

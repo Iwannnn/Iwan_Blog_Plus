@@ -93,4 +93,12 @@ public class BlogUserController extends BaseController {
 	public AjaxResult remove(@PathVariable Long[] userIds) {
 		return toAjax(blogUserService.deleteBlogUserByUserIds(userIds));
 	}
+
+	/**
+	 * 获取id和用户名
+	 */
+	@GetMapping("/getUserId")
+	public AjaxResult getBlogUserId() {
+		return AjaxResult.success(blogUserService.selectBlogUserVos());
+	}
 }

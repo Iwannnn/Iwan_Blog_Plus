@@ -6,6 +6,6 @@ import lombok.Data;
 public class BlogArticleVo {
 	private String articleId;
 
-	private String articleTittle;
+	private String tittle;
 
 }

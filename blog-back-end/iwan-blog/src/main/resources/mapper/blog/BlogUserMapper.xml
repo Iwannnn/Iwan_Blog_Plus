@@ -100,4 +100,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{userId}
         </foreach>
     </delete>
+
+	<select id="selectBlogUserVos" resultType="BlogUserVo">
+        select user_id, account, nickname from blog_user
+    </select>
 </mapper>

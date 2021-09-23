@@ -6,20 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="BlogTag" id="BlogTagResult">
         <result property="tagId"    column="tag_id"    />
-        <result property="tagName"    column="tag_name"    />
+        <result property="name"    column="name"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
     </resultMap>
 
     <sql id="selectBlogTagVo">
-        select tag_id, tag_name, create_time, update_time, remark from blog_tag
+        select tag_id, name, create_time, update_time, remark from blog_tag
     </sql>
 
     <select id="selectBlogTagList" parameterType="BlogTag" resultMap="BlogTagResult">
         <include refid="selectBlogTagVo"/>
         <where>  
-            <if test="tagName != null  and tagName != ''"> and tag_name like concat('%', #{tagName}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
         </where>
     </select>
     
@@ -31,13 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertBlogTag" parameterType="BlogTag" useGeneratedKeys="true" keyProperty="tagId">
         insert into blog_tag
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="tagName != null">tag_name,</if>
+            <if test="name != null">name,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="tagName != null">#{tagName},</if>
+            <if test="name != null">#{name},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateBlogTag" parameterType="BlogTag">
         update blog_tag
         <trim prefix="SET" suffixOverrides=",">
-            <if test="tagName != null">tag_name = #{tagName},</if>
+            <if test="name != null">name = #{name},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>

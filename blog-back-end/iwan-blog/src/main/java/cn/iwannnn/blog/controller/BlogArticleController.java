@@ -95,4 +95,12 @@ public class BlogArticleController extends BaseController {
 		return toAjax(blogArticleService.deleteBlogArticleByArticleIds(articleIds));
 	}
 
+	/**
+	 * 获取标题id
+	 */
+	@GetMapping("/getArticleId")
+	public AjaxResult getBlogArticleId() {
+		return AjaxResult.success(blogArticleService.selectBlogArticleVos());
+	}
+
 }

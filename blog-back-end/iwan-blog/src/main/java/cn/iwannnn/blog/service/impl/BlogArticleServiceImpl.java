@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.iwannnn.blog.mapper.BlogArticleMapper;
 import cn.iwannnn.blog.domain.BlogArticle;
 import cn.iwannnn.blog.service.IBlogArticleService;
+import cn.iwannnn.blog.vo.BlogArticleVo;
 
 /**
  * 博客文章Service业务层处理
@@ -86,4 +87,15 @@ public class BlogArticleServiceImpl implements IBlogArticleService {
 	public int deleteBlogArticleByArticleId(Long articleId) {
 		return blogArticleMapper.deleteBlogArticleByArticleId(articleId);
 	}
+
+	/**
+	 * 获取文章标题id
+	 * 
+	 * @return id 标题
+	 */
+	@Override
+	public List<BlogArticleVo> selectBlogArticleVos() {
+		return blogArticleMapper.selectBlogArticleVos();
+	}
+
 }

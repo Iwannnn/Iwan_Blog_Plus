@@ -55,7 +55,7 @@ export function exportCategory(query) {
 // 获取分类名和id
 export function getCategoryId() {
 	return request({
-		url: '/blog/music/getCategoryId',
+		url: '/blog/category/getCategoryId',
 		method: 'get'
 	})
 }

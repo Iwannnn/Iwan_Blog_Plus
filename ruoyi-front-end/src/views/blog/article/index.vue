@@ -319,6 +319,7 @@ export default {
     created() {
         this.getList();
         this.getMusicList();
+        this.getCategoryList();
     },
     methods: {
         /** 查询博客文章列表 */
@@ -463,13 +464,12 @@ export default {
         },
         getCategoryList() {
             getCategoryId().then((res) => {
-                console.log(res);
-                // this.musicList = res.data;
+                this.categoryList = res.data;
             });
         },
         getMusicList() {
             getMusicId().then((res) => {
-                console.log(res);
+                this.musicList = res.data;
             });
         },
     },

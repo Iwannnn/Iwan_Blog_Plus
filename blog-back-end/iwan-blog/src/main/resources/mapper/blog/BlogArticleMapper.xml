@@ -105,4 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{articleId}
         </foreach>
     </delete>
+	
+	<select id="selectBlogArticleVos" resultType="BlogArticleVo">
+        select article_id, tittle from blog_article
+    </select>
 </mapper>

@@ -19,7 +19,7 @@ public class BlogCategory extends BaseEntity {
 
 	/** 分类名称 */
 	@Excel(name = "分类名称")
-	private String categoryName;
+	private String name;
 
 	public void setCategoryId(Long categoryId) {
 		this.categoryId = categoryId;
@@ -29,18 +29,18 @@ public class BlogCategory extends BaseEntity {
 		return categoryId;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public String getName() {
+		return name;
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("categoryId", getCategoryId())
-				.append("categoryName", getCategoryName()).append("createTime", getCreateTime())
-				.append("updateTime", getUpdateTime()).append("remark", getRemark()).toString();
+				.append("name", getName()).append("createTime", getCreateTime()).append("updateTime", getUpdateTime())
+				.append("remark", getRemark()).toString();
 	}
 }

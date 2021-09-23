@@ -93,4 +93,12 @@ public class BlogCategoryController extends BaseController {
 	public AjaxResult remove(@PathVariable Long[] categoryIds) {
 		return toAjax(blogCategoryService.deleteBlogCategoryByCategoryIds(categoryIds));
 	}
+
+	/**
+	 * 获取类别id
+	 */
+	@GetMapping("/getCategoryId")
+	public AjaxResult getBlogCategoryId() {
+		return AjaxResult.success(blogCategoryService.selectBlogCategoryVos());
+	}
 }

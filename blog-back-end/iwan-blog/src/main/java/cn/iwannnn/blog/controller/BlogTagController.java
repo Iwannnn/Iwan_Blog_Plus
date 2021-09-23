@@ -93,4 +93,12 @@ public class BlogTagController extends BaseController {
 	public AjaxResult remove(@PathVariable Long[] tagIds) {
 		return toAjax(blogTagService.deleteBlogTagByTagIds(tagIds));
 	}
+
+	/**
+	 * 获取id和标签名
+	 */
+	@GetMapping("/getTagId")
+	public AjaxResult getBlogTagId() {
+		return AjaxResult.success(blogTagService.selectBlogTagVos());
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.iwannnn.blog.mapper.BlogCategoryMapper;
 import cn.iwannnn.blog.domain.BlogCategory;
 import cn.iwannnn.blog.service.IBlogCategoryService;
+import cn.iwannnn.blog.vo.BlogCategoryVo;
 
 /**
  * 博客分类Service业务层处理
@@ -85,5 +86,15 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService {
 	@Override
 	public int deleteBlogCategoryByCategoryId(Long categoryId) {
 		return blogCategoryMapper.deleteBlogCategoryByCategoryId(categoryId);
+	}
+
+	/**
+	 * 获取类别id 名称
+	 * 
+	 * @return id name
+	 */
+	@Override
+	public List<BlogCategoryVo> selectBlogCategoryVos() {
+		return blogCategoryMapper.selectBlogCategoryVos();
 	}
 }

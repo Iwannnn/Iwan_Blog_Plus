@@ -94,8 +94,11 @@ public class BlogMusicController extends BaseController {
 		return toAjax(blogMusicService.deleteBlogMusicByMusicIds(musicIds));
 	}
 
+	/**
+	 * 获取音乐id名称
+	 */
 	@GetMapping("/getMusicId")
-	public AjaxResult getMusicId() {
+	public AjaxResult getBlogMusicId() {
 		return AjaxResult.success(blogMusicService.getBlogMusicVos());
 	}
 }
