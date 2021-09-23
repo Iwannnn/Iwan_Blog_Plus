@@ -253,6 +253,9 @@ import {
     exportComment,
 } from "@/api/blog/comment";
 import { addImg } from "@/api/tool/upload.js";
+import { getUserId } from "@/api/blog/user.js";
+import { getCommentId } from "@/api/blog/comment.js";
+import { getArticleId } from "@/api/blog/article.js";
 export default {
     name: "Comment",
     data() {
@@ -294,10 +297,19 @@ export default {
             form: {},
             // 表单校验
             rules: {},
+            // 用户列表
+            userList: [],
+            // 评论列表
+            commentList: [],
+            // 文章列表
+            articleList: [],
         };
     },
     created() {
         this.getList();
+        this.getArticleList();
+        this.getUserList();
+        this.getCommentList();
     },
     methods: {
         /** 查询博客评论列表 */
@@ -432,6 +444,21 @@ export default {
         },
         imgDel(pos) {
             delete this.img_file[pos];
+        },
+        getUserList() {
+            getUserId().then((res) => {
+                this.userList = res.data;
+            });
+        },
+        getCommentList() {
+            getCommentId().then((res) => {
+                this.commentList = res.data;
+            });
+        },
+        getArticleList() {
+            getArticleId().then((res) => {
+                this.articleList = res.data;
+            });
         },
     },
 };

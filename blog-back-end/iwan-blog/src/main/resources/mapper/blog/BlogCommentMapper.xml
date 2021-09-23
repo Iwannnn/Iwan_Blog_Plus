@@ -91,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <sql id="selectBlogCommentVo">
+    <select id="selectBlogCommentVos" resultType="BlogCommentVo">
         select comment_id, content from blog_comment
-    </sql>
+    </select>
 </mapper>

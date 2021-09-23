@@ -178,7 +178,8 @@ import {
     updateArticletag,
     exportArticletag,
 } from "@/api/blog/articletag";
-
+import { getTagId } from "@/api/blog/tag.js";
+import { getArticleId } from "@/api/blog/article.js";
 export default {
     name: "Articletag",
     data() {
@@ -214,12 +215,16 @@ export default {
             form: {},
             // 表单校验
             rules: {},
-            articletagList: [],
+            // 文章列表
+            articleList: [],
+            // 标签列表
             tagList: [],
         };
     },
     created() {
         this.getList();
+        this.getArticleList();
+        this.getTagList();
     },
     methods: {
         /** 查询文章标签列表 */
@@ -339,8 +344,16 @@ export default {
                 })
                 .catch(() => {});
         },
-        getArticleList() {},
-        getTagList() {},
+        getArticleList() {
+            getArticleId().then((res) => {
+                this.articleList = res.data;
+            });
+        },
+        getTagList() {
+            this.getTagList().then((res) => {
+                this.tagList = res.data;
+            });
+        },
     },
 };
 </script>

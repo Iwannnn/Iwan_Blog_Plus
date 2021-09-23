@@ -266,8 +266,8 @@ import {
 import importTable from "../../tool/gen/importTable.vue";
 import imageUpload from "@/components/ImageUpload";
 import { addImg } from "@/api/tool/upload.js";
-import { getMusicId } from "@/api/blog/music";
-import { getCategoryId } from "@/api/blog/category";
+import { getMusicId } from "@/api/blog/music.js";
+import { getCategoryId } from "@/api/blog/category.js";
 
 export default {
     components: { importTable, imageUpload },
@@ -312,7 +312,9 @@ export default {
             form: {},
             // 表单校验
             rules: {},
+            // 类型列表
             categoryList: [],
+            // 音乐列表
             musicList: [],
         };
     },
