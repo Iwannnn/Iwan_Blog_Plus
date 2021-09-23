@@ -34,28 +34,10 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
-            <el-form-item label="被评论用户名" prop="becommentUserName">
-                <el-input
-                    v-model="queryParams.becommentUserName"
-                    placeholder="请输入被评论用户名"
-                    clearable
-                    size="small"
-                    @keyup.enter.native="handleQuery"
-                />
-            </el-form-item>
             <el-form-item label="评论用户id" prop="commentUserId">
                 <el-input
                     v-model="queryParams.commentUserId"
                     placeholder="请输入评论用户id"
-                    clearable
-                    size="small"
-                    @keyup.enter.native="handleQuery"
-                />
-            </el-form-item>
-            <el-form-item label="评论用户名" prop="commentUserName">
-                <el-input
-                    v-model="queryParams.commentUserName"
-                    placeholder="请输入评论用户名"
                     clearable
                     size="small"
                     @keyup.enter.native="handleQuery"
@@ -156,19 +138,9 @@
                 prop="becommentUserId"
             />
             <el-table-column
-                label="被评论用户名"
-                align="center"
-                prop="becommentUserName"
-            />
-            <el-table-column
                 label="评论用户id"
                 align="center"
                 prop="commentUserId"
-            />
-            <el-table-column
-                label="评论用户名"
-                align="center"
-                prop="commentUserName"
             />
             <el-table-column label="评论点赞数" align="center" prop="likes" />
             <el-table-column label="评论内容" align="center" prop="content" />
@@ -238,22 +210,10 @@
                         placeholder="请输入被评论用户id"
                     />
                 </el-form-item>
-                <el-form-item label="被评论用户名" prop="becommentUserName">
-                    <el-input
-                        v-model="form.becommentUserName"
-                        placeholder="请输入被评论用户名"
-                    />
-                </el-form-item>
                 <el-form-item label="评论用户id" prop="commentUserId">
                     <el-input
                         v-model="form.commentUserId"
                         placeholder="请输入评论用户id"
-                    />
-                </el-form-item>
-                <el-form-item label="评论用户名" prop="commentUserName">
-                    <el-input
-                        v-model="form.commentUserName"
-                        placeholder="请输入评论用户名"
                     />
                 </el-form-item>
                 <el-form-item label="评论点赞数" prop="likes">
@@ -361,9 +321,7 @@ export default {
                 blogId: null,
                 parentId: null,
                 becommentUserId: null,
-                becommentUserName: null,
                 commentUserId: null,
-                commentUserName: null,
                 likes: null,
                 content: null,
                 createTime: null,

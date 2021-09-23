@@ -266,6 +266,8 @@ import {
 import importTable from "../../tool/gen/importTable.vue";
 import imageUpload from "@/components/ImageUpload";
 import { addImg } from "@/api/tool/upload.js";
+import { getMusicId } from "@/api/blog/music";
+import { getCategoryId } from "@/api/blog/category";
 
 export default {
     components: { importTable, imageUpload },
@@ -316,6 +318,7 @@ export default {
     },
     created() {
         this.getList();
+        this.getMusicList();
     },
     methods: {
         /** 查询博客文章列表 */
@@ -458,8 +461,17 @@ export default {
         imgDel(pos) {
             delete this.img_file[pos];
         },
-        getCategoryList() {},
-        getMusicList() {},
+        getCategoryList() {
+            getCategoryId().then((res) => {
+                console.log(res);
+                // this.musicList = res.data;
+            });
+        },
+        getMusicList() {
+            getMusicId().then((res) => {
+                console.log(res);
+            });
+        },
     },
 };
 </script>
