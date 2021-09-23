@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.iwannnn.blog.mapper.BlogCommentMapper;
 import cn.iwannnn.blog.domain.BlogComment;
 import cn.iwannnn.blog.service.IBlogCommentService;
+import cn.iwannnn.blog.vo.BlogCommentVo;
 
 /**
  * 博客评论Service业务层处理
@@ -85,5 +86,15 @@ public class BlogCommentServiceImpl implements IBlogCommentService {
 	@Override
 	public int deleteBlogCommentByCommentId(Long commentId) {
 		return blogCommentMapper.deleteBlogCommentByCommentId(commentId);
+	}
+
+	/**
+	 * 获取评论内容 id
+	 * 
+	 * @return content id
+	 */
+	@Override
+	public List<BlogCommentVo> selectBlogCommentVos() {
+		return blogCommentMapper.selectBlogCommentVos();
 	}
 }

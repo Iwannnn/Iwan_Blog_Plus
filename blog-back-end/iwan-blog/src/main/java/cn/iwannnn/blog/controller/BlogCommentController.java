@@ -93,4 +93,12 @@ public class BlogCommentController extends BaseController {
 	public AjaxResult remove(@PathVariable Long[] commentIds) {
 		return toAjax(blogCommentService.deleteBlogCommentByCommentIds(commentIds));
 	}
+
+	/**
+	 * 获取评论内容 id
+	 */
+	@GetMapping("getCommentId")
+	public AjaxResult getBlogCommentId() {
+		return AjaxResult.success(blogCommentService.selectBlogCommentVos());
+	}
 }
