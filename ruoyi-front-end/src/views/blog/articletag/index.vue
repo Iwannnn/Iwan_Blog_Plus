@@ -149,13 +149,30 @@
         >
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
                 <el-form-item label="文章id" prop="article">
-                    <el-input
-                        v-model="form.article"
-                        placeholder="请输入文章id"
-                    />
+                    <el-select
+                        v-model="form.articleId"
+                        placeholder="请选择文章"
+                    >
+                        <el-option
+                            v-for="item in articleList"
+                            :key="item.articleId"
+                            :label="item.tittle"
+                            :value="item.articleId"
+                        >
+                        </el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="标签id" prop="tag">
-                    <el-input v-model="form.tag" placeholder="请输入标签id" />
+                    <el-input v-model="form.tagId" placeholder="请输入标签id" />
+                    <el-select v-model="form.tagId" placeholder="请选择类别">
+                        <el-option
+                            v-for="item in tagList"
+                            :key="item.tagId"
+                            :label="item.name"
+                            :value="item.tagId"
+                        >
+                        </el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
                     <el-input v-model="form.remark" placeholder="请输入备注" />
@@ -245,8 +262,8 @@ export default {
         reset() {
             this.form = {
                 id: null,
-                article: null,
-                tag: null,
+                articleId: null,
+                tagId: null,
                 createTime: null,
                 updateTime: null,
                 remark: null,

@@ -212,17 +212,31 @@
                         @imgDel="this.imgDel"
                     />
                 </el-form-item>
+
                 <el-form-item label="音乐id" prop="musicId">
-                    <el-input
-                        v-model="form.musicId"
-                        placeholder="请输入音乐id"
-                    />
+                    <el-select v-model="form.musicId" placeholder="请选择音乐">
+                        <el-option
+                            v-for="item in musicList"
+                            :key="item.musicId"
+                            :label="item.name"
+                            :value="item.musicId"
+                        >
+                        </el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="分类id" prop="categoryId">
-                    <el-input
+                    <el-select
                         v-model="form.categoryId"
-                        placeholder="请输入分类id"
-                    />
+                        placeholder="请选择类别"
+                    >
+                        <el-option
+                            v-for="item in categoryList"
+                            :key="item.categoryId"
+                            :label="item.name"
+                            :value="item.categoryId"
+                        >
+                        </el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="标题图" prop="avatar">
                     <imageUpload
@@ -471,7 +485,9 @@ export default {
         },
         getMusicList() {
             getMusicId().then((res) => {
+                console.log(res.data);
                 this.musicList = res.data;
+                console.log(this.musicList);
             });
         },
     },
