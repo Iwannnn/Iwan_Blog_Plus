@@ -203,18 +203,43 @@
                         v-model="form.parentId"
                         placeholder="请输入父级评论"
                     />
+                    <el-select
+                        v-model="form.parentId"
+                        placeholder="请选择父类评论"
+                    >
+                        <el-option
+                            v-for="item in commentList"
+                            :key="item.commentId"
+                            :label="item.content"
+                            :value="item.commentId"
+                        />
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="被评论用户id" prop="becommentUserId">
-                    <el-input
+                    <el-select
                         v-model="form.becommentUserId"
-                        placeholder="请输入被评论用户id"
-                    />
+                        placeholder="请选择被评论用户"
+                    >
+                        <el-option
+                            v-for="item in userList"
+                            :key="item.userId"
+                            :label="item.account"
+                            :value="item.userId"
+                        />
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="评论用户id" prop="commentUserId">
-                    <el-input
+                    <el-select
                         v-model="form.commentUserId"
-                        placeholder="请输入评论用户id"
-                    />
+                        placeholder="请选择父类评论"
+                    >
+                        <el-option
+                            v-for="item in userList"
+                            :key="item.userId"
+                            :label="item.account"
+                            :value="item.userId"
+                        />
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="评论点赞数" prop="likes">
                     <el-input

@@ -220,8 +220,7 @@
                             :key="item.musicId"
                             :label="item.name"
                             :value="item.musicId"
-                        >
-                        </el-option>
+                        />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="分类id" prop="categoryId">
@@ -234,8 +233,7 @@
                             :key="item.categoryId"
                             :label="item.name"
                             :value="item.categoryId"
-                        >
-                        </el-option>
+                        />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="标题图" prop="avatar">

@@ -163,15 +163,13 @@
                     </el-select>
                 </el-form-item>
                 <el-form-item label="标签id" prop="tag">
-                    <el-input v-model="form.tagId" placeholder="请输入标签id" />
                     <el-select v-model="form.tagId" placeholder="请选择类别">
                         <el-option
                             v-for="item in tagList"
                             :key="item.tagId"
                             :label="item.name"
                             :value="item.tagId"
-                        >
-                        </el-option>
+                        />
                     </el-select>
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">

@@ -148,11 +148,16 @@
         >
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
                 <el-form-item label="被通知用户id" prop="userId">
-                    <el-input
-                        v-model="form.userId"
-                        placeholder="请输入被通知用户id"
-                    />
+                    <el-select v-model="form.userId" placeholder="请选择用户">
+                        <el-option
+                            v-for="item in userList"
+                            :key="item.userId"
+                            :label="item.account"
+                            :value="item.userId"
+                        />
+                    </el-select>
                 </el-form-item>
+
                 <el-form-item label="通知内容">
                     <editor v-model="form.content" :min-height="192" />
                 </el-form-item>

@@ -192,17 +192,35 @@
                         v-model="form.articleId"
                         placeholder="请输入文章id"
                     />
+                    <el-select
+                        v-model="form.articleId"
+                        placeholder="请选择文章"
+                    >
+                        <el-option
+                            v-for="item in articleList"
+                            :key="item.articleId"
+                            :label="item.tittle"
+                            :value="item.articleId"
+                        />
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="评论id" prop="commentId">
+                    <el-select
+                        v-model="form.commentId"
+                        placeholder="请选择文章"
+                    >
+                        <el-option
+                            v-for="item in commentList"
+                            :key="item.commentId"
+                            :label="item.content"
+                            :value="item.commentId"
+                        />
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="是否取消了点赞" prop="isDelete">
                     <el-input
                         v-model="form.isDelete"
                         placeholder="请输入是否取消了点赞"
-                    />
-                </el-form-item>
-                <el-form-item label="评论id" prop="commentId">
-                    <el-input
-                        v-model="form.commentId"
-                        placeholder="请输入评论id"
                     />
                 </el-form-item>
                 <el-form-item label="备注" prop="temark">
