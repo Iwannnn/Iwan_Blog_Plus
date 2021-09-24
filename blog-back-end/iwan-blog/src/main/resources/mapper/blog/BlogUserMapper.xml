@@ -19,6 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
+	<resultMap type="BlogUserVo" id="BlogUserVoResult">
+        <result property="userId"    column="user_id"    />
+        <result property="account"    column="account"    />
+        <result property="nickname"    column="nickname"    />
+    </resultMap>
+
     <sql id="selectBlogUserVo">
         select user_id, account, nickname, password, phone, email, avatar, birthday, introduction, create_time, update_time, remark from blog_user
     </sql>
@@ -37,6 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
+	
     <select id="selectBlogUserByUserId" parameterType="Long" resultMap="BlogUserResult">
         <include refid="selectBlogUserVo"/>
         where user_id = #{userId}
@@ -101,7 +108,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-	<select id="selectBlogUserVos" resultType="BlogUserVo">
+	<select id="selectBlogUserVos" resultMap="BlogUserVoResult">
         select user_id, account, nickname from blog_user
     </select>
 </mapper>

@@ -17,6 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
+	<resultMap type="BlogCommentVo" id="BlogCommentVoResult">
+        <result property="commentId"    column="comment_id"    />
+        <result property="content"    column="content"    />
+    </resultMap>
     <sql id="selectBlogCommentVo">
         select comment_id, blog_id, parent_id, becomment_user_id, comment_user_id, likes, content, create_time, update_time, remark from blog_comment
     </sql>
@@ -91,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <select id="selectBlogCommentVos" resultType="BlogCommentVo">
+    <select id="selectBlogCommentVos" resultMap="BlogCommentVoResult">
         select comment_id, content from blog_comment
     </select>
 </mapper>

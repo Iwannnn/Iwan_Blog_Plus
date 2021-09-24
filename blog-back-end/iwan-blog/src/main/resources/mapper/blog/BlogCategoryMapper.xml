@@ -12,6 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
     </resultMap>
 
+	<resultMap type="BlogCategoryVo" id="BlogCategoryVoResult">
+        <result property="categoryId"    column="category_id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+	
     <sql id="selectBlogCategoryVo">
         select category_id, name, create_time, update_time, remark from blog_category
     </sql>
@@ -66,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-	<select id="selectBlogCategoryVos" resultType="BlogCategoryVo">
+	<select id="selectBlogCategoryVos" resultMap="BlogCategoryVoResult">
         select category_id, name from blog_category
     </select>
 </mapper>

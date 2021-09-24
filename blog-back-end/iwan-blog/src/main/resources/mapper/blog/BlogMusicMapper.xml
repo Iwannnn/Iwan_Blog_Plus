@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <select id="selectBlogMusicVos" resultType="BlogMusicVo">
+    <select id="selectBlogMusicVos" resultMap="BlogMusicVoResult">
 		SELECT music_id ,name FROM blog_music
     </select>
 </mapper>
