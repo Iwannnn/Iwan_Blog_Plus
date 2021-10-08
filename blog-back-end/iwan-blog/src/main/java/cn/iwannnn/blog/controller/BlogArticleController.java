@@ -36,7 +36,7 @@ public class BlogArticleController extends BaseController {
 	/**
 	 * 查询博客文章列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:article:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:article:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogArticle blogArticle) {
 		startPage();
@@ -59,7 +59,7 @@ public class BlogArticleController extends BaseController {
 	/**
 	 * 获取博客文章详细信息
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:article:query')")
+	// @PreAuthorize("@ss.hasPermi('blog:article:query')")
 	@GetMapping(value = "/{articleId}")
 	public AjaxResult getInfo(@PathVariable("articleId") Long articleId) {
 		return AjaxResult.success(blogArticleService.selectBlogArticleByArticleId(articleId));

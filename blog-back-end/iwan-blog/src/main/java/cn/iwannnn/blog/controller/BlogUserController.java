@@ -35,7 +35,7 @@ public class BlogUserController extends BaseController {
 	/**
 	 * 查询博客用户列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:user:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:user:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogUser blogUser) {
 		startPage();

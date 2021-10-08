@@ -35,7 +35,7 @@ public class BlogNotificationController extends BaseController {
 	/**
 	 * 查询博客通知列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:notification:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:notification:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogNotification blogNotification) {
 		startPage();

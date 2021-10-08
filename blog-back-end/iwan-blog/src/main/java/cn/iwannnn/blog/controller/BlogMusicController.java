@@ -35,7 +35,7 @@ public class BlogMusicController extends BaseController {
 	/**
 	 * 查询博客音乐列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:music:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:music:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogMusic blogMusic) {
 		startPage();

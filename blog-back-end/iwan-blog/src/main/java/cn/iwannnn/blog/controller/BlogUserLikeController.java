@@ -35,7 +35,7 @@ public class BlogUserLikeController extends BaseController {
 	/**
 	 * 查询用户点赞列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:like:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:like:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogUserLike blogUserLike) {
 		startPage();

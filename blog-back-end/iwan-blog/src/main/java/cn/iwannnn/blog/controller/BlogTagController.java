@@ -35,7 +35,7 @@ public class BlogTagController extends BaseController {
 	/**
 	 * 查询博客标签列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:tag:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:tag:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogTag blogTag) {
 		startPage();

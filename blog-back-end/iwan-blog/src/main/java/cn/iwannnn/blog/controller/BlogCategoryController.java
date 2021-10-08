@@ -35,7 +35,7 @@ public class BlogCategoryController extends BaseController {
 	/**
 	 * 查询博客分类列表
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:category:list')")
+	// @PreAuthorize("@ss.hasPermi('blog:category:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogCategory blogCategory) {
 		startPage();
