@@ -1,21 +1,36 @@
-# blog-front-end
+## 开发
 
-> A Vue.js project
+```bash
+# 克隆项目
+git clone https://gitee.com/y_project/RuoYi-Vue
 
-## Build Setup
+# 进入项目目录
+cd ruoyi-ui
 
-``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 建议不要直接使用 cnpm 安装依赖，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
+npm install --registry=https://registry.npm.taobao.org
+
+# 启动服务
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+浏览器访问 http://localhost:80
+
+## 发布
+
+```bash
+# 构建测试环境
+npm run build:stage
+
+# 构建生产环境
+npm run build:prod
+```
+## node版本问题
+**ERESOLVE unable to resolve dependency tree**
+```bash
+npm i --legacy-peer-deps
+npm i eslint-plugin-vue
+```
