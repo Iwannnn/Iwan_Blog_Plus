@@ -155,7 +155,7 @@ export const constantRoutes = [
 
 export default new Router({
 	mode: 'history', // 去掉url中的#
-	base: "back",
+	// base: "back",
 	scrollBehavior: () => ({ y: 0 }),
 	routes: constantRoutes
 })
