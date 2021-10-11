@@ -16,9 +16,18 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
-            <el-form-item label="音乐资源" prop="src">
+            <el-form-item label="歌手" prop="artist">
                 <el-input
-                    v-model="queryParams.src"
+                    v-model="queryParams.artist"
+                    placeholder="请输入歌手"
+                    clearable
+                    size="small"
+                    @keyup.enter.native="handleQuery"
+                />
+            </el-form-item>
+            <el-form-item label="音乐资源" prop="url">
+                <el-input
+                    v-model="queryParams.url"
                     placeholder="请输入音乐资源"
                     clearable
                     size="small"
@@ -34,9 +43,9 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
-            <el-form-item label="头像" prop="avatar">
+            <el-form-item label="头像" prop="cover">
                 <el-input
-                    v-model="queryParams.avatar"
+                    v-model="queryParams.cover"
                     placeholder="请输入头像"
                     clearable
                     size="small"
@@ -121,10 +130,11 @@
         >
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="音乐id" align="center" prop="musicId" />
+            <el-table-column label="歌手" align="center" prop="artist" />
             <el-table-column label="音乐名称" align="center" prop="name" />
-            <el-table-column label="音乐资源" align="center" prop="src" />
+            <el-table-column label="音乐资源" align="center" prop="url" />
             <el-table-column label="字幕文件" align="center" prop="lrc" />
-            <el-table-column label="头像" align="center" prop="avatar" />
+            <el-table-column label="头像" align="center" prop="cover" />
             <el-table-column label="备注" align="center" prop="remark" />
             <el-table-column
                 label="操作"
@@ -174,7 +184,11 @@
                         placeholder="请输入音乐名称"
                     />
                 </el-form-item>
-                <el-form-item label="音乐资源" prop="src">
+                <el-form-item label="歌手" prop="artist">
+                    <el-input v-model="form.artist" placeholder="请输入歌手" />
+                </el-form-item>
+                <el-form-item label="音乐资源" prop="url">
+                    <el-input v-model="form.url" placeholder="请输入音乐资源" />
                     <fileUpload
                         :fileType="musicType"
                         :fileSize="30"
@@ -182,9 +196,10 @@
                     />
                 </el-form-item>
                 <el-form-item label="字幕文件" prop="lrc">
+                    <el-input v-model="form.lrc" placeholder="请输入字幕文件" />
                     <fileUpload :fileType="lrcType" @input="getLrcUrl" />
                 </el-form-item>
-                <el-form-item label="头像" prop="avatar">
+                <el-form-item label="头像" prop="cover">
                     <imageUpload @input="getImageUrl" />
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
@@ -237,9 +252,10 @@ export default {
                 pageNum: 1,
                 pageSize: 10,
                 name: null,
-                src: null,
+                artist: null,
                 lrc: null,
-                avatar: null,
+                url: null,
+                cover: null,
             },
             // 表单参数
             form: {},
@@ -272,10 +288,11 @@ export default {
             this.form = {
                 musicId: null,
                 name: null,
-                src: null,
+                artist: null,
                 lrc: null,
-                avatar: null,
+                url: null,
                 createTime: null,
+                cover: null,
                 updateTime: null,
                 remark: null,
             };
@@ -374,13 +391,13 @@ export default {
         },
 
         getMusicUrl(muiscUrl) {
-            this.form.src = muiscUrl;
+            this.form.url = muiscUrl;
         },
         getLrcUrl(lrcUrl) {
             this.form.lrc = lrcUrl;
         },
         getImageUrl(imageUrl) {
-            this.form.avatar = imageUrl;
+            this.form.cover = imageUrl;
         },
     },
 };

@@ -6,5 +6,5 @@ import lombok.Data;
 public class BlogMusicVo {
 	private String musicId;
 
-	private String name;
+	private String tittle;
 }

@@ -9,7 +9,7 @@ import cn.iwannnn.common.core.domain.BaseEntity;
  * 博客音乐对象 blog_music
  * 
  * @author iwan
- * @date 2021-09-17
+ * @date 2021-10-11
  */
 public class BlogMusic extends BaseEntity {
 	private static final long serialVersionUID = 1L;
@@ -21,17 +21,21 @@ public class BlogMusic extends BaseEntity {
 	@Excel(name = "音乐名称")
 	private String name;
 
-	/** 音乐资源 */
-	@Excel(name = "音乐资源")
-	private String src;
+	/** 歌手 */
+	@Excel(name = "歌手")
+	private String artist;
 
 	/** 字幕文件 */
 	@Excel(name = "字幕文件")
 	private String lrc;
 
+	/** 音乐资源 */
+	@Excel(name = "音乐资源")
+	private String url;
+
 	/** 头像 */
 	@Excel(name = "头像")
-	private String avatar;
+	private String cover;
 
 	public void setMusicId(Long musicId) {
 		this.musicId = musicId;
@@ -49,12 +53,12 @@ public class BlogMusic extends BaseEntity {
 		return name;
 	}
 
-	public void setSrc(String src) {
-		this.src = src;
+	public void setArtist(String artist) {
+		this.artist = artist;
 	}
 
-	public String getSrc() {
-		return src;
+	public String getArtist() {
+		return artist;
 	}
 
 	public void setLrc(String lrc) {
@@ -65,19 +69,27 @@ public class BlogMusic extends BaseEntity {
 		return lrc;
 	}
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
-	public String getAvatar() {
-		return avatar;
+	public String getUrl() {
+		return url;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+	public String getCover() {
+		return cover;
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("musicId", getMusicId())
-				.append("name", getName()).append("src", getSrc()).append("lrc", getLrc()).append("avator", getAvatar())
-				.append("createTime", getCreateTime()).append("updateTime", getUpdateTime())
+				.append("name", getName()).append("artist", getArtist()).append("lrc", getLrc()).append("url", getUrl())
+				.append("createTime", getCreateTime()).append("cover", getCover()).append("updateTime", getUpdateTime())
 				.append("remark", getRemark()).toString();
 	}
 }

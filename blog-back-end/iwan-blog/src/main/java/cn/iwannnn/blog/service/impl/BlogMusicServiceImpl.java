@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import cn.iwannnn.blog.mapper.BlogMusicMapper;
 import cn.iwannnn.blog.domain.BlogMusic;
 import cn.iwannnn.blog.service.IBlogMusicService;
-import cn.iwannnn.blog.vo.BlogMusicVo;
+import cn.iwannnn.blog.vo.AplayerMusic;
 
 /**
  * 博客音乐Service业务层处理
  * 
  * @author iwan
- * @date 2021-09-17
+ * @date 2021-10-11
  */
 @Service
 public class BlogMusicServiceImpl implements IBlogMusicService {
@@ -89,12 +89,13 @@ public class BlogMusicServiceImpl implements IBlogMusicService {
 	}
 
 	/**
-	 * 获取博客音乐id 名称
+	 * 查找音乐适配aplayer
 	 * 
+	 * @param null
 	 * @return 结果
 	 */
 	@Override
-	public List<BlogMusicVo> getBlogMusicVos() {
-		return blogMusicMapper.selectBlogMusicVos();
+	public List<AplayerMusic> selectMusicForAplayer() {
+		return blogMusicMapper.selectMusicForAplayer();
 	}
 }

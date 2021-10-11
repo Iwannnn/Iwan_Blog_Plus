@@ -24,7 +24,7 @@ import cn.iwannnn.common.core.page.TableDataInfo;
  * 博客音乐Controller
  * 
  * @author iwan
- * @date 2021-09-17
+ * @date 2021-10-11
  */
 @RestController
 @RequestMapping("/blog/music")
@@ -35,7 +35,6 @@ public class BlogMusicController extends BaseController {
 	/**
 	 * 查询博客音乐列表
 	 */
-	// @PreAuthorize("@ss.hasPermi('blog:music:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogMusic blogMusic) {
 		startPage();
@@ -95,10 +94,10 @@ public class BlogMusicController extends BaseController {
 	}
 
 	/**
-	 * 获取音乐id名称
+	 * 获取音乐适配aplayer
 	 */
-	@GetMapping("/getMusicId")
-	public AjaxResult getBlogMusicId() {
-		return AjaxResult.success(blogMusicService.getBlogMusicVos());
+	@GetMapping("/listMusic")
+	public AjaxResult listMusic() {
+		return AjaxResult.success(blogMusicService.selectMusicForAplayer());
 	}
 }

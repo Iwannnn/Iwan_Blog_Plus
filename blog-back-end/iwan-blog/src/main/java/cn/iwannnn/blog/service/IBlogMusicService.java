@@ -2,13 +2,13 @@ package cn.iwannnn.blog.service;
 
 import java.util.List;
 import cn.iwannnn.blog.domain.BlogMusic;
-import cn.iwannnn.blog.vo.BlogMusicVo;
+import cn.iwannnn.blog.vo.AplayerMusic;
 
 /**
  * 博客音乐Service接口
  * 
  * @author iwan
- * @date 2021-09-17
+ * @date 2021-10-11
  */
 public interface IBlogMusicService {
 	/**
@@ -60,9 +60,10 @@ public interface IBlogMusicService {
 	public int deleteBlogMusicByMusicId(Long musicId);
 
 	/**
-	 * 获取博客音乐id 名称
+	 * 查找音乐适配aplayer
 	 * 
+	 * @param null
 	 * @return 结果
 	 */
-	public List<BlogMusicVo> getBlogMusicVos();
+	public List<AplayerMusic> selectMusicForAplayer();
 }
