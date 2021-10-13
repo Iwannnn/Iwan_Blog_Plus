@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <el-container>
@@ -7,7 +8,13 @@
                     <keep-alive><router-view /></keep-alive>
                 </div>
             </el-main>
-            <el-footer>Footer</el-footer>
+            <el-footer>
+                <small>
+                    <a href="https://beian.miit.gov.cn">
+                        浙ICP备2021004697号-1
+                    </a>
+                </small>
+            </el-footer>
         </el-container>
     </div>
 </template>

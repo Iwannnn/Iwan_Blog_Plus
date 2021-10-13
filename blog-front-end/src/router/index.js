@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '@/layout'
+import Index from '@/layout/index'
+import Common from '@/layout/common'
 Vue.use(Router)
 
 export const constantRoutes = [
 	{
 		path: "/",
-		component: Layout,
+		component: Index,
 		redirect: 'index',
 		children: [
 			{

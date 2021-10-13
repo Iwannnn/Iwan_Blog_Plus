@@ -2,12 +2,12 @@
     <div>
         <el-row :gutter="10">
             <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
-                <div class="grid-content bg-purple-light">
+                <div class="muisc">
                     <aplayer :audio="musicList" :lrcType="3" />
                 </div>
             </el-col>
             <el-col :xs="24" :sm="14" :md="14" :lg="14" :xl="14">
-                hello world
+                hello world hello world hello world hello world hello world
             </el-col>
             <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
                 <div class="grid-content bg-purple-light"></div>
