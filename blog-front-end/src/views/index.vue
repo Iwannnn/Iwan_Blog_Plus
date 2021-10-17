@@ -7,7 +7,30 @@
                 </div>
             </el-col>
             <el-col :xs="24" :sm="14" :md="14" :lg="14" :xl="14">
-                hello world hello world hello world hello world hello world
+                <ul
+                    class="infinite-list"
+                    v-infinite-scroll="getMoreArticle"
+                    style="overflow: auto"
+                >
+                    <el-card
+                        v-for="article in articleList"
+                        :key="article.articleId"
+                        shadow="hover"
+                    >
+                        <div>
+                            <div>{{ article.tittle }}</div>
+                            <div v-if="article.avatar">
+                                <img v-bind:src="article.avatar" />
+                            </div>
+                            <div>{{ article.summary }}</div>
+                            <dic>
+                                <span>{{ article.createTime }}</span>
+                                <span>{{ article.pageviews }}</span>
+                                <span>{{ article.likes }}</span>
+                            </dic>
+                        </div>
+                    </el-card>
+                </ul>
             </el-col>
             <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
                 <div class="grid-content bg-purple-light"></div>
@@ -27,6 +50,10 @@ export default {
             musicList: [],
             categoryList: [],
             tagList: [],
+            articleQuery: {
+                pageNum: 1,
+                pageSize: 10,
+            },
         };
     },
     created() {
@@ -36,6 +63,7 @@ export default {
         getList() {
             listArticle().then((res) => {
                 this.articleList = res.rows;
+                console.log(this.articleList);
             });
             listMusic().then((res) => {
                 this.musicList = res.data;
@@ -43,9 +71,17 @@ export default {
             });
             listCategory().then((res) => {
                 this.categoryList = res.rows;
+                console.log(this.categoryList);
             });
             listTag().then((res) => {
                 this.tagList = res.rows;
+                console.log(this.tagList);
+            });
+        },
+        getMoreArticle() {
+            this.articleQuery.pageNum += 1;
+            listArticle(this.articleQuery).then((res) => {
+                console.log(res.data);
             });
         },
     },
@@ -68,5 +104,14 @@ export default {
 .grid-content {
     border-radius: 4px;
     min-height: 36px;
+}
+.el-card {
+    width: auto;
+    height: auto;
+    background: #fff0f5;
+    padding: auto;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    line-height: 30px;
 }
 </style>
