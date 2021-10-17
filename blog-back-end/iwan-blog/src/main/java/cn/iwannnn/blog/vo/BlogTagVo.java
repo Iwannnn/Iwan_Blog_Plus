@@ -6,5 +6,5 @@ import lombok.Data;
 public class BlogTagVo {
 	private Long tagId;
 
-	private String tagName;
+	private String name;
 }

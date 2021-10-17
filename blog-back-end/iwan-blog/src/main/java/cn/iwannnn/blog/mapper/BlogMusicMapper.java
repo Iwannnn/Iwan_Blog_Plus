@@ -3,6 +3,7 @@ package cn.iwannnn.blog.mapper;
 import java.util.List;
 import cn.iwannnn.blog.domain.BlogMusic;
 import cn.iwannnn.blog.vo.AplayerMusic;
+import cn.iwannnn.blog.vo.BlogMusicVo;
 
 /**
  * 博客音乐Mapper接口
@@ -66,4 +67,11 @@ public interface BlogMusicMapper {
 	 * @return 结果
 	 */
 	public List<AplayerMusic> selectMusicForAplayer();
+
+	/**
+	 * 获取音乐 id
+	 * 
+	 * @return music id
+	 */
+	public List<BlogMusicVo> selectBlogMusicVos();
 }

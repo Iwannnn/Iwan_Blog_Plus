@@ -479,11 +479,11 @@ export default {
         getCategoryList() {
             getCategoryId().then((res) => {
                 this.categoryList = res.data;
+                console.log(this.categoryList);
             });
         },
         getMusicList() {
             getMusicId().then((res) => {
-                console.log(res.data);
                 this.musicList = res.data;
                 console.log(this.musicList);
             });

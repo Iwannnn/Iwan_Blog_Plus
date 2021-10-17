@@ -6,5 +6,5 @@ import lombok.Data;
 public class BlogCategoryVo {
 	private Long categoryId;
 
-	private String categoryName;
+	private String name;
 }

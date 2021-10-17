@@ -8,6 +8,7 @@ import cn.iwannnn.blog.mapper.BlogMusicMapper;
 import cn.iwannnn.blog.domain.BlogMusic;
 import cn.iwannnn.blog.service.IBlogMusicService;
 import cn.iwannnn.blog.vo.AplayerMusic;
+import cn.iwannnn.blog.vo.BlogMusicVo;
 
 /**
  * 博客音乐Service业务层处理
@@ -97,5 +98,15 @@ public class BlogMusicServiceImpl implements IBlogMusicService {
 	@Override
 	public List<AplayerMusic> selectMusicForAplayer() {
 		return blogMusicMapper.selectMusicForAplayer();
+	}
+
+	/**
+	 * 获取评论内容 id
+	 * 
+	 * @return music id
+	 */
+	@Override
+	public List<BlogMusicVo> selectBlogMusicVos() {
+		return blogMusicMapper.selectBlogMusicVos();
 	}
 }

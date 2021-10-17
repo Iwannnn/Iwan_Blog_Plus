@@ -100,4 +100,12 @@ public class BlogMusicController extends BaseController {
 	public AjaxResult listMusic() {
 		return AjaxResult.success(blogMusicService.selectMusicForAplayer());
 	}
+
+	/**
+	 * 获取标题id
+	 */
+	@GetMapping("/getMusicId")
+	public AjaxResult getBlogMusicId() {
+		return AjaxResult.success(blogMusicService.selectBlogMusicVos());
+	}
 }

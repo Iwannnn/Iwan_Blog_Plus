@@ -7,9 +7,9 @@
             v-show="showSearch"
             label-width="68px"
         >
-            <el-form-item label="分类名称" prop="categoryName">
+            <el-form-item label="分类名称" prop="name">
                 <el-input
-                    v-model="queryParams.categoryName"
+                    v-model="queryParams.name"
                     placeholder="请输入分类名称"
                     clearable
                     size="small"
@@ -94,11 +94,7 @@
         >
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="分类id" align="center" prop="categoryId" />
-            <el-table-column
-                label="分类名称"
-                align="center"
-                prop="categoryName"
-            />
+            <el-table-column label="分类名称" align="center" prop="name" />
             <el-table-column label="备注" align="center" prop="remark" />
             <el-table-column
                 label="操作"
@@ -142,9 +138,9 @@
             append-to-body
         >
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item label="分类名称" prop="categoryName">
+                <el-form-item label="分类名称" prop="name">
                     <el-input
-                        v-model="form.categoryName"
+                        v-model="form.name"
                         placeholder="请输入分类名称"
                     />
                 </el-form-item>
@@ -198,7 +194,7 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
-                categoryName: null,
+                name: null,
             },
             // 表单参数
             form: {},
@@ -228,7 +224,7 @@ export default {
         reset() {
             this.form = {
                 categoryId: null,
-                categoryName: null,
+                name: null,
                 createTime: null,
                 updateTime: null,
                 remark: null,

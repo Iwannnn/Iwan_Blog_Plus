@@ -3,6 +3,7 @@ package cn.iwannnn.blog.service;
 import java.util.List;
 import cn.iwannnn.blog.domain.BlogMusic;
 import cn.iwannnn.blog.vo.AplayerMusic;
+import cn.iwannnn.blog.vo.BlogMusicVo;
 
 /**
  * 博客音乐Service接口
@@ -66,4 +67,11 @@ public interface IBlogMusicService {
 	 * @return 结果
 	 */
 	public List<AplayerMusic> selectMusicForAplayer();
+
+	/**
+	 * 获取文章标题id
+	 * 
+	 * @return id 标题
+	 */
+	public List<BlogMusicVo> selectBlogMusicVos();
 }
