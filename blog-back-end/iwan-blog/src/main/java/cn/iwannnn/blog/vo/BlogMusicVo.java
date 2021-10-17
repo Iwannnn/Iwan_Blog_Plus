@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BlogMusicVo {
-	private String musicId;
+	private Long musicId;
 
 	private String tittle;
 }

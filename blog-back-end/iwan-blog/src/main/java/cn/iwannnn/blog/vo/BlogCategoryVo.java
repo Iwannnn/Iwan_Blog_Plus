@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BlogCategoryVo {
-	private String categoryId;
+	private Long categoryId;
 
 	private String categoryName;
 }

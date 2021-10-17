@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BlogCommentVo {
-	private String commentId;
+	private Long commentId;
 
 	private String comment;
 }
