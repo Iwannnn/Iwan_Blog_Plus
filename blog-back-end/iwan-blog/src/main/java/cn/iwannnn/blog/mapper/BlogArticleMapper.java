@@ -100,4 +100,12 @@ public interface BlogArticleMapper {
 	 * @return 是否成功
 	 */
 	public int decreaseArticleLike(LikeVo likeVo);
+
+	/**
+	 * 增加浏览量
+	 * 
+	 * @param articleId
+	 * @return 是否成功
+	 */
+	public int increaseArticleViews(Long articleId);
 }

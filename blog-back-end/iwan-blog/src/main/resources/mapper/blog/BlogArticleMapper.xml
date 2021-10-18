@@ -130,9 +130,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where article_id = #{articleId} and user_id = #{userId}
     </delete>
 
-    <update id="decreaseArticleLike" parameterType="LikeVo">
+    <update id="decreaseArticleLike" parameterType="Long">
         update blog_article
 		set likes= likes - 1 
+        where article_id = #{articleId}
+    </update>
+	
+	<update id="increaseArticleViews" parameterType="LikeVo">
+        update blog_article
+		set pageviews = pageviews + 1 
         where article_id = #{articleId}
     </update>
 </mapper>

@@ -31,6 +31,7 @@ public class BlogArticleServiceImpl implements IBlogArticleService {
 	 */
 	@Override
 	public BlogArticle selectBlogArticleByArticleId(Long articleId) {
+		blogArticleMapper.increaseArticleViews(articleId);
 		return blogArticleMapper.selectBlogArticleByArticleId(articleId);
 	}
 
