@@ -3,6 +3,7 @@ package cn.iwannnn.blog.service;
 import java.util.List;
 import cn.iwannnn.blog.domain.BlogArticle;
 import cn.iwannnn.blog.vo.BlogArticleVo;
+import cn.iwannnn.blog.vo.LikeVo;
 
 /**
  * 博客文章Service接口
@@ -65,4 +66,14 @@ public interface IBlogArticleService {
 	 * @return id 标题
 	 */
 	public List<BlogArticleVo> selectBlogArticleVos();
+
+	/**
+	 * 点赞
+	 */
+	public int likeArticle(LikeVo likeVo);
+
+	/**
+	 * 取消点赞
+	 */
+	public int dislikeArticle(LikeVo likeVo);
 }

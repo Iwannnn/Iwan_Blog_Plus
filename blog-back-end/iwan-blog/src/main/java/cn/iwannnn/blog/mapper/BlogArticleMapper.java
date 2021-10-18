@@ -3,6 +3,7 @@ package cn.iwannnn.blog.mapper;
 import java.util.List;
 import cn.iwannnn.blog.domain.BlogArticle;
 import cn.iwannnn.blog.vo.BlogArticleVo;
+import cn.iwannnn.blog.vo.LikeVo;
 
 /**
  * 博客文章Mapper接口
@@ -65,4 +66,38 @@ public interface BlogArticleMapper {
 	 * @return id 标题
 	 */
 	public List<BlogArticleVo> selectBlogArticleVos();
+
+	/**
+	 * 点赞文章
+	 * 
+	 * @param userId和articleId
+	 * @return 是否成功
+	 */
+
+	public int likeArticle(LikeVo likeVo);
+
+	/**
+	 * 增加点赞
+	 * 
+	 * @param userId和articleId
+	 * @return 是否成功
+	 * 
+	 */
+	public int increaseArticleLike(LikeVo likeVo);
+
+	/**
+	 * 取消点赞文章
+	 * 
+	 * @param userId和articleId
+	 * @return 是否成功
+	 */
+	public int dislikeArticle(LikeVo likeVo);
+
+	/**
+	 * 减小点赞
+	 * 
+	 * @param userId和articleId
+	 * @return 是否成功
+	 */
+	public int decreaseArticleLike(LikeVo likeVo);
 }

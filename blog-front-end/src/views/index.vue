@@ -23,11 +23,11 @@
                                 <img v-bind:src="article.avatar" />
                             </div>
                             <div>{{ article.summary }}</div>
-                            <dic>
+                            <div>
                                 <span>{{ article.createTime }}</span>
                                 <span>{{ article.pageviews }}</span>
                                 <span>{{ article.likes }}</span>
-                            </dic>
+                            </div>
                         </div>
                     </el-card>
                 </ul>
@@ -40,7 +40,7 @@
 </template>
 <script>
 import { listMusic } from "@/api/blog/music";
-import { listArticle } from "@/api/blog/article";
+import { listArticle, likeArticle, dislikeArticle } from "@/api/blog/article";
 import { listCategory } from "@/api/blog/category";
 import { listTag } from "@/api/blog/tag";
 export default {
@@ -58,6 +58,7 @@ export default {
     },
     created() {
         this.getList();
+        this.testLike();
     },
     methods: {
         getList() {
@@ -83,6 +84,13 @@ export default {
             listArticle(this.articleQuery).then((res) => {
                 console.log(res.data);
             });
+        },
+        testLike() {
+            var data = {
+                articleId: 9,
+                userId: 1,
+            };
+            dislikeArticle(data);
         },
     },
 };

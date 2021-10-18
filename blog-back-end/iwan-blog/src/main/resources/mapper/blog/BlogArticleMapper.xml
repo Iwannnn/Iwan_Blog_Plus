@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
 	<resultMap type="BlogArticleVo" id="BlogArticleVoResult">
-        <result property="articleId"    column="article"    />
+        <result property="articleId"    column="article_id"    />
         <result property="name"    column="name"    />
     </resultMap>
 
@@ -114,4 +114,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectBlogArticleVos" resultMap="BlogArticleVoResult">
         select article_id, tittle from blog_article
     </select>
+
+	<insert id="likeArticle" parameterType="LikeVo">
+		insert into blog_user_like (user_id,article_id) values (#{userId} ,#{articleId})
+    </insert>
+
+    <update id="increaseArticleLike" parameterType="LikeVo">
+        update blog_article
+		set likes = likes + 1 
+        where article_id = #{articleId}
+    </update>
+
+	<delete id="dislikeArticle" parameterType="LikeVo">
+		delete from blog_user_like
+        where article_id = #{articleId} and user_id = #{userId}
+    </delete>
+
+    <update id="decreaseArticleLike" parameterType="LikeVo">
+        update blog_article
+		set likes= likes - 1 
+        where article_id = #{articleId}
+    </update>
 </mapper>

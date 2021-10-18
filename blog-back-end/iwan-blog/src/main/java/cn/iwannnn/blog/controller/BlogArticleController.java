@@ -18,6 +18,7 @@ import cn.iwannnn.common.core.domain.AjaxResult;
 import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogArticle;
 import cn.iwannnn.blog.service.IBlogArticleService;
+import cn.iwannnn.blog.vo.LikeVo;
 import cn.iwannnn.common.utils.poi.ExcelUtil;
 import cn.iwannnn.common.core.page.TableDataInfo;
 
@@ -103,4 +104,19 @@ public class BlogArticleController extends BaseController {
 		return AjaxResult.success(blogArticleService.selectBlogArticleVos());
 	}
 
+	/**
+	 * 点赞
+	 */
+	@RequestMapping("/likeArticle")
+	public AjaxResult likeArticle(@RequestBody LikeVo likeVo) {
+		return AjaxResult.success(blogArticleService.likeArticle(likeVo));
+	}
+
+	/**
+	 * 取消点赞
+	 */
+	@RequestMapping("/dislikeArticle")
+	public AjaxResult dislikeArticle(@RequestBody LikeVo likeVo) {
+		return AjaxResult.success(blogArticleService.dislikeArticle(likeVo));
+	}
 }

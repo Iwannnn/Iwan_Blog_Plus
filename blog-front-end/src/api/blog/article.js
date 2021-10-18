@@ -59,3 +59,18 @@ export function getArticleId() {
 		method: 'get'
 	})
 }
+
+export function likeArticle(data) {
+	return request({
+		url: '/blog/article/likeArticle',
+		method: 'post',
+		data: data
+	})
+}
+export function dislikeArticle(data) {
+	return request({
+		url: '/blog/article/dislikeArticle',
+		method: 'post',
+		data: data
+	})
+}
