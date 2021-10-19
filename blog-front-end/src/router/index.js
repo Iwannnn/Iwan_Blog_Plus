@@ -14,21 +14,15 @@ export const constantRoutes = [
 				component: resolve => require(["@/views/index"], resolve),
 				hidden: true
 			},
-
-		]
-	},
-	{
-		path: "/article",
-		component: Layout,
-		children: [
 			{
-				path: "/:articleId",
-				// name: article,
+				path: "/article",
+				name: 'article',
 				component: resolve => require(["@/views/article"], resolve),
 				hidden: true
 			}
+
 		]
-	}
+	},
 ]
 
 export default new Router({
