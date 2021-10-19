@@ -7,30 +7,27 @@
                 </div>
             </el-col>
             <el-col :xs="24" :sm="14" :md="14" :lg="14" :xl="14">
-                <ul
-                    class="infinite-list"
-                    v-infinite-scroll="getMoreArticle"
-                    style="overflow: auto"
+                <el-card
+                    v-for="article in articleList"
+                    :key="article.articleId"
+                    shadow="hover"
                 >
-                    <el-card
-                        v-for="article in articleList"
-                        :key="article.articleId"
-                        shadow="hover"
+                    <router-link
+                        tag="div"
+                        :to="'/article/' + article.articleId"
                     >
-                        <div>
-                            <div>{{ article.tittle }}</div>
-                            <div v-if="article.avatar">
-                                <img v-bind:src="article.avatar" />
-                            </div>
-                            <div>{{ article.summary }}</div>
-                            <div>
-                                <span>{{ article.createTime }}</span>
-                                <span>{{ article.pageviews }}</span>
-                                <span>{{ article.likes }}</span>
-                            </div>
+                        <div>{{ article.tittle }}</div>
+                        <div v-if="article.avatar">
+                            <img v-bind:src="article.avatar" />
                         </div>
-                    </el-card>
-                </ul>
+                        <div>{{ article.summary }}</div>
+                        <div>
+                            <span>{{ article.createTime }}</span>
+                            <span>{{ article.pageviews }}</span>
+                            <span>{{ article.likes }}</span>
+                        </div>
+                    </router-link>
+                </el-card>
             </el-col>
             <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
                 <div class="grid-content bg-purple-light"></div>

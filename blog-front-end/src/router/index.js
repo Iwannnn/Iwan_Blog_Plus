@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from '@/layout/index'
-import Common from '@/layout/common'
+import Layout from '@/layout'
 Vue.use(Router)
 
 export const constantRoutes = [
 	{
 		path: "/",
-		component: Index,
+		component: Layout,
 		redirect: 'index',
 		children: [
 			{
@@ -15,6 +14,19 @@ export const constantRoutes = [
 				component: resolve => require(["@/views/index"], resolve),
 				hidden: true
 			},
+
+		]
+	},
+	{
+		path: "/article",
+		component: Layout,
+		children: [
+			{
+				path: "/:articleId",
+				// name: article,
+				component: resolve => require(["@/views/article"], resolve),
+				hidden: true
+			}
 		]
 	}
 ]

@@ -1,8 +1,11 @@
 <template>
     <el-container>
         <el-header :height="'auto'">
-            <div style="background: black; height: auto">
-                <el-image :src="require('@/assets/background/asuka.png')" />
+            <div
+                v-if="this.$route.path == '/index'"
+                style="background: black; height: auto"
+            >
+                <img :src="require('@/assets/background/asuka.png')" />
             </div>
             <div
                 :class="navBarFixed == true ? 'navBarWrap' : ''"
@@ -23,11 +26,11 @@
                         </el-submenu>
                     </el-submenu>
                     <el-menu-item index="3" disabled>消息中心</el-menu-item>
-                    <el-menu-item index="4"
-                        ><a href="https://www.ele.me" target="_blank"
-                            >订单管理</a
-                        ></el-menu-item
-                    >
+                    <el-menu-item index="4">
+                        <a href="https://www.ele.me" target="_blank"
+                            >订单管理
+                        </a>
+                    </el-menu-item>
                 </el-menu>
             </div>
         </el-header>
@@ -82,7 +85,7 @@ export default {
     padding: 0px 0px;
     color: #333;
     text-align: center;
-    line-height: 1000px;
+    line-height: 10px;
     width: 100%;
 }
 .el-footer {
@@ -102,5 +105,8 @@ export default {
     position: fixed;
     top: 0;
     z-index: 999;
+}
+.el-image {
+    z-index: 100;
 }
 </style>
