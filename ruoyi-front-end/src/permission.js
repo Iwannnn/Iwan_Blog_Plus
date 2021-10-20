@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth'
 
 NProgress.configure({ showSpinner: false })
 
-const whiteList = ['/back/login', '/auth-redirect', '/bind', '/register']
+const whiteList = ['/back/login', '/auth-redirect', '/bind', '/register', '/', '/index', 'article']
 
 router.beforeEach((to, from, next) => {
 	NProgress.start()
@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
 		to.meta.title && store.dispatch('settings/setTitle', to.meta.title)
 		/* has token*/
 		if (to.path === '/back/login') {
-			next({ path: '/' })
+			next({ path: '/back/index' })
 			NProgress.done()
 		} else {
 			if (store.getters.roles.length === 0) {
@@ -29,7 +29,7 @@ router.beforeEach((to, from, next) => {
 				}).catch(err => {
 					store.dispatch('LogOut').then(() => {
 						Message.error(err)
-						next({ path: '/' })
+						next({ path: '/index' })
 					})
 				})
 			} else {
@@ -37,8 +37,8 @@ router.beforeEach((to, from, next) => {
 			}
 		}
 	} else {
-		// 没有token
-		if (whiteList.indexOf(to.path) !== -1) {
+		// 没有token)
+		if (whiteList.indexOf(to.path) !== -1 || whiteList.indexOf(to.name) !== -1) {
 			// 在免登录白名单，直接进入
 			next()
 		} else {
@@ -46,7 +46,7 @@ router.beforeEach((to, from, next) => {
 				message: "这是管理员才能触及的领域！！！",
 				type: "warning"
 			})
-			// next(`/back/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
+			next(`/back/login?redirect=${to.fullPath}`) // 否则全部重定向到登录页
 			NProgress.done()
 		}
 	}
