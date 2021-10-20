@@ -15,7 +15,7 @@ export const constantRoutes = [
 				hidden: true
 			},
 			{
-				path: "/article",
+				path: "/article/:articleId",
 				name: 'article',
 				component: resolve => require(["@/views/article"], resolve),
 				hidden: true

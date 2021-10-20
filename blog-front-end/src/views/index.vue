@@ -14,10 +14,7 @@
                 >
                     <router-link
                         tag="div"
-                        :to="{
-                            name: 'article',
-                            params: { articleId: article.articleId },
-                        }"
+                        :to="'/article/' + article.articleId"
                     >
                         <div>{{ article.tittle }}</div>
                         <div v-if="article.avatar">
