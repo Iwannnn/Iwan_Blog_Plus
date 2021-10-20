@@ -70,7 +70,7 @@ export default {
                 document.documentElement.scrollTop ||
                 document.body.scrollTop;
             //  当滚动超过 50 时，实现吸顶效果
-            if (scrollTop > 780) {
+            if (scrollTop > 719) {
                 this.navBarFixed = true;
             } else {
                 this.navBarFixed = false;
@@ -94,13 +94,13 @@ export default {
     text-align: center;
     line-height: 60px;
 }
-
 .el-main {
     background-color: #e9eef3;
     color: #333;
     text-align: center;
     line-height: 160px;
 }
+
 .navBarWrap {
     position: fixed;
     top: 0;
@@ -108,11 +108,5 @@ export default {
 }
 .el-image {
     z-index: 100;
-}
-.wrap {
-    overflow: scroll;
-}
-.wrap::-webkit-scrollbar {
-    display: none;
 }
 </style>
