@@ -21,11 +21,4 @@ export default {
     },
 };
 </script>
-<style scoped>
-.wrap {
-    overflow: scroll;
-}
-.wrap::-webkit-scrollbar {
-    display: none;
-}
-</style>
+

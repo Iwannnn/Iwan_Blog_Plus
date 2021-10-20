@@ -36,7 +36,7 @@
     </div>
 </template>
 <script>
-import { listMusic } from "@/api/blog/music";
+import { listAplayerMusic } from "@/api/blog/music";
 import { listArticle, likeArticle, dislikeArticle } from "@/api/blog/article";
 import { listCategory } from "@/api/blog/category";
 import { listTag } from "@/api/blog/tag";
@@ -55,32 +55,25 @@ export default {
     },
     created() {
         this.getList();
-        this.testLike();
     },
     methods: {
         getList() {
             listArticle().then((res) => {
                 this.articleList = res.rows;
-                console.log(this.articleList);
             });
-            listMusic().then((res) => {
+            listAplayerMusic().then((res) => {
                 this.musicList = res.data;
-                console.log(this.musicList);
             });
             listCategory().then((res) => {
                 this.categoryList = res.rows;
-                console.log(this.categoryList);
             });
             listTag().then((res) => {
                 this.tagList = res.rows;
-                console.log(this.tagList);
             });
         },
         getMoreArticle() {
             this.articleQuery.pageNum += 1;
-            listArticle(this.articleQuery).then((res) => {
-                console.log(res.data);
-            });
+            listArticle(this.articleQuery).then((res) => {});
         },
         testLike() {
             var data = {

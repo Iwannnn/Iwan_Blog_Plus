@@ -59,3 +59,11 @@ export function getMusicId() {
 		method: 'get'
 	})
 }
+
+// 查询博客音乐列表
+export function listAplayerMusic() {
+	return request({
+		url: '/blog/music/listMusic',
+		method: 'get',
+	})
+}

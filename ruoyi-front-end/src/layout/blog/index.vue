@@ -109,4 +109,10 @@ export default {
 .el-image {
     z-index: 100;
 }
+.wrap {
+    overflow: scroll;
+}
+.wrap::-webkit-scrollbar {
+    display: none;
+}
 </style>
