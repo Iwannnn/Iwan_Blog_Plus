@@ -1,19 +1,31 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+    <div id="app">
+        <router-view />
+    </div>
 </template>
 
 <script>
-export default  {
-  name:  'App',
+export default {
+    name: "App",
     metaInfo() {
         return {
-            title: this.$store.state.settings.dynamicTitle && this.$store.state.settings.title,
-            titleTemplate: title => {
-                return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
-            }
-        }
-    }
-}
+            title:
+                this.$store.state.settings.dynamicTitle &&
+                this.$store.state.settings.title,
+            titleTemplate: (title) => {
+                return title
+                    ? `${title} - ${process.env.VUE_APP_TITLE}`
+                    : process.env.VUE_APP_TITLE;
+            },
+        };
+    },
+};
 </script>
+<style scoped>
+.wrap {
+    overflow: scroll;
+}
+.wrap::-webkit-scrollbar {
+    display: none;
+}
+</style>

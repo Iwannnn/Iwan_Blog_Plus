@@ -3,9 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-/* Layout */
-import Layout from '@/layout'
+/* Back */
+import Back from '@/layout/back'
 
+/* Blog */
+import Blog from '@/layout/blog'
 /**
  * Note: 路由配置项
  *
@@ -29,44 +31,63 @@ import Layout from '@/layout'
 // 公共路由
 export const constantRoutes = [
 	{
+		path: "/",
+		component: Blog,
+		redirect: 'index',
+		children: [
+			{
+				path: "/index",
+				component: resolve => require(["@/views/index"], resolve),
+				hidden: true
+			},
+			{
+				path: "/article/:articleId",
+				name: 'article',
+				component: resolve => require(["@/views/article"], resolve),
+				hidden: true
+			}
+
+		]
+	},
+	{
 		path: '/redirect',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		children: [
 			{
 				path: '/redirect/:path(.*)',
-				component: (resolve) => require(['@/views/redirect'], resolve)
+				component: (resolve) => require(['@/views/back/redirect'], resolve)
 			}
 		]
 	},
 	{
-		path: '/login',
-		component: (resolve) => require(['@/views/login'], resolve),
+		path: '/back/login',
+		component: (resolve) => require(['@/views/back/login'], resolve),
 		hidden: true
 	},
 	{
-		path: '/register',
-		component: (resolve) => require(['@/views/register'], resolve),
+		path: '/back/register',
+		component: (resolve) => require(['@/views/back/register'], resolve),
 		hidden: true
 	},
 	{
 		path: '/404',
-		component: (resolve) => require(['@/views/error/404'], resolve),
+		component: (resolve) => require(['@/views/back/error/404'], resolve),
 		hidden: true
 	},
 	{
 		path: '/401',
-		component: (resolve) => require(['@/views/error/401'], resolve),
+		component: (resolve) => require(['@/views/back/error/401'], resolve),
 		hidden: true
 	},
 	{
-		path: '',
-		component: Layout,
-		redirect: 'index',
+		path: '/back',
+		component: Back,
+		redirect: '/back/index',
 		children: [
 			{
 				path: 'index',
-				component: (resolve) => require(['@/views/index'], resolve),
+				component: (resolve) => require(['@/views/back/index'], resolve),
 				name: 'Index',
 				meta: { title: '首页', icon: 'dashboard', affix: true }
 			}
@@ -74,13 +95,13 @@ export const constantRoutes = [
 	},
 	{
 		path: '/user',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		redirect: 'noredirect',
 		children: [
 			{
 				path: 'profile',
-				component: (resolve) => require(['@/views/system/user/profile/index'], resolve),
+				component: (resolve) => require(['@/views/back/system/user/profile/index'], resolve),
 				name: 'Profile',
 				meta: { title: '个人中心', icon: 'user' }
 			}
@@ -88,12 +109,12 @@ export const constantRoutes = [
 	},
 	{
 		path: '/system/user-auth',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		children: [
 			{
 				path: 'role/:userId(\\d+)',
-				component: (resolve) => require(['@/views/system/user/authRole'], resolve),
+				component: (resolve) => require(['@/views/back/system/user/authRole'], resolve),
 				name: 'AuthRole',
 				meta: { title: '分配角色', activeMenu: '/system/user' }
 			}
@@ -101,12 +122,12 @@ export const constantRoutes = [
 	},
 	{
 		path: '/system/role-auth',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		children: [
 			{
 				path: 'user/:roleId(\\d+)',
-				component: (resolve) => require(['@/views/system/role/authUser'], resolve),
+				component: (resolve) => require(['@/views/back/system/role/authUser'], resolve),
 				name: 'AuthUser',
 				meta: { title: '分配用户', activeMenu: '/system/role' }
 			}
@@ -114,12 +135,12 @@ export const constantRoutes = [
 	},
 	{
 		path: '/system/dict-data',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		children: [
 			{
 				path: 'index/:dictId(\\d+)',
-				component: (resolve) => require(['@/views/system/dict/data'], resolve),
+				component: (resolve) => require(['@/views/back/system/dict/data'], resolve),
 				name: 'Data',
 				meta: { title: '字典数据', activeMenu: '/system/dict' }
 			}
@@ -127,12 +148,12 @@ export const constantRoutes = [
 	},
 	{
 		path: '/monitor/job-log',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		children: [
 			{
 				path: 'index',
-				component: (resolve) => require(['@/views/monitor/job/log'], resolve),
+				component: (resolve) => require(['@/views/back/monitor/job/log'], resolve),
 				name: 'JobLog',
 				meta: { title: '调度日志', activeMenu: '/monitor/job' }
 			}
@@ -140,12 +161,12 @@ export const constantRoutes = [
 	},
 	{
 		path: '/tool/gen-edit',
-		component: Layout,
+		component: Back,
 		hidden: true,
 		children: [
 			{
 				path: 'index',
-				component: (resolve) => require(['@/views/tool/gen/editTable'], resolve),
+				component: (resolve) => require(['@/views/back/tool/gen/editTable'], resolve),
 				name: 'GenEdit',
 				meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
 			}
@@ -155,7 +176,6 @@ export const constantRoutes = [
 
 export default new Router({
 	mode: 'history', // 去掉url中的#
-	// base: "back",
 	scrollBehavior: () => ({ y: 0 }),
 	routes: constantRoutes
 })

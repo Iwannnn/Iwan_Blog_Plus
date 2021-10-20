@@ -34,6 +34,7 @@ import VueMeta from 'vue-meta'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
+import APlayer from '@moefe/vue-aplayer';
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -82,6 +83,12 @@ Vue.use(mavonEditor)
 Vue.use(Element, {
 	size: Cookies.get('size') || 'medium' // set element-ui default size
 })
+
+
+Vue.use(APlayer, {
+	defaultCover: 'https://github.com/u3u.png',
+	productionTip: true,
+});
 
 Vue.config.productionTip = false
 
