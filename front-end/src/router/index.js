@@ -31,19 +31,31 @@ import Blog from '@/layout/blog'
 // 公共路由
 export const constantRoutes = [
 	{
-		path: "/",
+		path: '/',
 		component: Blog,
 		redirect: 'index',
 		children: [
 			{
-				path: "/index",
-				component: resolve => require(["@/views/index"], resolve),
+				path: '/index',
+				component: resolve => require(["@/views"], resolve),
 				hidden: true
 			},
 			{
-				path: "/article/:articleId",
+				path: '/article/:articleId',
 				name: 'article',
 				component: resolve => require(["@/views/article"], resolve),
+				hidden: true
+			},
+			{
+				path: '/about',
+				name: 'about',
+				component: resolve => require(["@/views/about"], resolve),
+				hidden: true
+			},
+			{
+				path: '/account',
+				name: 'account',
+				component: resolve => require(["@/views/account"], resolve),
 				hidden: true
 			}
 

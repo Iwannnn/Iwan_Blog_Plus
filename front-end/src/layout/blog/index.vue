@@ -1,36 +1,63 @@
 <template>
     <el-container>
-        <el-header :height="'auto'">
+        <el-header height="'auto'">
+            <el-row>
+                <el-col>
+                    <div v-if="this.$route.path == '/index'" class="img-back">
+                        <img :src="require('@/assets/background/asuka.png')" />
+                    </div>
+                </el-col>
+            </el-row>
             <div
-                v-if="this.$route.path == '/index'"
-                style="background: black; height: auto"
-            >
-                <img :src="require('@/assets/background/asuka.png')" />
-            </div>
-            <div
-                :class="navBarFixed == true ? 'navBarWrap' : ''"
+                :class="navBarFixed == true ? 'navbar-wrap' : ''"
                 style="width: 100%"
             >
-                <el-menu mode="horizontal">
-                    <el-menu-item index="1">处理中心</el-menu-item>
-                    <el-submenu index="2">
-                        <template slot="title">我的工作台</template>
-                        <el-menu-item index="2-1">选项1</el-menu-item>
-                        <el-menu-item index="2-2">选项2</el-menu-item>
-                        <el-menu-item index="2-3">选项3</el-menu-item>
-                        <el-submenu index="2-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="2-4-1">选项1</el-menu-item>
-                            <el-menu-item index="2-4-2">选项2</el-menu-item>
-                            <el-menu-item index="2-4-3">选项3</el-menu-item>
-                        </el-submenu>
-                    </el-submenu>
-                    <el-menu-item index="3" disabled>消息中心</el-menu-item>
-                    <el-menu-item index="4">
-                        <a href="https://www.ele.me" target="_blank"
-                            >订单管理
-                        </a>
-                    </el-menu-item>
+                <el-menu :router="true" :default-active="'/index'">
+                    <el-row>
+                        <el-col :xs="0">
+                            <el-menu-item class="menu-item" index="/index">
+                                首页
+                            </el-menu-item>
+                            <el-menu-item class="menu-item" index="/about">
+                                关于
+                            </el-menu-item>
+                            <el-menu-item class="menu-item" index="/back">
+                                后台
+                            </el-menu-item>
+                            <el-menu-item class="menu-item" index="/account">
+                                我的
+                            </el-menu-item>
+                            <el-menu-item class="icon">
+                                <i class="iconfont icon-github"></i>
+                            </el-menu-item>
+                            <el-menu-item class="icon">
+                                <i class="iconfont icon-coffee"></i>
+                            </el-menu-item>
+                            <el-menu-item class="icon">
+                                <i class="iconfont icon-QQ"></i>
+                            </el-menu-item>
+                            <el-menu-item class="icon">
+                                <i class="iconfont icon-weixin"></i>
+                            </el-menu-item>
+                        </el-col>
+                        <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
+                            <el-submenu>
+                                <template slot="title">导航菜单</template>
+                                <el-menu-item index="/index">
+                                    首页
+                                </el-menu-item>
+                                <el-menu-item index="/about">
+                                    关于
+                                </el-menu-item>
+                                <el-menu-item index="/back">
+                                    后台
+                                </el-menu-item>
+                                <el-menu-item index="/account">
+                                    我的
+                                </el-menu-item>
+                            </el-submenu>
+                        </el-col>
+                    </el-row>
                 </el-menu>
             </div>
         </el-header>
@@ -53,10 +80,11 @@
 
 <script>
 export default {
-    name: "Layout",
+    name: "Blog",
     data() {
         return {
             navBarFixed: false,
+            navBarIndex: [],
         };
     },
     mounted() {
@@ -101,12 +129,28 @@ export default {
     line-height: 160px;
 }
 
-.navBarWrap {
+.navbar-wrap {
     position: fixed;
     top: 0;
     z-index: 999;
 }
 .el-image {
     z-index: 100;
+}
+.el-menu {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.img-back {
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu-item {
+    float: left;
+}
+.icon {
+    float: right;
 }
 </style>

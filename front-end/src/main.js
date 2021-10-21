@@ -35,7 +35,7 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 
 import APlayer from '@moefe/vue-aplayer';
-
+import './assets/iconfont/iconfont.css'
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
