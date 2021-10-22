@@ -4,7 +4,11 @@
             <el-row>
                 <el-col>
                     <div v-if="this.$route.path == '/index'" class="img-back">
-                        <img :src="require('@/assets/background/asuka.png')" />
+                        <img
+                            ref="background"
+                            style="height: auto; width: 100%"
+                            :src="require('@/assets/background/jk.png')"
+                        />
                     </div>
                 </el-col>
             </el-row>
@@ -97,8 +101,9 @@ export default {
                 window.pageYOffset ||
                 document.documentElement.scrollTop ||
                 document.body.scrollTop;
+            let height = this.$refs.background.offsetHeight;
             //  当滚动超过 50 时，实现吸顶效果
-            if (scrollTop > 719) {
+            if (scrollTop > height) {
                 this.navBarFixed = true;
             } else {
                 this.navBarFixed = false;
