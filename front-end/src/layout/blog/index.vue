@@ -6,26 +6,31 @@
                     <div v-if="this.$route.path == '/index'" class="img-back">
                         <img
                             ref="background"
-                            style="height: auto; width: 100%"
+                            style="width: 100%"
                             :src="require('@/assets/background/jk.png')"
                         />
                     </div>
                     <div v-else>
                         <img
                             ref="background"
-                            style="height: auto; width: 100%"
+                            style="width: 100%"
                             :src="require('@/assets/background/double_jk.png')"
                         />
                     </div>
                 </el-col>
             </el-row>
             <a-affix :offset_top="0">
-                <div style="width: 100%">
+                <div
+                    style="
+                        width: 100%;
+                        box-shadow: 0px 6px 2px -6px #000;
+                        border-radius: 10px;
+                    "
+                >
                     <el-menu
                         class="blog-el-menu"
                         :router="true"
                         :default-active="'/index'"
-                        style="background-color: #e6e6fa"
                     >
                         <el-row>
                             <el-col :xs="0">
@@ -82,15 +87,6 @@
         <el-main>
             <keep-alive><router-view /></keep-alive>
         </el-main>
-        <el-footer>
-            <div>
-                <small>
-                    <a href="https://beian.miit.gov.cn">
-                        浙ICP备2021004697号-1
-                    </a>
-                </small>
-            </div>
-        </el-footer>
     </el-container>
 </template>
 
@@ -110,7 +106,6 @@ export default {
 
 <style>
 .el-header {
-    background-color: #e6e6fa;
     padding: 0px 0px;
     color: #333;
     text-align: center;
@@ -118,7 +113,6 @@ export default {
     width: 100%;
 }
 .el-footer {
-    background-color: #e6e6fa;
     color: #333;
     text-align: center;
     line-height: 60px;
