@@ -10,65 +10,77 @@
                             :src="require('@/assets/background/jk.png')"
                         />
                     </div>
+                    <div v-else>
+                        <img
+                            ref="background"
+                            style="height: auto; width: 100%"
+                            :src="require('@/assets/background/double_jk.png')"
+                        />
+                    </div>
                 </el-col>
             </el-row>
-            <div
-                :class="navBarFixed == true ? 'navbar-wrap' : ''"
-                style="width: 100%"
-            >
-                <el-menu :router="true" :default-active="'/index'">
-                    <el-row>
-                        <el-col :xs="0">
-                            <el-menu-item class="menu-item" index="/index">
-                                首页
-                            </el-menu-item>
-                            <el-menu-item class="menu-item" index="/about">
-                                关于
-                            </el-menu-item>
-                            <el-menu-item class="menu-item" index="/back">
-                                后台
-                            </el-menu-item>
-                            <el-menu-item class="menu-item" index="/account">
-                                我的
-                            </el-menu-item>
-                            <el-menu-item class="icon">
-                                <i class="iconfont icon-github"></i>
-                            </el-menu-item>
-                            <el-menu-item class="icon">
-                                <i class="iconfont icon-coffee"></i>
-                            </el-menu-item>
-                            <el-menu-item class="icon">
-                                <i class="iconfont icon-QQ"></i>
-                            </el-menu-item>
-                            <el-menu-item class="icon">
-                                <i class="iconfont icon-weixin"></i>
-                            </el-menu-item>
-                        </el-col>
-                        <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
-                            <el-submenu>
-                                <template slot="title">导航菜单</template>
-                                <el-menu-item index="/index">
+            <a-affix :offset_top="0">
+                <div style="width: 100%">
+                    <el-menu
+                        class="blog-el-menu"
+                        :router="true"
+                        :default-active="'/index'"
+                        style="background-color: #e6e6fa"
+                    >
+                        <el-row>
+                            <el-col :xs="0">
+                                <el-menu-item class="menu-item" index="/index">
                                     首页
                                 </el-menu-item>
-                                <el-menu-item index="/about">
+                                <el-menu-item class="menu-item" index="/about">
                                     关于
                                 </el-menu-item>
-                                <el-menu-item index="/back">
+                                <el-menu-item class="menu-item" index="/back">
                                     后台
                                 </el-menu-item>
-                                <el-menu-item index="/account">
+                                <el-menu-item
+                                    class="menu-item"
+                                    index="/account"
+                                >
                                     我的
                                 </el-menu-item>
-                            </el-submenu>
-                        </el-col>
-                    </el-row>
-                </el-menu>
-            </div>
+                                <el-menu-item class="icon">
+                                    <i class="iconfont icon-github"></i>
+                                </el-menu-item>
+                                <el-menu-item class="icon">
+                                    <i class="iconfont icon-coffee"></i>
+                                </el-menu-item>
+                                <el-menu-item class="icon">
+                                    <i class="iconfont icon-QQ"></i>
+                                </el-menu-item>
+                                <el-menu-item class="icon">
+                                    <i class="iconfont icon-weixin"></i>
+                                </el-menu-item>
+                            </el-col>
+                            <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
+                                <el-submenu index="/">
+                                    <template slot="title">导航菜单</template>
+                                    <el-menu-item index="/index">
+                                        首页
+                                    </el-menu-item>
+                                    <el-menu-item index="/about">
+                                        关于
+                                    </el-menu-item>
+                                    <el-menu-item index="/back">
+                                        后台
+                                    </el-menu-item>
+                                    <el-menu-item index="/account">
+                                        我的
+                                    </el-menu-item>
+                                </el-submenu>
+                            </el-col>
+                        </el-row>
+                    </el-menu>
+                </div>
+            </a-affix>
         </el-header>
         <el-main>
-            <div>
-                <keep-alive><router-view /></keep-alive>
-            </div>
+            <keep-alive><router-view /></keep-alive>
         </el-main>
         <el-footer>
             <div>
@@ -91,30 +103,14 @@ export default {
             navBarIndex: [],
         };
     },
-    mounted() {
-        // 事件监听滚动条
-        window.addEventListener("scroll", this.watchScroll);
-    },
-    methods: {
-        watchScroll() {
-            var scrollTop =
-                window.pageYOffset ||
-                document.documentElement.scrollTop ||
-                document.body.scrollTop;
-            let height = this.$refs.background.offsetHeight;
-            //  当滚动超过 50 时，实现吸顶效果
-            if (scrollTop > height) {
-                this.navBarFixed = true;
-            } else {
-                this.navBarFixed = false;
-            }
-        },
-    },
+    mounted() {},
+    methods: {},
 };
 </script>
 
 <style>
 .el-header {
+    background-color: #e6e6fa;
     padding: 0px 0px;
     color: #333;
     text-align: center;
@@ -122,13 +118,12 @@ export default {
     width: 100%;
 }
 .el-footer {
-    background-color: #b3c0d1;
+    background-color: #e6e6fa;
     color: #333;
     text-align: center;
     line-height: 60px;
 }
 .el-main {
-    background-color: #e9eef3;
     color: #333;
     text-align: center;
     line-height: 160px;
@@ -142,12 +137,11 @@ export default {
 .el-image {
     z-index: 100;
 }
-.el-menu {
+.blog-el-menu {
     padding-left: 30px;
     padding-right: 30px;
 }
 .img-back {
-    background: black;
     display: flex;
     justify-content: center;
     align-items: center;
