@@ -1,9 +1,16 @@
 <template>
     <div>
-        <el-row :gutter="10">
+        <el-row :gutter="20">
             <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
+                <a-affix :offset-top="70">
+                    <div class="muisc">
+                        <aplayer :audio="musicList" :lrcType="3" />
+                    </div>
+                </a-affix>
+            </el-col>
+            <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
                 <div class="muisc">
-                    <aplayer :audio="musicList" :lrcType="3" />
+                    <aplayer :audio="musicList" :lrcType="3" fixed />
                 </div>
             </el-col>
             <el-col :xs="24" :sm="14" :md="14" :lg="14" :xl="14">
@@ -11,6 +18,7 @@
                     v-for="article in articleList"
                     :key="article.articleId"
                     shadow="hover"
+                    class="card"
                 >
                     <router-link
                         tag="div"
@@ -30,7 +38,7 @@
                 </el-card>
             </el-col>
             <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
-                <div class="grid-content bg-purple-light"></div>
+                <a-affix :offset-top="70"> class tag </a-affix>
             </el-col>
         </el-row>
     </div>
@@ -90,23 +98,13 @@ export default {
 .el-col {
     border-radius: 4px;
 }
-.bg-purple-dark {
-    background: #99a9bf;
-}
-.bg-purple {
-    background: #d3dce6;
-}
-.bg-purple-light {
-    background: #e5e9f2;
-}
 .grid-content {
     border-radius: 4px;
     min-height: 36px;
 }
-.el-card {
+.card {
     width: auto;
     height: auto;
-    background: #fff0f5;
     padding: auto;
     margin-bottom: 30px;
     border-radius: 10px;
