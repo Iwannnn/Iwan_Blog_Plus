@@ -57,7 +57,7 @@ public class BlogMusicController extends BaseController {
 	/**
 	 * 获取博客音乐详细信息
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:music:query')")
+	// @PreAuthorize("@ss.hasPermi('blog:music:query')")
 	@GetMapping(value = "/{musicId}")
 	public AjaxResult getInfo(@PathVariable("musicId") Long musicId) {
 		return AjaxResult.success(blogMusicService.selectBlogMusicByMusicId(musicId));
