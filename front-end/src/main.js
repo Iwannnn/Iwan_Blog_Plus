@@ -33,9 +33,12 @@ import VueMeta from 'vue-meta'
 
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-
 import APlayer from '@moefe/vue-aplayer';
-import './assets/iconfont/iconfont.css'
+import './assets/iconfont/iconfont.css';
+import highlight from 'highlight.js';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey
@@ -58,7 +61,6 @@ Vue.prototype.msgError = function (msg) {
 Vue.prototype.msgInfo = function (msg) {
 	this.$message.info(msg);
 }
-
 // 全局组件挂载
 Vue.component('DictTag', DictTag)
 Vue.component('Pagination', Pagination)
@@ -70,6 +72,7 @@ Vue.component('ImageUpload', ImageUpload)
 Vue.use(directive)
 Vue.use(VueMeta)
 Vue.use(mavonEditor)
+Vue.use(Antd);
 
 /**
  * If you don't want to use mock-server
@@ -90,11 +93,12 @@ Vue.use(APlayer, {
 	productionTip: true,
 });
 
+
 Vue.config.productionTip = false
 
 new Vue({
 	el: '#app',
 	router,
 	store,
-	render: h => h(App)
+	render: h => h(App),
 })
