@@ -1,16 +1,24 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2884511 */
-  src: url("iconfont.woff2?t=1634823596010") format("woff2"),
-    url("iconfont.woff?t=1634823596010") format("woff"),
-    url("iconfont.ttf?t=1634823596010") format("truetype");
+  src: url('iconfont.woff2?t=1634996163563') format('woff2'),
+       url('iconfont.woff?t=1634996163563') format('woff'),
+       url('iconfont.ttf?t=1634996163563') format('truetype');
 }
 
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 30px;
+  font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-fangda:before {
+  content: "\ec13";
+}
+
+.icon-fuzhi:before {
+  content: "\ec7a";
 }
 
 .icon-github:before {
@@ -28,3 +36,4 @@
 .icon-QQ:before {
   content: "\e882";
 }
+

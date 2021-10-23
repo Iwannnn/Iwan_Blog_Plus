@@ -35,7 +35,6 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import APlayer from '@moefe/vue-aplayer';
 import './assets/iconfont/iconfont.css';
-import highlight from 'highlight.js';
 import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
 
