@@ -1,26 +1,14 @@
 <template>
     <div>
         <el-row :gutter="10">
-            <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
-                <a-affix :offset-top="70">
-                    <div class="muisc">
-                        <aplayer :audio="music" :lrcType="3" />
-                    </div>
-                </a-affix>
-            </el-col>
-            <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
-                <div class="muisc">
-                    <aplayer :audio="music" :lrcType="3" fixed />
-                </div>
-            </el-col>
-            <el-col :xs="24" :sm="14" :md="14" :lg="14" :xl="14">
+            <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
                 <div
                     class="markdown-content"
                     id="content"
                     v-html="this.article.html"
                 />
             </el-col>
-            <el-col :xs="0" :sm="5" :md="5" :lg="5" :xl="5">
+            <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
                 <a-anchor
                     class="toc"
                     affix
@@ -37,7 +25,6 @@
 </template>
 <script>
 import { getArticle } from "@/api/blog/article";
-import { getMusic } from "@/api/blog/music";
 import { Message } from "element-ui";
 import AnchorLink from "@/components/AnchorLink";
 import marked from "marked";
@@ -63,7 +50,6 @@ export default {
     data() {
         return {
             article: {},
-            music: [],
             clipboard: "",
             anchors: [],
             tocItems: [], // 目录递归列表
@@ -83,9 +69,6 @@ export default {
                     this.article = res.data;
                     this.article.html = this.compiledMarkdown();
                     this.render();
-                    getMusic(this.article.musicId).then((res) => {
-                        this.music = res.data;
-                    });
                 });
             } else {
                 Message({
@@ -183,7 +166,7 @@ export default {
     box-sizing: border-box;
     padding: 40px;
 }
-.music {
+.toc {
     background-color: rgba(0, 0, 0, 0);
 }
 </style>

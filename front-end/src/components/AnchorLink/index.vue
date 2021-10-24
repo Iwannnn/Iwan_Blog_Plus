@@ -28,5 +28,6 @@ export default {
 <style scoped>
 .toc {
     text-align: left;
+    background-color: rgba(0, 0, 0, 0);
 }
 </style>

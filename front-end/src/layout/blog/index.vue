@@ -85,23 +85,48 @@
             </a-affix>
         </el-header>
         <el-main>
-            <keep-alive><router-view /></keep-alive>
+            <el-row :gutter="20">
+                <el-col :xs="0" :sm="6" :md="6" :lg="6" :xl="6">
+                    <a-affix :offset-top="70">
+                        <div class="muisc">
+                            <aplayer :audio="musicList" :lrcType="3" />
+                        </div>
+                    </a-affix>
+                </el-col>
+                <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">
+                    <div class="muisc">
+                        <aplayer :audio="musicList" :lrcType="3" fixed />
+                    </div>
+                </el-col>
+                <el-col :xs="24" :sm="18" :md="18" :lg="18" :xl="18">
+                    <keep-alive><router-view /></keep-alive>
+                </el-col>
+            </el-row>
         </el-main>
     </el-container>
 </template>
 
 <script>
+import { listAplayerMusic } from "@/api/blog/music";
 export default {
     name: "Blog",
     data() {
         return {
             navBarFixed: false,
             navBarIndex: [],
+            musicList: [],
         };
     },
     mounted() {},
+    created() {
+        this.getList();
+    },
     methods: {
-        handleMove() {},
+        getList() {
+            listAplayerMusic().then((res) => {
+                this.musicList = res.data;
+            });
+        },
     },
 };
 </script>
@@ -147,5 +172,8 @@ export default {
 }
 .icon {
     float: right;
+}
+.music {
+    background-color: rgba(0, 0, 0, 0);
 }
 </style>
