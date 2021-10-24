@@ -109,5 +109,9 @@ export default {
     margin-bottom: 30px;
     border-radius: 10px;
     line-height: 30px;
+    background-color: rgba(0, 0, 0, 0);
+}
+.music {
+    background-color: rgba(0, 0, 0, 0);
 }
 </style>

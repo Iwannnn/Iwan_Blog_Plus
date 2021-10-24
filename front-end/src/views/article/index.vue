@@ -183,4 +183,7 @@ export default {
     box-sizing: border-box;
     padding: 40px;
 }
+.music {
+    background-color: rgba(0, 0, 0, 0);
+}
 </style>
