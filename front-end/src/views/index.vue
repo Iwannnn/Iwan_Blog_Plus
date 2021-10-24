@@ -2,28 +2,24 @@
     <div>
         <el-row :gutter="20">
             <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
-                <el-card
+                <router-link
                     v-for="article in articleList"
                     :key="article.articleId"
-                    shadow="hover"
                     class="card"
+                    tag="div"
+                    :to="'/article/' + article.articleId"
                 >
-                    <router-link
-                        tag="div"
-                        :to="'/article/' + article.articleId"
-                    >
-                        <div>{{ article.tittle }}</div>
-                        <div v-if="article.avatar">
-                            <img v-bind:src="article.avatar" />
-                        </div>
-                        <div>{{ article.summary }}</div>
-                        <div>
-                            <span>{{ article.createTime }}</span>
-                            <span>{{ article.pageviews }}</span>
-                            <span>{{ article.likes }}</span>
-                        </div>
-                    </router-link>
-                </el-card>
+                    <div>{{ article.tittle }}</div>
+                    <div v-if="article.avatar">
+                        <img v-bind:src="article.avatar" />
+                    </div>
+                    <div>{{ article.summary }}</div>
+                    <div>
+                        <span>{{ article.createTime }}</span>
+                        <span>{{ article.pageviews }}</span>
+                        <span>{{ article.likes }}</span>
+                    </div>
+                </router-link>
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
                 <a-affix :offset-top="70"> class tag </a-affix>
@@ -36,6 +32,7 @@ import { listAplayerMusic } from "@/api/blog/music";
 import { listArticle, likeArticle, dislikeArticle } from "@/api/blog/article";
 import { listCategory } from "@/api/blog/category";
 import { listTag } from "@/api/blog/tag";
+import "@/assets/styles/cardround.css";
 export default {
     data() {
         return {
@@ -80,22 +77,3 @@ export default {
     },
 };
 </script>
-
-<style>
-.el-col {
-    border-radius: 4px;
-}
-.grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-}
-.card {
-    width: auto;
-    height: auto;
-    padding: auto;
-    margin-bottom: 30px;
-    border-radius: 10px;
-    line-height: 30px;
-    background-color: rgba(0, 0, 0, 0);
-}
-</style>
