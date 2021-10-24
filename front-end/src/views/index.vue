@@ -22,7 +22,35 @@
                 </router-link>
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
-                <a-affix :offset-top="70"> class tag </a-affix>
+                <a-affix :offset-top="70">
+                    <div class="rightbar">
+                        <img class="avatar" :src="avatarUrl" />
+                        <div class="text">
+                            熊猫圈里的老鼠屎
+                            <br />
+                            文章
+                            {{ this.articleList.length }} | 分类
+                            {{ this.categoryList.length }} | 标签
+                            {{ this.tagList.length }}
+                        </div>
+                    </div>
+                    <div class="rightbar">
+                        <div
+                            v-for="category in categoryList"
+                            :key="category.category"
+                        >
+                            <el-button class="category">
+                                <div class="category-name">
+                                    {{ category.name }}
+                                </div>
+                                <div class="category-num">
+                                    {{ category.num }}
+                                </div>
+                            </el-button>
+                        </div>
+                    </div>
+                    <div class="rightbar">14314514</div>
+                </a-affix>
             </el-col>
         </el-row>
     </div>
@@ -39,10 +67,7 @@ export default {
             articleList: [],
             categoryList: [],
             tagList: [],
-            articleQuery: {
-                pageNum: 1,
-                pageSize: 10,
-            },
+            avatarUrl: require("@/assets/avatar/white.jpg"),
         };
     },
     created() {
@@ -77,3 +102,35 @@ export default {
     },
 };
 </script>
+<style scoped>
+.rightbar {
+    box-shadow: inset 0 0 0 2px #f5f5f5;
+    line-height: 40px;
+    margin: 0px 0px 20px 0px;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 30px;
+}
+.text {
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 30px;
+}
+.category {
+    border-radius: 0px;
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.category-name {
+    text-align: left;
+}
+.category-num {
+    text-align: right;
+}
+.tag {
+}
+</style>
