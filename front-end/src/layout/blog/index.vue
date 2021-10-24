@@ -100,7 +100,9 @@ export default {
         };
     },
     mounted() {},
-    methods: {},
+    methods: {
+        handleMove() {},
+    },
 };
 </script>
 
