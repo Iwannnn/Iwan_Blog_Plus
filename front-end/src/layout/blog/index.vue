@@ -84,10 +84,10 @@
                 </div>
             </a-affix>
         </el-header>
-        <el-main>
+        <el-main height="'auto'">
             <el-row :gutter="20">
                 <el-col :xs="0" :sm="6" :md="6" :lg="6" :xl="6">
-                    <a-affix :offset-top="70">
+                    <a-affix :offset-top="76">
                         <div class="muisc">
                             <aplayer :audio="musicList" :lrcType="3" />
                         </div>
