@@ -41,6 +41,9 @@
                                 :key="category.categoryList"
                                 class="category"
                                 shadow="hover"
+                                @click.native="
+                                    handleCategoryClick(category.categoryId)
+                                "
                             >
                                 <span class="category-left">
                                     {{ category.name }}
@@ -57,6 +60,7 @@
                                 class="tag"
                                 shadow="hover"
                                 :style="color()"
+                                @click.native="handleTagClick(tag.tagId)"
                             >
                                 {{ tag.name }}
                             </el-card>
@@ -116,8 +120,13 @@ export default {
             var g = Math.floor(Math.random() * 255);
             var b = Math.floor(Math.random() * 255);
             var color = "background:rgba(" + r + "," + g + "," + b + ",0.8)";
-            console.log(color);
             return color;
+        },
+        handleCategoryClick(categoryId) {
+            console.log(categoryId);
+        },
+        handleTagClick(tagId) {
+            console.log(tagId);
         },
     },
 };
