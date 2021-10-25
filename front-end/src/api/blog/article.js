@@ -9,6 +9,15 @@ export function listArticle(query) {
 	})
 }
 
+// 查询博客文章列表
+export function listArticleByTagId(query) {
+	return request({
+		url: '/blog/article/listByTagId',
+		method: 'get',
+		params: query
+	})
+}
+
 // 查询博客文章详细
 export function getArticle(articleId) {
 	return request({

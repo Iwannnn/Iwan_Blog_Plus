@@ -1,5 +1,6 @@
 package cn.iwannnn.blog.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import cn.iwannnn.common.core.controller.BaseController;
 import cn.iwannnn.common.core.domain.AjaxResult;
 import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogArticle;
+import cn.iwannnn.blog.domain.BlogArticleTag;
 import cn.iwannnn.blog.service.IBlogArticleService;
+import cn.iwannnn.blog.service.IBlogArticleTagService;
 import cn.iwannnn.blog.service.IBlogCategoryService;
 import cn.iwannnn.blog.vo.LikeVo;
 import cn.iwannnn.common.utils.poi.ExcelUtil;
@@ -38,6 +41,9 @@ public class BlogArticleController extends BaseController {
 	@Autowired
 	private IBlogCategoryService blogCategoryService;
 
+	@Autowired
+	private IBlogArticleTagService blogArticleTagService;
+
 	/**
 	 * 查询博客文章列表
 	 */
@@ -47,6 +53,21 @@ public class BlogArticleController extends BaseController {
 		startPage();
 		List<BlogArticle> list = blogArticleService.selectBlogArticleList(blogArticle);
 		return getDataTable(list);
+	}
+
+	@GetMapping("/listByTagId")
+	public TableDataInfo listByTagId(Long tagId) {
+		startPage();
+		BlogArticleTag blogArticleTag = new BlogArticleTag();
+		blogArticleTag.setTagId(tagId);
+		List<BlogArticleTag> list = blogArticleTagService.selectBlogArticleTagList(blogArticleTag);
+		List<BlogArticle> res = new ArrayList<BlogArticle>();
+		for (int i = 0; i < list.size(); i++) {
+			res.add(blogArticleService.selectBlogArticleByArticleId(list.get(i).getArticleId()));
+		}
+		if (res.equals(null))
+			return getDataTable(null);
+		return getDataTable(res);
 	}
 
 	/**

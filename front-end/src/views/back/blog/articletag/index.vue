@@ -7,9 +7,9 @@
             v-show="showSearch"
             label-width="68px"
         >
-            <el-form-item label="文章id" prop="article">
+            <el-form-item label="文章id" prop="articleId">
                 <el-input
-                    v-model="queryParams.article"
+                    v-model="queryParams.articleId"
                     placeholder="请输入文章id"
                     clearable
                     size="small"
@@ -103,8 +103,8 @@
         >
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="文章和标签关联" align="center" prop="id" />
-            <el-table-column label="文章id" align="center" prop="article" />
-            <el-table-column label="标签id" align="center" prop="tag" />
+            <el-table-column label="文章id" align="center" prop="articleId" />
+            <el-table-column label="标签id" align="center" prop="tagId" />
             <el-table-column label="备注" align="center" prop="remark" />
             <el-table-column
                 label="操作"
@@ -148,7 +148,7 @@
             append-to-body
         >
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item label="文章id" prop="article">
+                <el-form-item label="文章id" prop="articleId">
                     <el-select
                         v-model="form.articleId"
                         placeholder="请选择文章"
@@ -162,7 +162,7 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="标签id" prop="tag">
+                <el-form-item label="标签id" prop="tagId">
                     <el-select v-model="form.tagId" placeholder="请选择类别">
                         <el-option
                             v-for="item in tagList"
@@ -224,7 +224,7 @@ export default {
                 pageNum: 1,
                 pageSize: 10,
                 article: null,
-                tag: null,
+                tagId: null,
             },
             // 表单参数
             form: {},

@@ -7,9 +7,9 @@
             v-show="showSearch"
             label-width="100px"
         >
-            <el-form-item label="博客id" prop="blogId">
+            <el-form-item label="博客id" prop="articleId">
                 <el-input
-                    v-model="queryParams.blogId"
+                    v-model="queryParams.articleId"
                     placeholder="请输入博客id"
                     clearable
                     size="small"
@@ -130,7 +130,7 @@
         >
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="评论id" align="center" prop="commentId" />
-            <el-table-column label="博客id" align="center" prop="blogId" />
+            <el-table-column label="博客id" align="center" prop="articleId" />
             <el-table-column label="父级评论" align="center" prop="parentId" />
             <el-table-column
                 label="被评论用户id"
@@ -192,17 +192,13 @@
                 :rules="rules"
                 label-width="100px"
             >
-                <el-form-item label="博客id" prop="blogId">
+                <el-form-item label="博客id" prop="articleId">
                     <el-input
-                        v-model="form.blogId"
+                        v-model="form.articleId"
                         placeholder="请输入博客id"
                     />
                 </el-form-item>
                 <el-form-item label="父级评论" prop="parentId">
-                    <el-input
-                        v-model="form.parentId"
-                        placeholder="请输入父级评论"
-                    />
                     <el-select
                         v-model="form.parentId"
                         placeholder="请选择父类评论"
@@ -309,7 +305,7 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
-                blogId: null,
+                articleId: null,
                 parentId: null,
                 becommentUserId: null,
                 becommentUserName: null,
@@ -355,7 +351,7 @@ export default {
         reset() {
             this.form = {
                 commentId: null,
-                blogId: null,
+                articleId: null,
                 parentId: null,
                 becommentUserId: null,
                 commentUserId: null,
@@ -472,6 +468,7 @@ export default {
         },
         getUserList() {
             getUserId().then((res) => {
+                console.log(res);
                 this.userList = res.data;
             });
         },

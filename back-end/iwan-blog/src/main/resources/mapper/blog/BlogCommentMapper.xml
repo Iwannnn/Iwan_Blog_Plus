@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <resultMap type="BlogComment" id="BlogCommentResult">
         <result property="commentId"    column="comment_id"    />
-        <result property="blogId"    column="blog_id"    />
+        <result property="articleId"    column="article_id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="becommentUserId"    column="becomment_user_id"    />
         <result property="commentUserId"    column="comment_user_id"    />
@@ -21,14 +21,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="commentId"    column="comment_id"    />
         <result property="content"    column="content"    />
     </resultMap>
+
     <sql id="selectBlogCommentVo">
-        select comment_id, blog_id, parent_id, becomment_user_id, comment_user_id, likes, content, create_time, update_time, remark from blog_comment
+        select comment_id, article_id, parent_id, becomment_user_id, comment_user_id, likes, content, create_time, update_time, remark from blog_comment
     </sql>
 
     <select id="selectBlogCommentList" parameterType="BlogComment" resultMap="BlogCommentResult">
         <include refid="selectBlogCommentVo"/>
         <where>  
-            <if test="blogId != null "> and blog_id = #{blogId}</if>
+            <if test="articleId != null "> and article_id = #{articleId}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
             <if test="becommentUserId != null "> and becomment_user_id = #{becommentUserId}</if>
             <if test="commentUserId != null "> and comment_user_id = #{commentUserId}</if>
@@ -45,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertBlogComment" parameterType="BlogComment" useGeneratedKeys="true" keyProperty="commentId">
         insert into blog_comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="blogId != null">blog_id,</if>
+            <if test="articleId != null">article_id,</if>
             <if test="parentId != null">parent_id,</if>
             <if test="becommentUserId != null">becomment_user_id,</if>
             <if test="commentUserId != null">comment_user_id,</if>
@@ -56,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="blogId != null">#{blogId},</if>
+            <if test="articleId != null">#{articleId},</if>
             <if test="parentId != null">#{parentId},</if>
             <if test="becommentUserId != null">#{becommentUserId},</if>
             <if test="commentUserId != null">#{commentUserId},</if>
@@ -71,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateBlogComment" parameterType="BlogComment">
         update blog_comment
         <trim prefix="SET" suffixOverrides=",">
-            <if test="blogId != null">blog_id = #{blogId},</if>
+            <if test="articleId != null">article_id = #{articleId},</if>
             <if test="parentId != null">parent_id = #{parentId},</if>
             <if test="becommentUserId != null">becomment_user_id = #{becommentUserId},</if>
             <if test="commentUserId != null">comment_user_id = #{commentUserId},</if>
@@ -97,5 +98,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBlogCommentVos" resultMap="BlogCommentVoResult">
         select comment_id, content from blog_comment
-    </select>
+    </select>	
 </mapper>

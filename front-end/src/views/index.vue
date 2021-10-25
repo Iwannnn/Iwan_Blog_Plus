@@ -81,7 +81,12 @@
 </template>
 <script>
 import { listAplayerMusic } from "@/api/blog/music";
-import { listArticle, likeArticle, dislikeArticle } from "@/api/blog/article";
+import {
+    listArticle,
+    listArticleByTagId,
+    likeArticle,
+    dislikeArticle,
+} from "@/api/blog/article";
 import { listCategory } from "@/api/blog/category";
 import { listTag } from "@/api/blog/tag";
 import "@/assets/styles/cardround.css";
@@ -125,6 +130,13 @@ export default {
                 this.total = res.total;
             });
         },
+        getArticleListByTagId() {
+            listArticleByTagId(this.queryParams).then((res) => {
+                console.log(res.data);
+                this.articleList = res.rows;
+                this.total = res.total;
+            });
+        },
         testLike() {
             var data = {
                 articleId: 9,
@@ -141,9 +153,20 @@ export default {
         },
         handleCategoryClick(categoryId) {
             console.log(categoryId);
+            this.queryParams = {
+                pageNum: 1,
+                pageSize: 10,
+                categoryId: categoryId,
+            };
+            this.getArticleList();
         },
         handleTagClick(tagId) {
-            console.log(tagId);
+            this.queryParams = {
+                pageNum: 1,
+                pageSize: 10,
+                tagId: tagId,
+            };
+            this.getArticleListByTagId();
         },
     },
 };
