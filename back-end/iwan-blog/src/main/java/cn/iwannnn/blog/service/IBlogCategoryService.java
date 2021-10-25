@@ -65,4 +65,12 @@ public interface IBlogCategoryService {
 	 * @return id name
 	 */
 	public List<BlogCategoryVo> selectBlogCategoryVos();
+
+	/**
+	 * 更新类别数量
+	 * 
+	 * @return void
+	 */
+	public void updataCategoryNum();
+
 }

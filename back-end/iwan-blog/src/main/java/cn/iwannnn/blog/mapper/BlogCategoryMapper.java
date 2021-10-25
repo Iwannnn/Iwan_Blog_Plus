@@ -65,4 +65,18 @@ public interface BlogCategoryMapper {
 	 * @return id name
 	 */
 	public List<BlogCategoryVo> selectBlogCategoryVos();
+
+	/**
+	 * 更新博客数量
+	 * 
+	 * @return void
+	 */
+	public void updateCategoryNum();
+
+	/**
+	 * 重置类型数量
+	 * 
+	 * @return 0
+	 */
+	public void clearCategoryNum();
 }

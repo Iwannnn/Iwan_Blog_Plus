@@ -16,6 +16,15 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
+            <el-form-item label="分类个数" prop="num">
+                <el-input
+                    v-model="queryParams.num"
+                    placeholder="请输入分类个数"
+                    clearable
+                    size="small"
+                    @keyup.enter.native="handleQuery"
+                />
+            </el-form-item>
             <el-form-item>
                 <el-button
                     type="primary"
@@ -95,6 +104,7 @@
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="分类id" align="center" prop="categoryId" />
             <el-table-column label="分类名称" align="center" prop="name" />
+            <el-table-column label="分类个数" align="center" prop="num" />
             <el-table-column label="备注" align="center" prop="remark" />
             <el-table-column
                 label="操作"
@@ -143,6 +153,9 @@
                         v-model="form.name"
                         placeholder="请输入分类名称"
                     />
+                </el-form-item>
+                <el-form-item label="分类个数" prop="num">
+                    <el-input v-model="form.num" placeholder="请输入分类个数" />
                 </el-form-item>
                 <el-form-item label="备注" prop="remark">
                     <el-input v-model="form.remark" placeholder="请输入备注" />
@@ -195,6 +208,7 @@ export default {
                 pageNum: 1,
                 pageSize: 10,
                 name: null,
+                num: null,
             },
             // 表单参数
             form: {},
@@ -225,6 +239,7 @@ export default {
             this.form = {
                 categoryId: null,
                 name: null,
+                num: null,
                 createTime: null,
                 updateTime: null,
                 remark: null,

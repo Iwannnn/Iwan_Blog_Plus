@@ -97,4 +97,15 @@ public class BlogCategoryServiceImpl implements IBlogCategoryService {
 	public List<BlogCategoryVo> selectBlogCategoryVos() {
 		return blogCategoryMapper.selectBlogCategoryVos();
 	}
+
+	/**
+	 * 更行类别数量
+	 * 
+	 * @return void
+	 */
+	@Override
+	public void updataCategoryNum() {
+		blogCategoryMapper.clearCategoryNum();
+		blogCategoryMapper.updateCategoryNum();
+	}
 }

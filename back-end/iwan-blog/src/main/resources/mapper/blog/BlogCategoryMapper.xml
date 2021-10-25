@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="BlogCategory" id="BlogCategoryResult">
         <result property="categoryId"    column="category_id"    />
         <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="remark"    column="remark"    />
@@ -15,16 +16,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="BlogCategoryVo" id="BlogCategoryVoResult">
         <result property="categoryId"    column="category_id"    />
         <result property="name"    column="name"    />
+        <result property="num"    column="num"    />
     </resultMap>
-	
+
     <sql id="selectBlogCategoryVo">
-        select category_id, name, create_time, update_time, remark from blog_category
+        select category_id, name, num, create_time, update_time, remark from blog_category
     </sql>
 
     <select id="selectBlogCategoryList" parameterType="BlogCategory" resultMap="BlogCategoryResult">
         <include refid="selectBlogCategoryVo"/>
         <where>  
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="num != null "> and num = #{num}</if>
         </where>
     </select>
     
@@ -37,12 +40,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into blog_category
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">name,</if>
+            <if test="num != null">num,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateTime != null">update_time,</if>
             <if test="remark != null">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
+            <if test="num != null">#{num},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="remark != null">#{remark},</if>
@@ -53,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update blog_category
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null">name = #{name},</if>
+            <if test="num != null">num = #{num},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="remark != null">remark = #{remark},</if>
@@ -72,6 +78,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
 	<select id="selectBlogCategoryVos" resultMap="BlogCategoryVoResult">
-        select category_id, name from blog_category
+        select category_id, num, name from blog_category
     </select>
+
+	<update id="clearCategoryNum">
+		update `blog_category`
+		set num = 0
+	</update>
+
+    <update id="updateCategoryNum">
+		update `blog_article` as article , `blog_category` as category
+		set category.num = category.num + 1
+		where article.category_id = category.category_id
+    </update>
 </mapper>

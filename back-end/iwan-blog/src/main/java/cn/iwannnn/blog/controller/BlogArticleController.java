@@ -18,6 +18,7 @@ import cn.iwannnn.common.core.domain.AjaxResult;
 import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogArticle;
 import cn.iwannnn.blog.service.IBlogArticleService;
+import cn.iwannnn.blog.service.IBlogCategoryService;
 import cn.iwannnn.blog.vo.LikeVo;
 import cn.iwannnn.common.utils.poi.ExcelUtil;
 import cn.iwannnn.common.core.page.TableDataInfo;
@@ -33,6 +34,9 @@ import cn.iwannnn.common.core.page.TableDataInfo;
 public class BlogArticleController extends BaseController {
 	@Autowired
 	private IBlogArticleService blogArticleService;
+
+	@Autowired
+	private IBlogCategoryService blogCategoryService;
 
 	/**
 	 * 查询博客文章列表
@@ -73,7 +77,9 @@ public class BlogArticleController extends BaseController {
 	@Log(title = "博客文章", businessType = BusinessType.INSERT)
 	@PostMapping
 	public AjaxResult add(@RequestBody BlogArticle blogArticle) {
-		return toAjax(blogArticleService.insertBlogArticle(blogArticle));
+		int res = blogArticleService.insertBlogArticle(blogArticle);
+		blogCategoryService.updataCategoryNum();
+		return toAjax(res);
 	}
 
 	/**
@@ -83,7 +89,9 @@ public class BlogArticleController extends BaseController {
 	@Log(title = "博客文章", businessType = BusinessType.UPDATE)
 	@PutMapping
 	public AjaxResult edit(@RequestBody BlogArticle blogArticle) {
-		return toAjax(blogArticleService.updateBlogArticle(blogArticle));
+		int res = blogArticleService.updateBlogArticle(blogArticle);
+		blogCategoryService.updataCategoryNum();
+		return toAjax(res);
 	}
 
 	/**
@@ -93,7 +101,9 @@ public class BlogArticleController extends BaseController {
 	@Log(title = "博客文章", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{articleIds}")
 	public AjaxResult remove(@PathVariable Long[] articleIds) {
-		return toAjax(blogArticleService.deleteBlogArticleByArticleIds(articleIds));
+		int res = blogArticleService.deleteBlogArticleByArticleIds(articleIds);
+		blogCategoryService.updataCategoryNum();
+		return toAjax(res);
 	}
 
 	/**

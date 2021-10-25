@@ -35,17 +35,15 @@
                         </div>
                     </div>
                     <div class="rightbar">
+                        <div class="category-text">分类</div>
                         <div
                             v-for="category in categoryList"
                             :key="category.category"
                         >
                             <el-button class="category">
-                                <div class="category-name">
+                                <span class="category-name">
                                     {{ category.name }}
-                                </div>
-                                <div class="category-num">
-                                    {{ category.num }}
-                                </div>
+                                </span>
                             </el-button>
                         </div>
                     </div>
@@ -83,6 +81,7 @@ export default {
             });
             listCategory().then((res) => {
                 this.categoryList = res.rows;
+                this.countCategory();
             });
             listTag().then((res) => {
                 this.tagList = res.rows;
@@ -98,6 +97,26 @@ export default {
                 userId: 1,
             };
             dislikeArticle(data);
+        },
+        countCategory() {
+            var i = 0,
+                j = 0;
+            for (i = 0; i < this.categoryList.length; i++) {
+                this.categoryList[i].num = 0;
+            }
+            for (i = 0; i < this.articleList.length; i++) {
+                for (j = 0; j < this.categoryList.length; j++) {
+                    if (
+                        this.categoryList[j].categoryId ===
+                        this.articleList[i].categoryId
+                    ) {
+                        this.categoryList[j].num = this.categoryList[j].num
+                            ? this.categoryList[j].num + 1
+                            : 0;
+                        break;
+                    }
+                }
+            }
         },
     },
 };
@@ -124,12 +143,13 @@ export default {
     width: 80%;
     margin-top: 10px;
     margin-bottom: 10px;
+    font-size: 20px;
 }
 .category-name {
-    text-align: left;
+    float: left;
 }
 .category-num {
-    text-align: right;
+    float: right;
 }
 .tag {
 }

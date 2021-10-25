@@ -7,4 +7,6 @@ public class BlogCategoryVo {
 	private Long categoryId;
 
 	private String name;
+
+	private Long num;
 }
