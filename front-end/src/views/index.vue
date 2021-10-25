@@ -20,6 +20,14 @@
                         <span>{{ article.likes }}</span>
                     </div>
                 </router-link>
+                <pagination
+                    v-show="total > 0"
+                    :total="total"
+                    style="height: 150px"
+                    :page.sync="queryParams.pageNum"
+                    :limit.sync="queryParams.pageSize"
+                    @pagination="getArticleList()"
+                />
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
                 <div>
@@ -84,6 +92,11 @@ export default {
             categoryList: [],
             tagList: [],
             avatarUrl: require("@/assets/avatar/white.jpg"),
+            queryParams: {
+                pageNum: 1,
+                pageSize: 10,
+            },
+            total: 0,
         };
     },
     created() {
@@ -91,8 +104,9 @@ export default {
     },
     methods: {
         getList() {
-            listArticle().then((res) => {
+            listArticle(this.queryParams).then((res) => {
                 this.articleList = res.rows;
+                this.total = res.total;
             });
             listAplayerMusic().then((res) => {
                 this.musicList = res.data;
@@ -104,9 +118,12 @@ export default {
                 this.tagList = res.rows;
             });
         },
-        getMoreArticle() {
-            this.articleQuery.pageNum += 1;
-            listArticle(this.articleQuery).then((res) => {});
+
+        getArticleList() {
+            listArticle(this.queryParams).then((res) => {
+                this.articleList = res.rows;
+                this.total = res.total;
+            });
         },
         testLike() {
             var data = {
@@ -186,12 +203,13 @@ export default {
 }
 .tag {
     display: inline-flex;
-    font-size: 20px;
+    font-size: 10px;
     background: none;
-    line-height: 5px;
+    line-height: 1px;
+    height: 30px;
     color: #ffffff;
     position: relative;
-    margin: 5px 5px;
+    margin: 2px 2px;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
 }
