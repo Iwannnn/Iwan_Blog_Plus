@@ -7,9 +7,9 @@
             v-show="showSearch"
             label-width="68px"
         >
-            <el-form-item label="标签名称" prop="tagName">
+            <el-form-item label="标签名称" prop="name">
                 <el-input
-                    v-model="queryParams.tagName"
+                    v-model="queryParams.name"
                     placeholder="请输入标签名称"
                     clearable
                     size="small"
@@ -94,7 +94,7 @@
         >
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="标签id" align="center" prop="tagId" />
-            <el-table-column label="标签名称" align="center" prop="tagName" />
+            <el-table-column label="标签名称" align="center" prop="name" />
             <el-table-column label="备注" align="center" prop="remark" />
             <el-table-column
                 label="操作"
@@ -138,9 +138,9 @@
             append-to-body
         >
             <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-                <el-form-item label="标签名称" prop="tagName">
+                <el-form-item label="标签名称" prop="name">
                     <el-input
-                        v-model="form.tagName"
+                        v-model="form.name"
                         placeholder="请输入标签名称"
                     />
                 </el-form-item>
@@ -194,7 +194,7 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
-                tagName: null,
+                name: null,
             },
             // 表单参数
             form: {},
@@ -224,7 +224,7 @@ export default {
         reset() {
             this.form = {
                 tagId: null,
-                tagName: null,
+                name: null,
                 createTime: null,
                 updateTime: null,
                 remark: null,

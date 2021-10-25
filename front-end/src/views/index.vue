@@ -22,33 +22,47 @@
                 </router-link>
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
-                <a-affix :offset-top="70">
+                <div>
                     <div class="rightbar">
-                        <img class="avatar" :src="avatarUrl" />
-                        <div class="text">
-                            熊猫圈里的老鼠屎
-                            <br />
-                            文章
-                            {{ this.articleList.length }} | 分类
-                            {{ this.categoryList.length }} | 标签
-                            {{ this.tagList.length }}
+                        <div class="info">
+                            <img class="avatar" :src="avatarUrl" />
+                            <div class="text">
+                                熊猫圈里的老鼠屎
+                                <br />
+                                文章
+                                {{ this.articleList.length }} | 分类
+                                {{ this.categoryList.length }} | 标签
+                                {{ this.tagList.length }}
+                            </div>
                         </div>
-                    </div>
-                    <div class="rightbar">
-                        <div class="category-text">分类</div>
-                        <div
-                            v-for="category in categoryList"
-                            :key="category.category"
-                        >
-                            <el-button class="category">
-                                <span class="category-name">
+                        <div class="info">
+                            <el-card
+                                v-for="category in categoryList"
+                                :key="category.categoryList"
+                                class="category"
+                                shadow="hover"
+                            >
+                                <span class="category-left">
                                     {{ category.name }}
                                 </span>
-                            </el-button>
+                                <span class="category-num" :style="color()">
+                                    {{ category.num }}
+                                </span>
+                            </el-card>
+                        </div>
+                        <div class="info">
+                            <el-card
+                                v-for="tag in tagList"
+                                :key="tag.tagId"
+                                class="tag"
+                                shadow="hover"
+                                :style="color()"
+                            >
+                                {{ tag.name }}
+                            </el-card>
                         </div>
                     </div>
-                    <div class="rightbar">14314514</div>
-                </a-affix>
+                </div>
             </el-col>
         </el-row>
     </div>
@@ -81,7 +95,6 @@ export default {
             });
             listCategory().then((res) => {
                 this.categoryList = res.rows;
-                this.countCategory();
             });
             listTag().then((res) => {
                 this.tagList = res.rows;
@@ -98,25 +111,13 @@ export default {
             };
             dislikeArticle(data);
         },
-        countCategory() {
-            var i = 0,
-                j = 0;
-            for (i = 0; i < this.categoryList.length; i++) {
-                this.categoryList[i].num = 0;
-            }
-            for (i = 0; i < this.articleList.length; i++) {
-                for (j = 0; j < this.categoryList.length; j++) {
-                    if (
-                        this.categoryList[j].categoryId ===
-                        this.articleList[i].categoryId
-                    ) {
-                        this.categoryList[j].num = this.categoryList[j].num
-                            ? this.categoryList[j].num + 1
-                            : 0;
-                        break;
-                    }
-                }
-            }
+        color() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            var color = "background:rgba(" + r + "," + g + "," + b + ",0.8)";
+            console.log(color);
+            return color;
         },
     },
 };
@@ -125,7 +126,11 @@ export default {
 .rightbar {
     box-shadow: inset 0 0 0 2px #f5f5f5;
     line-height: 40px;
-    margin: 0px 0px 20px 0px;
+    padding: 20px;
+}
+.info {
+    padding: 10px;
+    border-bottom: 2px solid #f5f5f5;
 }
 .avatar {
     width: 100px;
@@ -136,21 +141,49 @@ export default {
 .text {
     text-align: center;
     font-size: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 .category {
-    border-radius: 0px;
-    width: 80%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 20px;
+    text-align: left;
+    font-size: 1.2rem;
+    background: none;
+    line-height: 1.2rem;
+    height: auto;
+    color: #000000;
+    position: relative;
+    margin: 10px auto;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+}
+.category:hover {
+    color: #ffdafc;
 }
 .category-name {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color);
     float: left;
 }
 .category-num {
+    width: 1.6rem;
+    height: 1.6rem;
+    text-align: center;
+    line-height: 1.6rem;
+    border-radius: 0.25rem;
+    background: #eee;
+    font-size: 20px;
+    color: #fff;
     float: right;
 }
 .tag {
+    display: inline-flex;
+    font-size: 20px;
+    background: none;
+    line-height: 5px;
+    color: #ffffff;
+    position: relative;
+    margin: 5px 5px;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 5px;
 }
 </style>

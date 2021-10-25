@@ -57,7 +57,7 @@ export const constantRoutes = [
 				name: 'account',
 				component: resolve => require(["@/views/account"], resolve),
 				hidden: true
-			}
+			},
 
 		]
 	},

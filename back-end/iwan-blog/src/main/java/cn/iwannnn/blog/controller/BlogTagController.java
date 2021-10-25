@@ -71,6 +71,7 @@ public class BlogTagController extends BaseController {
 	@Log(title = "博客标签", businessType = BusinessType.INSERT)
 	@PostMapping
 	public AjaxResult add(@RequestBody BlogTag blogTag) {
+		System.out.println(blogTag.toString());
 		return toAjax(blogTagService.insertBlogTag(blogTag));
 	}
 
