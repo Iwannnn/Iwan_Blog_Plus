@@ -6,5 +6,5 @@ import lombok.Data;
 public class BlogCommentVo {
 	private Long commentId;
 
-	private String comment;
+	private String content;
 }

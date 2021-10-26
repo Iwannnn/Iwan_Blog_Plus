@@ -46,7 +46,7 @@
                         <div class="info">
                             <el-card
                                 v-for="category in categoryList"
-                                :key="category.categoryList"
+                                :key="category.categoryId"
                                 class="category"
                                 shadow="hover"
                                 @click.native="

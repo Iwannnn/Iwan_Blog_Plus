@@ -35,7 +35,6 @@ public class BlogCommentController extends BaseController {
 	/**
 	 * 查询博客评论列表
 	 */
-	// @PreAuthorize("@ss.hasPermi('blog:comment:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogComment blogComment) {
 		startPage();
