@@ -97,4 +97,15 @@ public class BlogUserServiceImpl implements IBlogUserService {
 	public List<BlogUserVo> selectBlogUserVos() {
 		return blogUserMapper.selectBlogUserVos();
 	}
+
+	/**
+	 * 查找用户
+	 * 
+	 * @param blogUser
+	 * @return user
+	 */
+	@Override
+	public BlogUser selectBlogUser(BlogUser blogUser) {
+		return blogUserMapper.selectBlogUser(blogUser);
+	}
 }

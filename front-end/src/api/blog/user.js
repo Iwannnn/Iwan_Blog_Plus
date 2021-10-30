@@ -59,3 +59,25 @@ export function getUserId() {
 		method: 'get'
 	})
 }
+
+// 登录
+export function login(account, password) {
+	var query = {
+		account: account,
+		password: password
+	}
+	return request({
+		url: '/blog/user/login',
+		method: 'get',
+		params: query
+	})
+}
+
+//检查是否重复
+export function check(query) {
+	return request({
+		url: '/blog/user/check',
+		method: 'get',
+		params: query
+	})
+}

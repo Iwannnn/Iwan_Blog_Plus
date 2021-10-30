@@ -65,4 +65,12 @@ public interface BlogUserMapper {
 	 * @return id account name
 	 */
 	public List<BlogUserVo> selectBlogUserVos();
+
+	/**
+	 * 查找用户
+	 * 
+	 * @param blogUser
+	 * @return user
+	 */
+	public BlogUser selectBlogUser(BlogUser blogUser);
 }

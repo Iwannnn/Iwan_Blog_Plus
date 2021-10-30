@@ -62,6 +62,18 @@ export const constantRoutes = [
 		]
 	},
 	{
+		path: '/login',
+		name: 'login',
+		component: resolve => require(["@/views/login"], resolve),
+		hidden: true
+	},
+	{
+		path: '/register',
+		name: 'register',
+		component: resolve => require(["@/views/register"], resolve),
+		hidden: true
+	},
+	{
 		path: '/redirect',
 		component: Back,
 		hidden: true,

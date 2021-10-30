@@ -1,15 +1,15 @@
 <template>
     <div class="login">
         <el-form
-            ref="loginForm"
-            :model="loginForm"
+            ref="blogLoginForm"
+            :model="blogLoginForm"
             :rules="loginRules"
             class="login-form"
         >
-            <h3 class="title">博客管理系统</h3>
-            <el-form-item prop="username">
+            <h3 class="title">登录</h3>
+            <el-form-item prop="blogAccount">
                 <el-input
-                    v-model="loginForm.username"
+                    v-model="blogLoginForm.blogAccount"
                     type="text"
                     auto-complete="off"
                     placeholder="账号"
@@ -21,9 +21,9 @@
                     />
                 </el-input>
             </el-form-item>
-            <el-form-item prop="password">
+            <el-form-item prop="blogPassword">
                 <el-input
-                    v-model="loginForm.password"
+                    v-model="blogLoginForm.blogPassword"
                     type="password"
                     auto-complete="off"
                     placeholder="密码"
@@ -36,30 +36,8 @@
                     />
                 </el-input>
             </el-form-item>
-            <el-form-item prop="code" v-if="captchaOnOff">
-                <el-input
-                    v-model="loginForm.code"
-                    auto-complete="off"
-                    placeholder="验证码"
-                    style="width: 63%"
-                    @keyup.enter.native="handleLogin"
-                >
-                    <svg-icon
-                        slot="prefix"
-                        icon-class="validCode"
-                        class="el-input__icon input-icon"
-                    />
-                </el-input>
-                <div class="login-code">
-                    <img
-                        :src="codeUrl"
-                        @click="getCode"
-                        class="login-code-img"
-                    />
-                </div>
-            </el-form-item>
             <el-checkbox
-                v-model="loginForm.rememberMe"
+                v-model="blogLoginForm.blogRememberMe"
                 style="margin: 0px 0px 25px 0px"
                 >记住密码</el-checkbox
             >
@@ -83,14 +61,14 @@
         </el-form>
         <!--  底部  -->
         <div class="el-login-footer">
-            <span>Copyright © 2018-2021 ruoyi.vip All Rights Reserved.</span>
+            <span>copyright iwannnn.cn</span>
         </div>
     </div>
 </template>
 
 <script>
-import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
+import { login } from "@/api/blog/user";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
 
 export default {
@@ -99,41 +77,30 @@ export default {
         return {
             codeUrl: "",
             cookiePassword: "",
-            loginForm: {
-                username: "admin",
-                password: "admin123",
-                rememberMe: false,
-                code: "",
-                uuid: "",
+            blogLoginForm: {
+                blogAccount: "",
+                blogPassword: "",
+                blogRememberMe: false,
             },
             loginRules: {
-                username: [
+                blogAccount: [
                     {
                         required: true,
                         trigger: "blur",
                         message: "请输入您的账号",
                     },
                 ],
-                password: [
+                blogPassword: [
                     {
                         required: true,
                         trigger: "blur",
                         message: "请输入您的密码",
                     },
                 ],
-                code: [
-                    {
-                        required: true,
-                        trigger: "change",
-                        message: "请输入验证码",
-                    },
-                ],
             },
             loading: false,
-            // 验证码开关
-            captchaOnOff: true,
             // 注册开关
-            register: false,
+            register: true,
             redirect: undefined,
         };
     },
@@ -146,69 +113,82 @@ export default {
         },
     },
     created() {
-        this.getCode();
         this.getCookie();
     },
     methods: {
-        getCode() {
-            getCodeImg().then((res) => {
-                this.captchaOnOff =
-                    res.captchaOnOff === undefined ? true : res.captchaOnOff;
-                if (this.captchaOnOff) {
-                    this.codeUrl = "data:image/gif;base64," + res.img;
-                    this.loginForm.uuid = res.uuid;
-                }
-            });
-        },
         getCookie() {
-            const username = Cookies.get("username");
-            const password = Cookies.get("password");
-            const rememberMe = Cookies.get("rememberMe");
-            this.loginForm = {
-                username:
-                    username === undefined ? this.loginForm.username : username,
-                password:
-                    password === undefined
-                        ? this.loginForm.password
-                        : decrypt(password),
-                rememberMe:
-                    rememberMe === undefined ? false : Boolean(rememberMe),
+            const blogAccount = Cookies.get("blogAccount");
+            const blogPassword = Cookies.get("blogPassword");
+            const blogRememberMe = Cookies.get("blogRememberMe");
+            this.blogLoginForm = {
+                blogAccount:
+                    blogAccount === undefined
+                        ? this.blogLoginForm.blogAccount
+                        : blogAccount,
+                blogPassword:
+                    blogPassword === undefined
+                        ? this.blogLoginForm.blogPassword
+                        : decrypt(blogPassword),
+                blogRememberMe:
+                    blogRememberMe === undefined
+                        ? false
+                        : Boolean(blogRememberMe),
             };
         },
         handleLogin() {
-            this.$refs.loginForm.validate((valid) => {
+            this.$refs.blogLoginForm.validate((valid) => {
                 if (valid) {
                     this.loading = true;
-                    if (this.loginForm.rememberMe) {
-                        Cookies.set("username", this.loginForm.username, {
-                            expires: 30,
-                        });
+                    if (this.blogLoginForm.blogRememberMe) {
                         Cookies.set(
-                            "password",
-                            encrypt(this.loginForm.password),
+                            "blogAccount",
+                            this.blogLoginForm.blogAccount,
+                            {
+                                expires: 30,
+                            }
+                        );
+                        Cookies.set(
+                            "blogPassword",
+                            encrypt(this.blogLoginForm.blogPassword),
                             { expires: 30 }
                         );
-                        Cookies.set("rememberMe", this.loginForm.rememberMe, {
-                            expires: 30,
-                        });
-                    } else {
-                        Cookies.remove("username");
-                        Cookies.remove("password");
-                        Cookies.remove("rememberMe");
-                    }
-                    this.$store
-                        .dispatch("Login", this.loginForm)
-                        .then(() => {
-                            this.$router
-                                .push({ path: this.redirect || "/" })
-                                .catch(() => {});
-                        })
-                        .catch(() => {
-                            this.loading = false;
-                            if (this.captchaOnOff) {
-                                this.getCode();
+                        Cookies.set(
+                            "blogRememberMe",
+                            this.blogLoginForm.blogRememberMe,
+                            {
+                                expires: 30,
                             }
-                        });
+                        );
+                    } else {
+                        Cookies.remove("blogAccount");
+                        Cookies.remove("blogPassword");
+                        Cookies.remove("blogRememberMe");
+                    }
+                    login(
+                        this.blogLoginForm.blogAccount,
+                        this.blogLoginForm.blogPassword
+                    ).then((res) => {
+                        console.log(res);
+                        if (res.msg == "操作成功") {
+                            this.$message({
+                                showClose: true,
+                                message: "登录成功",
+                                type: "success",
+                            });
+                        } else if (res.msg == "密码错误") {
+                            this.$message({
+                                showClose: true,
+                                message: "密码错误",
+                                type: "error",
+                            });
+                        } else if (res.msg == "账号不存在") {
+                            this.$message({
+                                showClose: true,
+                                message: "账号不存在",
+                                type: "error",
+                            });
+                        }
+                    });
                 }
             });
         },
@@ -222,7 +202,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100%;
-    background-image: url("../../assets/background/jk.png");
+    background-image: url("../assets/background/jk.png");
     background-size: cover;
 }
 .title {

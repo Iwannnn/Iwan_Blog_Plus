@@ -17,7 +17,9 @@ import cn.iwannnn.common.core.domain.AjaxResult;
 import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogUser;
 import cn.iwannnn.blog.service.IBlogUserService;
+import cn.iwannnn.common.utils.StringUtils;
 import cn.iwannnn.common.utils.poi.ExcelUtil;
+import cn.iwannnn.common.utils.sign.Md5Utils;
 import cn.iwannnn.common.core.page.TableDataInfo;
 
 /**
@@ -67,10 +69,11 @@ public class BlogUserController extends BaseController {
 	/**
 	 * 新增博客用户
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:user:add')")
+	// @PreAuthorize("@ss.hasPermi('blog:user:add')")
 	@Log(title = "博客用户", businessType = BusinessType.INSERT)
 	@PostMapping
 	public AjaxResult add(@RequestBody BlogUser blogUser) {
+		blogUser.setPassword(Md5Utils.hash(blogUser.getPassword()));
 		return toAjax(blogUserService.insertBlogUser(blogUser));
 	}
 
@@ -100,5 +103,45 @@ public class BlogUserController extends BaseController {
 	@GetMapping("/getUserId")
 	public AjaxResult getBlogUserId() {
 		return AjaxResult.success(blogUserService.selectBlogUserVos());
+	}
+
+	/**
+	 * 登录
+	 */
+	@RequestMapping("/login")
+	public AjaxResult login(String account, String password) {
+		BlogUser blogUser = new BlogUser();
+		blogUser.setAccount(account);
+		BlogUser res = blogUserService.selectBlogUser(blogUser);
+		if (res == null) {
+			return AjaxResult.success("账号不存在");
+		} else if (res.getPassword().equals(Md5Utils.hash(password))) {
+			return AjaxResult.success();
+		} else {
+			return AjaxResult.success("密码错误");
+		}
+
+	}
+
+	/**
+	 * 注册
+	 */
+	@RequestMapping("/register")
+	public AjaxResult register(@RequestBody BlogUser blogUser) {
+		return AjaxResult.success(blogUserService.insertBlogUser(blogUser));
+	}
+
+	/**
+	 * 验证用户注册信息
+	 */
+	@RequestMapping("/check")
+	public AjaxResult check(BlogUser blogUser) {
+		if (blogUser.getAccount() == null && blogUser.getPhone() == null && blogUser.getEmail() == null)
+			return AjaxResult.success();
+		BlogUser res = blogUserService.selectBlogUser(blogUser);
+		if (res == null)
+			return AjaxResult.success();
+		else
+			return AjaxResult.success("exist");
 	}
 }

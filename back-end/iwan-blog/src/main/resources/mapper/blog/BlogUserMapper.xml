@@ -43,6 +43,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
     
+	<select id="selectBlogUser" parameterType="BlogUser" resultMap="BlogUserResult">
+        <include refid="selectBlogUserVo"/>
+        <where>  
+            <if test="account != null  and account != ''"> and account = #{account}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+        </where>
+    </select>
 	
     <select id="selectBlogUserByUserId" parameterType="Long" resultMap="BlogUserResult">
         <include refid="selectBlogUserVo"/>
