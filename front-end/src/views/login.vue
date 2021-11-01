@@ -53,7 +53,13 @@
                     <span v-else>登 录 中...</span>
                 </el-button>
                 <div style="float: right" v-if="register">
-                    <router-link class="link-type" :to="'/register'">
+                    <router-link
+                        class="link-type"
+                        :to="{
+                            path: '/register',
+                            query: { next: { next } },
+                        }"
+                    >
                         立即注册
                     </router-link>
                 </div>
@@ -82,6 +88,7 @@ export default {
         return {
             codeUrl: "",
             cookiePassword: "",
+            next: this.$route.query.next,
             blogLoginForm: {
                 blogAccount: "",
                 blogPassword: "",
@@ -108,14 +115,6 @@ export default {
             register: true,
             redirect: undefined,
         };
-    },
-    watch: {
-        $route: {
-            handler: function (route) {
-                this.redirect = route.query && route.query.redirect;
-            },
-            immediate: true,
-        },
     },
     created() {
         this.getCookie();
@@ -173,25 +172,30 @@ export default {
                         this.blogLoginForm.blogAccount,
                         this.blogLoginForm.blogPassword
                     ).then((res) => {
-                        console.log(res);
                         if (res.msg == "操作成功") {
                             this.$message({
                                 showClose: true,
                                 message: "登录成功",
                                 type: "success",
                             });
+                            Cookies.set("userId", res.data, {
+                                expires: 7,
+                            });
+                            this.$router.push(this.next);
                         } else if (res.msg == "密码错误") {
                             this.$message({
                                 showClose: true,
-                                message: "密码错误",
+                                message: "密码错误，请重新输入密码",
                                 type: "error",
                             });
-                        } else if (res.msg == "账号不存在") {
+                            this.loading = false;
+                        } else if (res.msg == "账号不存在，请检查账号信息") {
                             this.$message({
                                 showClose: true,
                                 message: "账号不存在",
                                 type: "error",
                             });
+                            this.loading = false;
                         }
                     });
                 }

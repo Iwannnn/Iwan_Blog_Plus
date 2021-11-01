@@ -115,7 +115,7 @@ public class BlogUserController extends BaseController {
 		if (res == null) {
 			return AjaxResult.success("账号不存在");
 		} else if (res.getPassword().equals(Md5Utils.hash(password))) {
-			return AjaxResult.success(res);
+			return AjaxResult.success(res.getUserId());
 		} else {
 			return AjaxResult.success("密码错误");
 		}

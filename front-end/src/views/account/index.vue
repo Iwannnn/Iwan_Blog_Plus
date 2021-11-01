@@ -1,5 +1,5 @@
 <template>
-    <div>account</div>
+    <div></div>
 </template>
 <script>
 import Cookies from "js-cookie";
@@ -8,7 +8,7 @@ import { encrypt, decrypt } from "@/utils/jsencrypt";
 export default {
     data() {
         return {
-            userInfo: null,
+            userId: null,
         };
     },
     created() {
@@ -16,10 +16,14 @@ export default {
     },
     methods: {
         getUserInfo() {
-            this.userInfo = Cookies.get("userInfo");
-            console.log(this.userInfo);
-            if (this.userInfo == undefined) {
-                this.$router.push("login");
+            this.userId = Cookies.get("userId");
+            if (this.userId == undefined) {
+                this.$router.push({
+                    path: "/login",
+                    query: {
+                        next: "/account",
+                    },
+                });
                 this.$message({
                     showClose: true,
                     message: "请先登录账号",

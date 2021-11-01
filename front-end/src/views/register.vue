@@ -89,7 +89,10 @@
                     <span v-else>注 册 中...</span>
                 </el-button>
                 <div style="float: right" v-if="login">
-                    <router-link class="link-type" :to="'/login'">
+                    <router-link
+                        class="link-type"
+                        :to="{ path: '/login', query: { next: { next } } }"
+                    >
                         立即登录
                     </router-link>
                 </div>
@@ -181,6 +184,7 @@ export default {
             });
         };
         return {
+            next: this.$route.query.next,
             registerForm: {
                 account: null,
                 password: null,
@@ -243,15 +247,6 @@ export default {
             redirect: undefined,
         };
     },
-    watch: {
-        $route: {
-            handler: function (route) {
-                this.redirect = route.query && route.query.redirect;
-            },
-            immediate: true,
-        },
-    },
-    created() {},
     methods: {
         handleRegister() {
             this.$refs.registerForm.validate((valid) => {
@@ -262,6 +257,12 @@ export default {
                                 showClose: true,
                                 message: "注册成功",
                                 type: "success",
+                            });
+                            this.$router.push({
+                                path: "/login",
+                                query: {
+                                    next: this.next,
+                                },
                             });
                         }
                     });

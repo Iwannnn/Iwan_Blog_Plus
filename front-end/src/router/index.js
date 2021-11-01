@@ -65,7 +65,8 @@ export const constantRoutes = [
 		path: '/login',
 		name: 'login',
 		component: resolve => require(["@/views/login"], resolve),
-		hidden: true
+		hidden: true,
+		meta: { next: 'index' }
 	},
 	{
 		path: '/register',
