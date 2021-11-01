@@ -53,9 +53,14 @@
                     <span v-else>登 录 中...</span>
                 </el-button>
                 <div style="float: right" v-if="register">
-                    <router-link class="link-type" :to="'/register'"
-                        >立即注册</router-link
-                    >
+                    <router-link class="link-type" :to="'/register'">
+                        立即注册
+                    </router-link>
+                </div>
+                <div style="float: left">
+                    <router-link class="link-type" :to="'/index'">
+                        回到首页
+                    </router-link>
                 </div>
             </el-form-item>
         </el-form>

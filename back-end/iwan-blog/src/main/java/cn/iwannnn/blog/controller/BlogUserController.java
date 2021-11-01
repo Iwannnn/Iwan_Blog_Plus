@@ -17,7 +17,6 @@ import cn.iwannnn.common.core.domain.AjaxResult;
 import cn.iwannnn.common.enums.BusinessType;
 import cn.iwannnn.blog.domain.BlogUser;
 import cn.iwannnn.blog.service.IBlogUserService;
-import cn.iwannnn.common.utils.StringUtils;
 import cn.iwannnn.common.utils.poi.ExcelUtil;
 import cn.iwannnn.common.utils.sign.Md5Utils;
 import cn.iwannnn.common.core.page.TableDataInfo;
@@ -116,7 +115,7 @@ public class BlogUserController extends BaseController {
 		if (res == null) {
 			return AjaxResult.success("账号不存在");
 		} else if (res.getPassword().equals(Md5Utils.hash(password))) {
-			return AjaxResult.success();
+			return AjaxResult.success(res);
 		} else {
 			return AjaxResult.success("密码错误");
 		}

@@ -93,6 +93,11 @@
                         立即登录
                     </router-link>
                 </div>
+                <div style="float: left">
+                    <router-link class="link-type" :to="'/index'">
+                        回到首页
+                    </router-link>
+                </div>
             </el-form-item>
         </el-form>
         <!--  底部  -->
