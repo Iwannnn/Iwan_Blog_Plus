@@ -1,5 +1,8 @@
 package cn.iwannnn.blog.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import cn.iwannnn.common.annotation.Excel;
@@ -77,6 +80,8 @@ public class BlogUser extends BaseEntity {
 		this.password = password;
 	}
 
+	@JsonIgnore
+	@JsonProperty
 	public String getPassword() {
 		return password;
 	}

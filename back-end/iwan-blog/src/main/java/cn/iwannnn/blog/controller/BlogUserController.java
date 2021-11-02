@@ -59,7 +59,7 @@ public class BlogUserController extends BaseController {
 	/**
 	 * 获取博客用户详细信息
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:user:query')")
+	// @PreAuthorize("@ss.hasPermi('blog:user:query')")
 	@GetMapping(value = "/{userId}")
 	public AjaxResult getInfo(@PathVariable("userId") Long userId) {
 		return AjaxResult.success(blogUserService.selectBlogUserByUserId(userId));
@@ -79,7 +79,7 @@ public class BlogUserController extends BaseController {
 	/**
 	 * 修改博客用户
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:user:edit')")
+	// @PreAuthorize("@ss.hasPermi('blog:user:edit')")
 	@Log(title = "博客用户", businessType = BusinessType.UPDATE)
 	@PutMapping
 	public AjaxResult edit(@RequestBody BlogUser blogUser) {

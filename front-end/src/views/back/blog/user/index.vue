@@ -229,10 +229,10 @@
                 <el-form-item label="邮箱" prop="email">
                     <el-input v-model="form.email" placeholder="请输入邮箱" />
                 </el-form-item>
-                <el-form-item label="标题图" prop="avator">
+                <el-form-item label="标题图" prop="avatar">
                     <imageUpload
                         @input="getImageUrl"
-                        :dialogImageUrl="'form.avator'"
+                        :dialogImageUrl="'form.avatar'"
                     />
                 </el-form-item>
                 <el-form-item label="生日" prop="birthday">
@@ -441,7 +441,6 @@ export default {
         },
         getImageUrl(imageUrl) {
             this.form.avatar = imageUrl;
-            console.log(this, this.form.avator);
         },
     },
 };

@@ -24,10 +24,7 @@
                     />
                 </div>
                 <div>
-                    <Comment
-                        :commentList.sync="commentList"
-                        :parentId="0"
-                    ></Comment>
+                    <Comment :commentList.sync="commentList" :parentId="0" />
                 </div>
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
