@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "777841",
+      "name": "浏览",
+      "font_class": "icon1",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "68235",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "77110",
+      "name": "时间",
+      "font_class": "shijian",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "521148",
+      "name": "business",
+      "font_class": "custom-business",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "777843",
+      "name": "赞",
+      "font_class": "icon",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "1305451",
+      "name": "标签",
+      "font_class": "biaoqian",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "6246290",
+      "name": "概要",
+      "font_class": "gaiyao",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
       "icon_id": "11488000",
       "name": "category",
       "font_class": "category",

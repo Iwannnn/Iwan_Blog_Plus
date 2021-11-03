@@ -35,7 +35,6 @@ public class BlogCategoryController extends BaseController {
 	/**
 	 * 查询博客分类列表
 	 */
-	// @PreAuthorize("@ss.hasPermi('blog:category:list')")
 	@GetMapping("/list")
 	public TableDataInfo list(BlogCategory blogCategory) {
 		startPage();
@@ -58,7 +57,6 @@ public class BlogCategoryController extends BaseController {
 	/**
 	 * 获取博客分类详细信息
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:category:query')")
 	@GetMapping(value = "/{categoryId}")
 	public AjaxResult getInfo(@PathVariable("categoryId") Long categoryId) {
 		return AjaxResult.success(blogCategoryService.selectBlogCategoryByCategoryId(categoryId));

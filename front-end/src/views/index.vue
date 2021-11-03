@@ -9,15 +9,34 @@
                     tag="div"
                     :to="'/article/' + article.articleId"
                 >
-                    <div>{{ article.tittle }}</div>
-                    <div v-if="article.avatar">
-                        <img v-bind:src="article.avatar" />
+                    <div class="tittle">
+                        <i class="iconfont icon-custom-business" />
+                        {{ article.tittle }}
                     </div>
-                    <div>{{ article.summary }}</div>
+                    <div v-if="article.avatar">
+                        <img class="image" v-bind:src="article.avatar" />
+                    </div>
+                    <div class="cate" v-if="article.category">
+                        <i class="iconfont icon-category" />
+                        {{ article.category }}
+                    </div>
+                    <div class="summary" v-if="article.summary">
+                        <i class="iconfont icon-gaiyao" />
+                        {{ article.summary }}
+                    </div>
                     <div>
-                        <span>{{ article.createTime }}</span>
-                        <span>{{ article.pageviews }}</span>
-                        <span>{{ article.likes }}</span>
+                        <span class="cardbuttom">
+                            <i class="iconfont icon-shijian" />
+                            {{ article.createTime }}
+                        </span>
+                        <span class="cardbuttom">
+                            <i class="iconfont icon-icon1" />
+                            {{ article.pageviews }}
+                        </span>
+                        <span class="cardbuttom">
+                            <i class="iconfont icon-icon" />
+                            {{ article.likes }}
+                        </span>
                     </div>
                 </router-link>
                 <pagination
@@ -43,6 +62,10 @@
                                 {{ this.tagList.length }}
                             </div>
                         </div>
+                        <div class="infotop">
+                            <i class="iconfont icon-category" />分类
+                        </div>
+                        <br />
                         <div class="info">
                             <el-card
                                 v-for="category in categoryList"
@@ -61,6 +84,10 @@
                                 </span>
                             </el-card>
                         </div>
+                        <div class="infotop">
+                            <i class="iconfont icon-biaoqian" />标签
+                        </div>
+                        <br />
                         <div class="info">
                             <el-card
                                 v-for="tag in tagList"
@@ -87,7 +114,7 @@ import {
     likeArticle,
     dislikeArticle,
 } from "@/api/blog/article";
-import { listCategory } from "@/api/blog/category";
+import { listCategory, getCategory } from "@/api/blog/category";
 import { listTag } from "@/api/blog/tag";
 import "@/assets/styles/cardround.css";
 export default {
@@ -109,33 +136,45 @@ export default {
     },
     methods: {
         getList() {
-            listArticle(this.queryParams).then((res) => {
-                this.articleList = res.rows;
-                this.total = res.total;
-            });
             listAplayerMusic().then((res) => {
                 this.musicList = res.data;
             });
             listCategory().then((res) => {
                 this.categoryList = res.rows;
+                this.getArticleList();
             });
             listTag().then((res) => {
                 this.tagList = res.rows;
             });
         },
-
         getArticleList() {
             listArticle(this.queryParams).then((res) => {
                 this.articleList = res.rows;
                 this.total = res.total;
+                this.matchCategory();
             });
         },
         getArticleListByTagId() {
             listArticleByTagId(this.queryParams).then((res) => {
-                console.log(res.data);
                 this.articleList = res.rows;
                 this.total = res.total;
             });
+        },
+        matchCategory() {
+            var i, j;
+            for (i = 0; i < this.articleList.length; i++) {
+                if (this.articleList[i].categoryId) {
+                    for (j = 0; j < this.categoryList.length; j++) {
+                        if (
+                            this.articleList[i].categoryId ===
+                            this.categoryList[j].categoryId
+                        ) {
+                            this.articleList[i].category =
+                                this.categoryList[j].name;
+                        }
+                    }
+                }
+            }
         },
         testLike() {
             var data = {
@@ -180,6 +219,12 @@ export default {
 .info {
     padding: 10px;
     border-bottom: 2px solid #f5f5f5;
+}
+.infotop {
+    float: left;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-bottom: 0px;
 }
 .avatar {
     width: 100px;
@@ -235,5 +280,21 @@ export default {
     margin: 2px 2px;
     background-color: rgba(0, 0, 0, 0);
     border-radius: 5px;
+}
+.tittle {
+    padding: 10px;
+    font-size: 30px;
+}
+.image {
+    border-radius: 10px;
+}
+.cate {
+    font-size: 25px;
+}
+.summary {
+    font-size: 20px;
+}
+.cardbuttom {
+    margin: 5px;
 }
 </style>

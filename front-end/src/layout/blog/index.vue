@@ -50,16 +50,16 @@
                                     我的
                                 </el-menu-item>
                                 <el-menu-item class="icon">
-                                    <i class="iconfont icon-github"></i>
+                                    <i class="iconfont icon-github" />
                                 </el-menu-item>
                                 <el-menu-item class="icon">
-                                    <i class="iconfont icon-coffee"></i>
+                                    <i class="iconfont icon-coffee" />
                                 </el-menu-item>
                                 <el-menu-item class="icon">
-                                    <i class="iconfont icon-QQ"></i>
+                                    <i class="iconfont icon-QQ" />
                                 </el-menu-item>
                                 <el-menu-item class="icon">
-                                    <i class="iconfont icon-weixin"></i>
+                                    <i class="iconfont icon-weixin" />
                                 </el-menu-item>
                             </el-col>
                             <el-col :xs="24" :sm="0" :md="0" :lg="0" :xl="0">

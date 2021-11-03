@@ -1,16 +1,43 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2884511 */
-  src: url('iconfont.woff2?t=1635088519746') format('woff2'),
-       url('iconfont.woff?t=1635088519746') format('woff'),
-       url('iconfont.ttf?t=1635088519746') format('truetype');
+  src: url("iconfont.woff2?t=1635939535081") format("woff2"),
+    url("iconfont.woff?t=1635939535081") format("woff"),
+    url("iconfont.ttf?t=1635939535081") format("truetype");
 }
 
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon1:before {
+  content: "\e650";
+}
+
+.icon-fenlei:before {
+  content: "\e601";
+}
+
+.icon-shijian:before {
+  content: "\e602";
+}
+
+.icon-custom-business:before {
+  content: "\e638";
+}
+
+.icon-icon:before {
+  content: "\e651";
+}
+
+.icon-biaoqian:before {
+  content: "\e63d";
+}
+
+.icon-gaiyao:before {
+  content: "\e646";
 }
 
 .icon-category:before {
@@ -40,4 +67,3 @@
 .icon-QQ:before {
   content: "\e882";
 }
-
