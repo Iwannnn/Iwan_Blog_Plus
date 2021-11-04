@@ -24,7 +24,7 @@
                     />
                 </div>
                 <div>
-                    <Comment :commentList.sync="commentList" :parentId="0" />
+                    <Comment :commentList="commentList" :parentId="0" />
                 </div>
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
@@ -127,7 +127,7 @@ export default {
     destroyed() {
         if (this.clipboard) this.clipboard.destroy();
     },
-    activated() {
+    created() {
         this.getArticleDetail(this.$route.params.articleId);
     },
     methods: {

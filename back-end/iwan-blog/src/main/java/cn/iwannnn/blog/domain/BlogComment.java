@@ -9,7 +9,7 @@ import cn.iwannnn.common.core.domain.BaseEntity;
  * 博客评论对象 blog_comment
  * 
  * @author iwan
- * @date 2021-10-25
+ * @date 2021-11-04
  */
 public class BlogComment extends BaseEntity
 {
@@ -30,9 +30,17 @@ public class BlogComment extends BaseEntity
     @Excel(name = "被评论用户id")
     private Long becommentUserId;
 
+    /** 评论用户名 */
+    @Excel(name = "评论用户名")
+    private String username;
+
     /** 评论用户id */
     @Excel(name = "评论用户id")
     private Long commentUserId;
+
+    /** 评论用户头像 */
+    @Excel(name = "评论用户头像")
+    private String avatar;
 
     /** 评论点赞数 */
     @Excel(name = "评论点赞数")
@@ -78,6 +86,15 @@ public class BlogComment extends BaseEntity
     {
         return becommentUserId;
     }
+    public void setUsername(String username) 
+    {
+        this.username = username;
+    }
+
+    public String getUsername() 
+    {
+        return username;
+    }
     public void setCommentUserId(Long commentUserId) 
     {
         this.commentUserId = commentUserId;
@@ -86,6 +103,15 @@ public class BlogComment extends BaseEntity
     public Long getCommentUserId() 
     {
         return commentUserId;
+    }
+    public void setAvatar(String avatar) 
+    {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() 
+    {
+        return avatar;
     }
     public void setLikes(Long likes) 
     {
@@ -113,7 +139,9 @@ public class BlogComment extends BaseEntity
             .append("articleId", getArticleId())
             .append("parentId", getParentId())
             .append("becommentUserId", getBecommentUserId())
+            .append("username", getUsername())
             .append("commentUserId", getCommentUserId())
+            .append("avatar", getAvatar())
             .append("likes", getLikes())
             .append("content", getContent())
             .append("createTime", getCreateTime())

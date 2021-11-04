@@ -9,7 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="articleId"    column="article_id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="becommentUserId"    column="becomment_user_id"    />
+        <result property="username"    column="username"    />
         <result property="commentUserId"    column="comment_user_id"    />
+        <result property="avatar"    column="avatar"    />
         <result property="likes"    column="likes"    />
         <result property="content"    column="content"    />
         <result property="createTime"    column="create_time"    />
@@ -23,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectBlogCommentVo">
-        select comment_id, article_id, parent_id, becomment_user_id, comment_user_id, likes, content, create_time, update_time, remark from blog_comment
+        select comment_id, article_id, parent_id, becomment_user_id, username, comment_user_id, avatar, likes, content, create_time, update_time, remark from blog_comment
     </sql>
 
     <select id="selectBlogCommentList" parameterType="BlogComment" resultMap="BlogCommentResult">
@@ -32,7 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="articleId != null "> and article_id = #{articleId}</if>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
             <if test="becommentUserId != null "> and becomment_user_id = #{becommentUserId}</if>
+            <if test="username != null  and username != ''"> and username like concat('%', #{username}, '%')</if>
             <if test="commentUserId != null "> and comment_user_id = #{commentUserId}</if>
+            <if test="avatar != null  and avatar != ''"> and avatar = #{avatar}</if>
             <if test="likes != null "> and likes = #{likes}</if>
             <if test="content != null  and content != ''"> and content = #{content}</if>
         </where>
@@ -49,7 +53,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="articleId != null">article_id,</if>
             <if test="parentId != null">parent_id,</if>
             <if test="becommentUserId != null">becomment_user_id,</if>
+            <if test="username != null">username,</if>
             <if test="commentUserId != null">comment_user_id,</if>
+            <if test="avatar != null">avatar,</if>
             <if test="likes != null">likes,</if>
             <if test="content != null">content,</if>
             <if test="createTime != null">create_time,</if>
@@ -60,7 +66,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="articleId != null">#{articleId},</if>
             <if test="parentId != null">#{parentId},</if>
             <if test="becommentUserId != null">#{becommentUserId},</if>
+            <if test="username != null">#{username},</if>
             <if test="commentUserId != null">#{commentUserId},</if>
+            <if test="avatar != null">#{avatar},</if>
             <if test="likes != null">#{likes},</if>
             <if test="content != null">#{content},</if>
             <if test="createTime != null">#{createTime},</if>
@@ -75,7 +83,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="articleId != null">article_id = #{articleId},</if>
             <if test="parentId != null">parent_id = #{parentId},</if>
             <if test="becommentUserId != null">becomment_user_id = #{becommentUserId},</if>
+            <if test="username != null">username = #{username},</if>
             <if test="commentUserId != null">comment_user_id = #{commentUserId},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
             <if test="likes != null">likes = #{likes},</if>
             <if test="content != null">content = #{content},</if>
             <if test="createTime != null">create_time = #{createTime},</if>
@@ -96,7 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <select id="selectBlogCommentVos" resultMap="BlogCommentVoResult">
+	<select id="selectBlogCommentVos" resultMap="BlogCommentVoResult">
         select comment_id, content from blog_comment
     </select>	
 </mapper>

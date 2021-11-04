@@ -2,6 +2,8 @@
     <div>
         <div v-for="comment in commentList" :key="comment.key">
             <el-card class="comment" v-if="comment.parentId == parentId">
+                {{ comment.username }}
+                {{ comment.avatar }}
                 {{ comment.content }}
                 <Comment
                     :commentList.sync="commentList"
@@ -38,8 +40,6 @@ export default {
             default: 0,
         },
     },
-    created() {
-        console.log(this.commentList);
-    },
+    created() {},
 };
 </script>

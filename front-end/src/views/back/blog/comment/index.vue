@@ -43,6 +43,24 @@
                     @keyup.enter.native="handleQuery"
                 />
             </el-form-item>
+            <el-form-item label="评论用户名" prop="username">
+                <el-input
+                    v-model="queryParams.username"
+                    placeholder="请输入评论用户名"
+                    clearable
+                    size="small"
+                    @keyup.enter.native="handleQuery"
+                />
+            </el-form-item>
+            <el-form-item label="评论用户id" prop="commentUserId">
+                <el-input
+                    v-model="queryParams.commentUserId"
+                    placeholder="请输入评论用户id"
+                    clearable
+                    size="small"
+                    @keyup.enter.native="handleQuery"
+                />
+            </el-form-item>
             <el-form-item label="评论点赞数" prop="likes">
                 <el-input
                     v-model="queryParams.likes"
@@ -136,6 +154,16 @@
                 label="被评论用户id"
                 align="center"
                 prop="becommentUserId"
+            />
+            <el-table-column
+                label="评论用户id"
+                align="center"
+                prop="commentUserId"
+            />
+            <el-table-column
+                label="评论用户名"
+                align="center"
+                prop="username"
             />
             <el-table-column
                 label="评论用户id"
@@ -236,6 +264,18 @@
                             :value="item.userId"
                         />
                     </el-select>
+                </el-form-item>
+                <el-form-item label="评论用户名" prop="username">
+                    <el-input
+                        v-model="form.username"
+                        placeholder="请输入评论用户名"
+                    />
+                </el-form-item>
+                <el-form-item label="评论用户id" prop="commentUserId">
+                    <el-input
+                        v-model="form.commentUserId"
+                        placeholder="请输入评论用户id"
+                    />
                 </el-form-item>
                 <el-form-item label="评论点赞数" prop="likes">
                     <el-input
