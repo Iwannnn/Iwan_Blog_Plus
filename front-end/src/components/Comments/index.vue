@@ -34,7 +34,7 @@
                         </el-button>
                     </span>
                 </div>
-                <div class="content" v-html="comment.html" />
+                <div class="content" id="comment" v-html="comment.html" />
                 <div v-if="comment.reply === true">
                     <mavon-editor
                         v-model="comment.replyContent"
@@ -64,6 +64,8 @@ import Comment from "@/components/Comments";
 import Cookies from "js-cookie";
 import { getUser } from "@/api/blog/user";
 import { addComment } from "@/api/blog/comment";
+import "@/assets/styles/github.css";
+import Clipboard from "clipboard";
 export default {
     name: "Comment",
     components: {
@@ -168,9 +170,6 @@ export default {
                 });
             }
         },
-    },
-    created() {
-        console.log(this.commentList);
     },
 };
 </script>

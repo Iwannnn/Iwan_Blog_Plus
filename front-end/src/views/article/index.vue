@@ -62,27 +62,19 @@
 <script>
 import { getArticle } from "@/api/blog/article";
 import { listComment } from "@/api/blog/comment";
+import { addComment } from "@/api/blog/comment";
 import { Message } from "element-ui";
-import AnchorLink from "@/components/AnchorLink";
-import marked from "marked";
+import { getUser } from "@/api/blog/user";
 import { last } from "lodash";
 import Clipboard from "clipboard";
-import "@/assets/styles/github.css";
 import Comment from "@/components/Comments";
 import Cookies from "js-cookie";
-import { getUser } from "@/api/blog/user";
-import { addComment } from "@/api/blog/comment";
+import AnchorLink from "@/components/AnchorLink";
+import marked from "marked";
+import hljs from "highlight.js";
+import "@/assets/styles/github.css";
 const rendererMD = new marked.Renderer();
-marked.setOptions({
-    renderer: rendererMD,
-    gfm: true,
-    tables: true,
-    breaks: true,
-    pedantic: false,
-    sanitize: false,
-    smartLists: true,
-    smartypants: false,
-});
+
 export default {
     components: {
         AnchorLink,
@@ -144,6 +136,19 @@ export default {
         if (this.clipboard) this.clipboard.destroy();
     },
     created() {
+        marked.setOptions({
+            renderer: rendererMD,
+            gfm: true,
+            tables: true,
+            breaks: true,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            },
+        });
         this.getArticleDetail(this.$route.params.articleId);
     },
     methods: {
@@ -186,11 +191,6 @@ export default {
                 let content = document.getElementById("content");
                 let pre = content.querySelectorAll("pre");
                 for (let i = 0; i < pre.length; i++) {
-                    //这里应为是script引入的，所以直接调用hljs就行
-                    //代码块高亮
-                    hljs.highlightBlock(pre[i].querySelector("code"));
-                    //对代码块加行数
-                    hljs.lineNumbersBlock(pre[i].querySelector("code"));
                     // 获取code去除标签，保留code里的内容 复制的时候用到
                     let median = pre[i]
                         .querySelector("code")
