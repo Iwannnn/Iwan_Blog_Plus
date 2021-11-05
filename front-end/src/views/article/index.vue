@@ -8,23 +8,40 @@
                     v-html="this.article.html"
                 />
                 <div>
-                    <mavon-editor
-                        v-model="comment.value"
-                        ref="md"
-                        placeholder="请输入文档内容..."
-                        :boxShadow="false"
-                        style="
-                            z-index: 1;
-                            border: 1px solid #d9d9d9;
-                            height: 30vh;
-                        "
-                        :shortCut="false"
-                        :toolbars="toolbars"
-                        :defaultOpen="'edit'"
-                    />
+                    <div class="reply">
+                        <el-button v-if="!reply" type="text" @click="replyFlag">
+                            评论
+                        </el-button>
+                        <el-button v-if="reply" type="text" @click="replyFlag">
+                            取消
+                        </el-button>
+                        <el-button
+                            v-if="reply"
+                            type="text"
+                            @click="confirmReply"
+                        >
+                            确认
+                        </el-button>
+                    </div>
+                    <div v-if="reply">
+                        <mavon-editor
+                            v-model="replyContent"
+                            ref="md"
+                            placeholder="请输入回复内容..."
+                            :boxShadow="false"
+                            style="
+                                z-index: 1;
+                                border: 1px solid #d9d9d9;
+                                height: 30vh;
+                            "
+                            :shortCut="false"
+                            :toolbars="toolbars"
+                            :defaultOpen="'edit'"
+                        />
+                    </div>
                 </div>
                 <div>
-                    <Comment :commentList="commentList" :parentId="0" />
+                    <Comment :commentList.sync="commentList" :parentId="0" />
                 </div>
             </el-col>
             <el-col :xs="0" :sm="8" :md="8" :lg="8" :xl="8">
@@ -52,6 +69,9 @@ import { last } from "lodash";
 import Clipboard from "clipboard";
 import "@/assets/styles/github.css";
 import Comment from "@/components/Comments";
+import Cookies from "js-cookie";
+import { getUser } from "@/api/blog/user";
+import { addComment } from "@/api/blog/comment";
 const rendererMD = new marked.Renderer();
 marked.setOptions({
     renderer: rendererMD,
@@ -68,6 +88,7 @@ export default {
         AnchorLink,
         Comment,
     },
+    inject: ["reload"],
     data() {
         return {
             article: {},
@@ -115,13 +136,8 @@ export default {
                 subfield: true, // 单双栏模式
                 preview: true, // 预览
             },
-            comment: {
-                conetent: null,
-                articleId: null,
-                parentId: 0,
-                commentUserId: 0,
-                BecommentUserId: 0,
-            },
+            reply: false,
+            replyContent: null,
         };
     },
     destroyed() {
@@ -142,7 +158,14 @@ export default {
                     articleId: articleId,
                 };
                 listComment(this.commentQueryParams).then((res) => {
+                    var i = 0;
                     this.commentList = res.rows;
+                    for (i = 0; i < this.commentList.length; i++) {
+                        this.commentList[i].reply = false;
+                        this.commentList[i].html = marked(
+                            this.commentList[i].content
+                        );
+                    }
                 });
             } else {
                 Message({
@@ -230,6 +253,46 @@ export default {
             }
             return anchor;
         },
+        replyFlag() {
+            this.reply = !this.reply;
+        },
+        confirmReply() {
+            if (this.replyContent) {
+                var comment = {
+                    content: this.replyContent,
+                    parentId: 0,
+                    articleId: this.article.articleId,
+                    becommentUserId: 0,
+                };
+                var userId = Cookies.get("userId") ? Cookies.get("userId") : 0;
+                if (userId !== 0) {
+                    getUser(userId).then((res) => {
+                        comment.commentUserId = userId;
+                        comment.username = res.data.nickname
+                            ? res.data.nickname
+                            : res.data.account;
+                        comment.avatar = res.data.avatar;
+                        addComment(comment).then((res) => {
+                            console.log(res);
+                            if (res.msg === "操作成功") {
+                                this.$message({
+                                    showClose: true,
+                                    message: "评论成功",
+                                    type: "success",
+                                });
+                                this.reload();
+                            }
+                        });
+                    });
+                }
+            } else {
+                this.$message({
+                    showClose: true,
+                    message: "回复内容不能为空",
+                    type: "warning",
+                });
+            }
+        },
     },
 };
 </script>
@@ -245,5 +308,10 @@ export default {
 }
 .comment {
     line-height: 10px;
+}
+.reply {
+    text-align: right;
+    line-height: 10px;
+    width: 100%;
 }
 </style>

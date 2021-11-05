@@ -66,7 +66,7 @@ public class BlogCommentController extends BaseController {
 	/**
 	 * 新增博客评论
 	 */
-	@PreAuthorize("@ss.hasPermi('blog:comment:add')")
+	// @PreAuthorize("@ss.hasPermi('blog:comment:add')")
 	@Log(title = "博客评论", businessType = BusinessType.INSERT)
 	@PostMapping
 	public AjaxResult add(@RequestBody BlogComment blogComment) {

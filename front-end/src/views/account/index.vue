@@ -131,7 +131,6 @@ export default {
 .head {
     text-align: left;
 }
-
 .box-card {
     line-height: 10px;
 }
