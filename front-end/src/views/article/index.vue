@@ -74,7 +74,6 @@ import marked from "marked";
 import hljs from "highlight.js";
 import "@/assets/styles/github.css";
 const rendererMD = new marked.Renderer();
-
 export default {
     components: {
         AnchorLink,
@@ -181,6 +180,7 @@ export default {
         },
         compiledMarkdown() {
             rendererMD.heading = (text, level) => {
+                console.log(text);
                 const anchor = this.renderToc(text, level); //渲染目录的方法
                 return `<h${level} id="${anchor}">${text}</h${level}>`;
             };

@@ -39,3 +39,9 @@ export default {
     },
 };
 </script>
+<style >
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+</style>
