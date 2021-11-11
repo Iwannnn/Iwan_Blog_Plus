@@ -60,6 +60,7 @@
 		"screenfull": "5.0.2",
 		"sortablejs": "1.10.2",
 		"vue": "2.6.12",
+		"vue-clap-button": "^1.0.6",
 		"vue-count-to": "1.0.13",
 		"vue-cropper": "0.5.5",
 		"vue-markdown": "^2.2.4",

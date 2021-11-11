@@ -11,6 +11,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import directive from './directive' //directive
+import vueClapButton from 'vue-clap-button'
 
 import './assets/icons' // icon
 import './permission' // permission control
@@ -72,6 +73,7 @@ Vue.use(directive)
 Vue.use(VueMeta)
 Vue.use(mavonEditor)
 Vue.use(Antd);
+Vue.use(vueClapButton);
 
 /**
  * If you don't want to use mock-server

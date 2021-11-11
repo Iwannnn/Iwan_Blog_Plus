@@ -10,31 +10,46 @@
                     :to="'/article/' + article.articleId"
                 >
                     <div class="tittle">
-                        <i class="iconfont icon-custom-business" />
+                        <i
+                            class="iconfont icon-custom-business"
+                            style="color: #6a5acd"
+                        />
                         {{ article.tittle }}
                     </div>
                     <div v-if="article.avatar">
                         <img class="image" v-bind:src="article.avatar" />
                     </div>
-                    <div class="cate" v-if="article.category">
-                        <i class="iconfont icon-category" />
-                        {{ article.category }}
-                    </div>
+
                     <div class="summary" v-if="article.summary">
-                        <i class="iconfont icon-gaiyao" />
                         {{ article.summary }}
+                    </div>
+                    <div class="cate" v-if="article.category">
+                        <i
+                            class="iconfont icon-category"
+                            style="color: #008000"
+                        />
+                        {{ article.category }}
                     </div>
                     <div>
                         <span class="cardbuttom">
-                            <i class="iconfont icon-shijian" />
+                            <i
+                                class="iconfont icon-shijian"
+                                style="color: #d8bfd8"
+                            />
                             {{ article.createTime }}
                         </span>
                         <span class="cardbuttom">
-                            <i class="iconfont icon-icon1" />
+                            <i
+                                class="iconfont icon-icon1"
+                                style="color: #008080"
+                            />
                             {{ article.pageviews }}
                         </span>
                         <span class="cardbuttom">
-                            <i class="iconfont icon-icon" />
+                            <i
+                                class="iconfont icon-icon"
+                                style="color: #ff4500"
+                            />
                             {{ article.likes }}
                         </span>
                     </div>
@@ -57,13 +72,16 @@
                                 熊猫圈里的老鼠屎
                                 <br />
                                 文章
-                                {{ this.articleList.length }} | 分类
-                                {{ this.categoryList.length }} | 标签
-                                {{ this.tagList.length }}
+                                {{ this.articleList.total }} | 分类
+                                {{ this.categoryList.total }} | 标签
+                                {{ this.tagList.total }}
                             </div>
                         </div>
                         <div class="infotop">
-                            <i class="iconfont icon-category" />分类
+                            <i
+                                class="iconfont icon-category"
+                                style="margin: 10px"
+                            />分类
                         </div>
                         <br />
                         <div class="info">
@@ -85,7 +103,10 @@
                             </el-card>
                         </div>
                         <div class="infotop">
-                            <i class="iconfont icon-biaoqian" />标签
+                            <i
+                                class="iconfont icon-biaoqian"
+                                style="margin: 10px"
+                            />标签
                         </div>
                         <br />
                         <div class="info">
@@ -141,15 +162,19 @@ export default {
             });
             listCategory().then((res) => {
                 this.categoryList = res.rows;
+                this.categoryList.total = res.total;
                 this.getArticleList();
             });
             listTag().then((res) => {
+                console.log(res);
                 this.tagList = res.rows;
+                this.tagList.total = res.total;
             });
         },
         getArticleList() {
             listArticle(this.queryParams).then((res) => {
                 this.articleList = res.rows;
+                this.articleList.total = res.total;
                 this.total = res.total;
                 this.matchCategory();
             });
@@ -175,13 +200,6 @@ export default {
                     }
                 }
             }
-        },
-        testLike() {
-            var data = {
-                articleId: 9,
-                userId: 1,
-            };
-            dislikeArticle(data);
         },
         color() {
             var r = Math.floor(Math.random() * 255);
@@ -212,19 +230,22 @@ export default {
 </script>
 <style scoped>
 .rightbar {
-    box-shadow: inset 0 0 0 2px #f5f5f5;
+    box-shadow: inset 0 0 0 2px #fff0f5;
+    color: #696969;
     line-height: 40px;
     padding: 20px;
 }
 .info {
     padding: 10px;
-    border-bottom: 2px solid #f5f5f5;
+    color: #696969;
+    border-bottom: 2px solid #fff0f5;
 }
 .infotop {
     float: left;
     font-size: 20px;
     margin-left: 10px;
     margin-bottom: 0px;
+    color: #696969;
 }
 .avatar {
     width: 100px;
@@ -233,6 +254,7 @@ export default {
     margin-top: 30px;
 }
 .text {
+    color: #696969;
     text-align: center;
     font-size: 20px;
     padding-bottom: 10px;
@@ -243,7 +265,7 @@ export default {
     background: none;
     line-height: 1.2rem;
     height: auto;
-    color: #000000;
+    color: #696969;
     position: relative;
     margin: 10px auto;
     background-color: rgba(0, 0, 0, 0);
@@ -282,19 +304,23 @@ export default {
     border-radius: 5px;
 }
 .tittle {
+    color: #696969;
     padding: 10px;
-    font-size: 30px;
+    font-size: 40px;
 }
 .image {
     border-radius: 10px;
 }
 .cate {
     font-size: 25px;
+    color: #696969;
 }
 .summary {
-    font-size: 20px;
+    font-size: 17px;
+    color: #d3d3d3;
 }
 .cardbuttom {
     margin: 5px;
+    color: #696969;
 }
 </style>

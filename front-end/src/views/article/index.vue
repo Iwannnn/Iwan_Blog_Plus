@@ -2,6 +2,26 @@
     <div>
         <el-row :gutter="10">
             <el-col :xs="24" :sm="16" :md="16" :lg="16" :xl="16">
+                <div class="tittle">
+                    {{ article.tittle }}
+                </div>
+                <div style="line-height: 10px">
+                    <span class="cardbuttom">
+                        <i
+                            class="iconfont icon-shijian"
+                            style="color: #d8bfd8"
+                        />
+                        {{ article.createTime }}
+                    </span>
+                    <span class="cardbuttom">
+                        <i class="iconfont icon-icon1" style="color: #008080" />
+                        {{ article.pageviews }}
+                    </span>
+                    <span class="cardbuttom">
+                        <i class="iconfont icon-icon" style="color: #ff4500" />
+                        {{ article.likes }}
+                    </span>
+                </div>
                 <div
                     class="markdown-content"
                     id="content"
@@ -134,6 +154,10 @@ export default {
     destroyed() {
         if (this.clipboard) this.clipboard.destroy();
     },
+    activated() {
+        this.getArticleDetail(this.$route.params.articleId);
+        this.tocItems = [];
+    },
     created() {
         marked.setOptions({
             renderer: rendererMD,
@@ -148,7 +172,6 @@ export default {
                 return hljs.highlightAuto(code).value;
             },
         });
-        this.getArticleDetail(this.$route.params.articleId);
     },
     methods: {
         getArticleDetail(articleId) {
@@ -166,6 +189,7 @@ export default {
                     this.commentList = res.rows;
                     for (i = 0; i < this.commentList.length; i++) {
                         this.commentList[i].reply = false;
+                        rendererMD.heading = null;
                         this.commentList[i].html = marked(
                             this.commentList[i].content
                         );
@@ -180,7 +204,6 @@ export default {
         },
         compiledMarkdown() {
             rendererMD.heading = (text, level) => {
-                console.log(text);
                 const anchor = this.renderToc(text, level); //渲染目录的方法
                 return `<h${level} id="${anchor}">${text}</h${level}>`;
             };
@@ -273,7 +296,6 @@ export default {
                             : res.data.account;
                         comment.avatar = res.data.avatar;
                         addComment(comment).then((res) => {
-                            console.log(res);
                             if (res.msg === "操作成功") {
                                 this.$message({
                                     showClose: true,
@@ -313,5 +335,14 @@ export default {
     text-align: right;
     line-height: 10px;
     width: 100%;
+}
+.tittle {
+    color: #696969;
+    margin: 30px;
+    font-size: 50px;
+    line-height: 10px;
+}
+.cardbuttom {
+    margin: 5px;
 }
 </style>
